@@ -5,17 +5,29 @@ import java.util.HashMap;
 
 import java.util.Map;
 
-
+/**
+ * simple chess vocabulary
+ * assign a term to a topic
+ */
 public class ChessVocabulary{
 	
+	//Map for "synonyms"
 	public Map<String, ArrayList<String>> PROPERTIES = new HashMap<String,ArrayList<String>>();
+	//inversed Map
 	public Map<String, String> INVERSED_PROPERTIES = new HashMap<String,String>();
 	
+	/**
+	 * constructor
+	 * fill the maps
+	 */
 	public ChessVocabulary() {
 		fillProperties();
 		inverseProperties();
 	}
 	
+	/**
+	 * a list the terms assigned to a topic
+	 */
 	public void fillProperties(){
 //		ArrayList<String> gameProperty = new ArrayList<String>();
 //		gameProperty.add("game");
@@ -145,6 +157,9 @@ public class ChessVocabulary{
 				
 	}
 	
+	/**
+	 * inverse the properties
+	 */
 	public void inverseProperties(){
 		for(HashMap.Entry<String, ArrayList<String>> entry : PROPERTIES.entrySet()){
 			for(String prop : entry.getValue()){
@@ -152,17 +167,5 @@ public class ChessVocabulary{
 				INVERSED_PROPERTIES.put(prop, entry.getKey());
 			}
 		}
-//		System.out.println("=============");
-//		for(HashMap.Entry<String, String> entry : INVERSED_PROPERTIES.entrySet()){
-//			System.out.println(entry.getKey() + " " + entry.getValue());
-//		}
-		
 	}
-	
-	public static void main (String[] args){
-		//fillProperties();
-		//inverseProperties();
-	}
-	
-	
 }
