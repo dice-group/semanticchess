@@ -2,17 +2,23 @@ package de.daug.semanticchess.Parser;
 
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+
+import de.daug.semanticchess.Parser.NewParser.Pair;
 
 /**
  * assign a sequence code to a sparql query
  */
 public class Allocator {
 	
-	private String sequenceCode;
-	private HashMap<Integer, String[]> sequence = new HashMap<Integer, String[]>();
+	private int sequenceCode;
 	private String sparqlQuery;
+	private List<Pair> entities;
+	private List<Pair> properties;
+	private List<Pair> options;
+	private List<Pair> optionNames;
 	
 	/**
 	 * constructor
@@ -20,9 +26,13 @@ public class Allocator {
 	 * @param query: user question
 	 */
 	public Allocator(String query){
-		Parser parser = new Parser(query);
-		this.sequenceCode = parser.getSequenceCode();
-		this.sequence = parser.getSequence();
+		NewParser parser = new NewParser(query);
+		this.sequenceCode = parser.getSequence();
+		this.entities = parser.getEntities();
+		this.properties = parser.getProperties();
+		this.options = parser.getOptions();
+		this.optionNames = parser.getOptionNames();
+
 		allocateSequence();
 	}
 	
@@ -31,15 +41,17 @@ public class Allocator {
 	 * @param query
 	 * @return
 	 */
-	private String replaceCodes(String query){
-		Iterator<Entry<Integer, String[]>> iter = this.sequence.entrySet().iterator();
-		while (iter.hasNext()) {
-			Map.Entry<Integer, String[]> pair = (Map.Entry<Integer, String[]>) iter.next();
-			String[] code = (String[]) pair.getValue();
-			System.out.println(code[0] +" "+ code[1]);
-			query = query.replaceAll(code[0], code[1]);
+	private String replaceCodes(String sparql){
+		for(int i = 0; i < entities.size(); i++){
+			sparql = sparql.replaceAll(entities.get(i).getLabel(), entities.get(i).getValue());
+			sparql = sparql.replaceAll(properties.get(i).getLabel(), properties.get(i).getValue());
 		}
-		return query;
+		for(int i = 0; i < options.size(); i++){
+			sparql = sparql.replaceAll(options.get(i).getLabel(), options.get(i).getValue());
+			sparql = sparql.replaceAll(optionNames.get(i).getLabel(), optionNames.get(i).getValue());
+		}
+		
+		return sparql;
 	}
 	
 	/**
@@ -49,23 +61,16 @@ public class Allocator {
 		String sparqlQuery = "";
 		//System.out.println(this.sequenceCode);
 		switch(this.sequenceCode){
-			case "E":
-				sparqlQuery = replaceCodes(Sequences.E);
+			case 1:
+				sparqlQuery = replaceCodes(Sequences._1);
 				break;
-			case "EE":
-				sparqlQuery = replaceCodes(Sequences.EE);
+			case 2: 
+				sparqlQuery = replaceCodes(Sequences._2);
 				break;
-			case "PM":
-				sparqlQuery = replaceCodes(Sequences.MP);
+			case 3: 
+				sparqlQuery = replaceCodes(Sequences._3);
 				break;
-			case "PZ":
-				sparqlQuery = replaceCodes(Sequences.PZ);
-				break;
-			case "PL":
-				sparqlQuery = replaceCodes(Sequences.LP);
-				break;
-			case "EPR":
-				sparqlQuery = replaceCodes(Sequences.EPR);
+			default:
 				break;
 		}
 		this.sparqlQuery = sparqlQuery;
@@ -92,7 +97,7 @@ public class Allocator {
 	 * @param args
 	 */
 	public static void main(String[] args){
-		Allocator alloc = new Allocator("Show me games from the DSB Kongress.");
+		Allocator alloc = new Allocator("Show me games by Magnus Carlsen from the DSB Kongress against Vladimir Kramnik with black.");
 		System.out.println(alloc.getSparqlQuery());
 	}
 	

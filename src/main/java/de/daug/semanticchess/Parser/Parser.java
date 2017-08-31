@@ -66,8 +66,17 @@ public class Parser {
 		ChessVocabulary cv = new ChessVocabulary();
 		this.vocabs = cv;
 		getStanfordEntities(getTokens());
-
+		System.out.println(getSequence().toString());
+		Iterator<Entry<Integer, String[]>> iter = getSequence().entrySet().iterator();
+		String code = "";
+		while (iter.hasNext()) {
+			Map.Entry<Integer, String[]> pair = (Map.Entry<Integer, String[]>) iter.next();
+			System.out.println(pair.getKey());
+			System.out.println(pair.getValue()[0] + " " + pair.getValue()[1]);
+		}
+		
 		setSequenceCode(getSequence());
+		
 		System.out.println(getSequenceCode());
 	}
 	
@@ -78,7 +87,7 @@ public class Parser {
 	public static void main(String[] args) {
 
 		Parser p = new Parser(
-				"Show me games where Magnus Carlsen won.");
+				"Show me 10 blitz games by Hikaru Nakamura.");
 		
 		//Iterator to loop through the HashMap and print out the sequence codes
 		Iterator<Entry<Integer, String[]>> it = p.getSequence().entrySet().iterator();
@@ -245,6 +254,8 @@ public class Parser {
 					putSequence(allCounter, resultCode, this.vocabs.INVERSED_PROPERTIES.get(prop.toLowerCase()));
 					break;
 				default:
+					propertyCounter += 1;
+					propertyCode =  property + propertyCounter;
 					putSequence(allCounter, propertyCode, this.vocabs.INVERSED_PROPERTIES.get(prop.toLowerCase()));
 					break;
 
@@ -297,6 +308,7 @@ public class Parser {
 		while (iter.hasNext()) {
 			Map.Entry<Integer, String[]> pair = (Map.Entry<Integer, String[]>) iter.next();
 			String[] seq = (String[]) pair.getValue();
+			
 			code += seq[0].substring(0, 1);
 		}
 		

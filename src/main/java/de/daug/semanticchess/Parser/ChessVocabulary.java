@@ -45,6 +45,7 @@ public class ChessVocabulary{
 //		PROPERTIES.put("game", gameProperty);
 		
 		
+		
 		ArrayList<String> eventProperty = new ArrayList<String>();
 		//TODO: sparql abfrage alle event Namen holen und hier eintragen.
 		eventProperty.add("blitz");
