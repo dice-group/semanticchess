@@ -8,21 +8,26 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import de.daug.semanticchess.Service.QueryService;
-import de.daug.semanticchess.Service.SparqlService;
 
+/**
+ * sets up a REST API
+ * the page /query delivers a result json for user queries
+ */
 @RestController
 @RequestMapping("/query")
 public class QueryController{
 	
+	/**
+	 * service that connects to the database
+	 */
 	@Autowired
 	private QueryService queryService;
 	
-//	@RequestMapping(method = RequestMethod.GET)
-//	public String getResults(){	
-//		return queryService.getResults();
-//		
-//	}
-	
+	/**
+	 * connects to QueryService.java 
+	 * @param strQuery: user query
+	 * @return a json with the results from the database
+	 */
 	@RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public String getCustomResult(@RequestBody String strQuery){
 		System.out.println("Controller: " + strQuery);

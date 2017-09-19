@@ -1,111 +1,61 @@
 package de.daug.semanticchess.Parser;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
+import java.util.Stack;
+
+import org.springframework.util.StringUtils;
 
 import de.daug.semanticchess.Annotation.PosTagger;
-import de.daug.semanticchess.Annotation.PosTagger.Token;
-import edu.stanford.nlp.ling.WordTag;
+import de.daug.semanticchess.Annotation.Token;
+import de.daug.semanticchess.Database.StringSimilarity;
+import de.daug.semanticchess.Parser.Helper.Classes;
+import de.daug.semanticchess.Parser.Helper.PropertyAllocator;
+import de.daug.semanticchess.Parser.Helper.CustomNer;
+import de.daug.semanticchess.Parser.Helper.Entity;
+import de.daug.semanticchess.Parser.Helper.FenRegex;
+import de.daug.semanticchess.Parser.Helper.Filters;
+import de.daug.semanticchess.Parser.Helper.Flipper;
+import de.daug.semanticchess.Parser.Helper.Options;
+import de.daug.semanticchess.Parser.Helper.Resource;
 import edu.stanford.nlp.pipeline.StanfordCoreNLP;
-import edu.stanford.nlp.process.Morphology;
 
 /**
  * parses the user query to a sequence to find a suitable sparql query
  */
 public class Parser {
-	
-	private List<Token> tokens;
-	private HashMap<Integer, String[]> sequence = new HashMap<Integer, String[]>();
-	private String sequenceCode = "";
-	private ChessVocabulary vocabs;
+	private List<Token> tokens = new ArrayList<Token>();
+	private String query;
 
-	//counter to track the found entities and properties
-	private int allCounter = 0;
-	private int entityCounter = 0;
-	private int propertyCounter = 0;
-	private int miscCounter = 0;
-	private int locationCounter = 0;
-	private int dateCounter = 0;
-	private int numberCounter = 0;
-	private int ordinalCounter = 0;
-	private int organizationCounter = 0;
-	private int resultCounter = 0;
-	private int colorCounter = 0;
+	private List<Entity> entities = new ArrayList<Entity>();
+	private List<Classes> classes = new ArrayList<Classes>();
+	private List<Resource> resources = new ArrayList<Resource>();
+	private Options options = new Options();
+	private FenRegex fenReg = new FenRegex();
+	private Filters filters = new Filters();
 
-	//labels for entities and properties
-	private String entity = "E_";
-	private String misc = "M_";
-	private String property = "P_";
-	private String location = "L_";
-	private String date = "D_";
-	private String number = "N_";
-	private String ordinal = "O_";
-	private String organization = "Z_";
-	private String result = "R_";
-	private String color = "C_";
+	private ChessVocabulary vocabulary = new ChessVocabulary();
 
-	//labels by the Stanford NER
-	private String nerEntity = "PERSON";
-	private String nerMisc = "MISC";
-	private String nerLocation = "LOCATION";
-	private String nerDate = "DATE";
-	private String nerNumber = "NUMBER";
-	private String nerOrdinal = "ORDINAL";
-	private String nerOrganization = "ORGANIZATION";
+	int index;
 
-	/**
-	 * constructor: takes a query and returns a sequence code 
-	 * @param query: user question
-	 */
+	private boolean isBlack = false;
+	private boolean isWhite = false;
+	private boolean isDecisive = false;
+	private boolean isUnion = false;
+	private boolean isElo = false;
+	private boolean isFen = false;
+	private boolean isFilter = false;
+
+	private String sequence;
+
 	public Parser(String query) {
-		this.tokens = initTokens(query);
-		ChessVocabulary cv = new ChessVocabulary();
-		this.vocabs = cv;
-		getStanfordEntities(getTokens());
-		System.out.println(getSequence().toString());
-		Iterator<Entry<Integer, String[]>> iter = getSequence().entrySet().iterator();
-		String code = "";
-		while (iter.hasNext()) {
-			Map.Entry<Integer, String[]> pair = (Map.Entry<Integer, String[]>) iter.next();
-			System.out.println(pair.getKey());
-			System.out.println(pair.getValue()[0] + " " + pair.getValue()[1]);
-		}
-		
-		setSequenceCode(getSequence());
-		
-		System.out.println(getSequenceCode());
-	}
-	
-	/**
-	 * main to test the parsing process
-	 * @param args
-	 */
-	public static void main(String[] args) {
+		this.query = query;
 
-		Parser p = new Parser(
-				"Show me 10 blitz games by Hikaru Nakamura.");
-		
-		//Iterator to loop through the HashMap and print out the sequence codes
-		Iterator<Entry<Integer, String[]>> it = p.getSequence().entrySet().iterator();
-		while (it.hasNext()) {
-			Map.Entry<Integer, String[]> pair = (Map.Entry<Integer, String[]>) it.next();
-			int key = (int) pair.getKey();
-			String[] seq = (String[]) pair.getValue();
-			System.out.println(key + " = " + seq[0] + " " + seq[1]);
-			it.remove();
-		}
-	}
-	
-	/**
-	 * initialize the POS tagger
-	 * @param query: user question
-	 * @return a list of tokens (word, ner, pos)
-	 */
-	private List<Token> initTokens(String query) {
 		PosTagger tagger = new PosTagger();
 		StanfordCoreNLP pipeline = tagger.getPipeline();
 		tagger.setQuery(query);
@@ -114,247 +64,673 @@ public class Parser {
 
 		List<Token> tokens = tagger.getTokens();
 
-		//basic morphology, for example changes "defeated" to "defeat"
-		for (Token token : tokens) {
-			WordTag lemma = Morphology.stemStatic(token.getWord(), token.getPos());
-			token.setWord(lemma.value());
-		}
-
-		return tokens;
-	}
-
-	/**
-	 * loop through the list of tokens
-	 * check the ner
-	 * check the custom chess vocabulary
-	 * and fill the Hashmap for sequences
-	 * @param tokens
-	 */
-	private void getStanfordEntities(List<Token> tokens) {
-		// TODO: implement FOX-java
-
-		for (int i = 0; i < tokens.size(); i++) {
-			if (tokens.get(i).getNe().equals(nerEntity)) {
-				entityCounter += 1;
-				i = checkTypes(i, entityCounter, nerEntity, entity);
-			} else if (tokens.get(i).getNe().equals(nerMisc)) {
-				miscCounter += 1;
-				i = checkTypes(i, miscCounter, nerMisc, misc);
-			} else if (tokens.get(i).getNe().equals(nerLocation)) {
-				locationCounter += 1;
-				i = checkTypes(i, locationCounter, nerLocation, location);
-			} else if (tokens.get(i).getNe().equals(nerDate)) {
-				dateCounter += 1;
-				i = checkTypes(i, dateCounter, nerDate, date);
-			} else if (tokens.get(i).getNe().equals(nerNumber)) {
-				numberCounter += 1;
-				i = checkTypes(i, numberCounter, nerNumber, number);
-			} else if (tokens.get(i).getNe().equals(nerOrdinal)) {
-				ordinalCounter += 1;
-				i = checkTypes(i, ordinalCounter, nerOrdinal, ordinal);
-			} else if (tokens.get(i).getNe().equals(nerOrganization)) {
-				organizationCounter += 1;
-				i = checkTypes(i, organizationCounter, nerOrganization, organization);
-			} else {
-				checkProperty(tokens.get(i).getWord());				
-			}
-		}
-		//switch the standard result if black wins or loses
-		switchResult();
-	}
-	
-	/**
-	 * switch the standard result ("1-0" for winning and "0-1" for loosing) if black wins or loses
-	 */
-	private void switchResult() {
-		Iterator<Entry<Integer, String[]>> iter = getSequence().entrySet().iterator();
-		//conditions that have to be true for switching the result
-		boolean colorFlag = false;
-		boolean resultFlag = false;
-		int keyNr = 0;
 		
-		//loop through the HashMap of sequences
-		while (iter.hasNext()) {
-			Map.Entry<Integer, String[]> pair = (Map.Entry<Integer, String[]>) iter.next();
-			String[] seq = (String[]) pair.getValue();
-			
-			if(seq[1].equals("black")) {
-				colorFlag = true;
+		
+		CustomNer cNer = new CustomNer();
+		tokens = cNer.stemming(tokens);
+		tokens = cNer.checkChessVocabulary(tokens);
+		tokens = cNer.checkElo(tokens);
+
+		this.tokens = tokens;
+		
+		System.out.println(this.tokens.toString());
+		
+		collectEntities(tokens);
+		if (isBlack || isWhite) {
+			try {
+				injectColor();
+			} catch (Exception err) {
+
 			}
-			if(seq[0].contains(result)) {
-				resultFlag = true;
-				keyNr = pair.getKey();
+
+		}
+
+		if (isElo) {
+			try {
+				injectElo();
+			} catch (Exception err) {
+
 			}
-			
-			if (colorFlag && resultFlag) {
-				seq = getSequence().get(keyNr);
-				String[] result = seq[1].split("-");
-				String newResult = result[1]+"-"+result[0];
-				seq[1] = newResult;
-				getSequence().put(keyNr, seq);
+
+			// List erweitern? get element by position?
+		}
+
+		resultChecker();
+		if (isUnion()) {
+			makeUnion();
+		}
+
+		if (!isUnion) {
+			this.sequence = "_" + classes.size() + "" + entities.size() + "0";
+		} else {
+			this.sequence = "_" + classes.size() + "" + entities.size() + "1";
+		}
+
+		if (isFilter) {
+			if (isFen) {
+				fenReg.createFen();
+				filters.addRegex("?fen", fenReg.getFen(), false);
+			}
+		}
+
+	}
+
+	public static void main(String[] args) {
+		String query = "Give me the games with rook and pawn against rook.";
+
+		Parser p = new Parser(query);
+
+		System.out.println(p.getTokens().toString());
+		System.out.println(p.getEntities().toString());
+		System.out.println(p.getClasses().toString());
+		System.out.println(p.getResources().toString());
+	}
+
+	public void collectEntities(List<Token> tokens) {
+		boolean isBlackPieces = false;
+		for (index = 0; index < tokens.size(); index++) {
+			String word = tokens.get(index).getWord();
+			String ne = tokens.get(index).getNe();
+			String preNe = "O";
+			String preWord = "";
+			try {
+				preNe = tokens.get(index - 1).getNe();
+				preWord = tokens.get(index - 1).getWord();
+			} catch (Exception e) {
+				preNe = "O";
+			}
+			String nextNe = "O";
+			String nextWord = "";
+			try {
+				nextNe = tokens.get(index + 1).getNe();
+				nextWord = tokens.get(index + 1).getWord();
+			} catch (Exception e) {
+				nextNe = "O";
+			}
+
+			String nextFoundNe = "O";
+			String nextFoundWord = "";
+			int nextFoundIndex = 0;
+			try {
+				int i = index;
+				while (nextFoundNe.equals("O")) {
+					nextFoundNe = tokens.get(i + 1).getNe();
+					nextFoundWord = tokens.get(i + 1).getWord();
+					nextFoundIndex = i + 1;
+					i++;
+				}
+			} catch (Exception err) {
+				nextFoundNe = "O";
+				nextFoundWord = "";
+			}
+
+			String pos = tokens.get(index).getPos();
+
+			switch (ne) {
+			case "PERSON":
+				addEntityOrClass(word, ne, "white|prop:black", "?game");
 				break;
-			}
-		}
-	}
-	
-	/**
-	 * check if the NER is followed by the same NER
-	 * iff: combine the words and put the sequence together
-	 * @param i: current index
-	 * @param counter: current entity or porperty counter
-	 * @param nerLabel: provided by Stanford NET
-	 * @param codeLabel: custom label to distinguish the entity or property
-	 * @return
-	 */
-	private int checkTypes(int i, int counter, String nerLabel, String codeLabel) {
+			case "MISC":
+				addEntityOrClass(word, ne, "", "?game");
+				break;
+			case "LOCATION":
+				addEntityOrClass(word, ne, "site", "?game");
+				break;
+			case "ORGANIZATION":
+				addEntityOrClass(word, ne, "event", "?game");
+				break;
+			case "DATE":
+				addEntityOrClass(word, ne, "date", "?game");
+				break;
+			case "ORDINAL":
+				if (nextNe.equals("round")) {
 
-		String type = tokens.get(i).getWord();
-		String code = codeLabel + counter;
+					index += 1;
+					if (word.equals("last")) {
+						addEntityOrClass("round", ne, "round", "?game");
+						options.setLimitStr(1);
+						options.setOffsetStr(0);
+						options.setOrderStr("DESC", "?round");
+					} else {
+						addEntityOrClass(word.replaceAll("\\D+", ""), ne, "round", "?game");
+					}
 
-		while ((i + 1) < tokens.size() && tokens.get(i + 1).getNe().equals(nerLabel)) {
-			type += " " + tokens.get(i + 1).getWord();
-			i += 1;
-		}
-		checkEntity(type);
-		allCounter += 1;
-		putSequence(allCounter, code, type);
+				} else {
+					if (word.equals("last")) {
+						options.setLimitStr(1);
+						options.setOffsetStr(0);
+						options.setOrderStr("DESC", "?date");
+					} else {
+						options.setLimitStr(1);
+						options.setOffsetStr((Integer.valueOf(word.replaceAll("\\D+", ""))) - 1);
+						options.setOrderStr("ASC", "?date");
+					}
 
-		return i;
-	}
-	
-	/**
-	 * check properties for exceptions
-	 * @param prop
-	 */
-	private void checkProperty(String prop) {
-		try {
-			if (this.vocabs.INVERSED_PROPERTIES.get(prop.toLowerCase()) != null) {
-
-				allCounter += 1;
-				String propertyCode = "";
-				String resultCode = "";
-				String colorCode = "";
-				switch (this.vocabs.INVERSED_PROPERTIES.get(prop.toLowerCase())) {
-				case "white":
-				case "black":
-					colorCounter += 1;
-					colorCode = color + colorCounter;
-					putSequence(allCounter, colorCode, this.vocabs.INVERSED_PROPERTIES.get(prop.toLowerCase()));
-					break;
-
-				case "1-0":
-				case "0-1":
-				case "1/2-1/2":
-					propertyCounter += 1;
-					propertyCode = property + propertyCounter;
-					putSequence(allCounter, propertyCode, "result");
-					resultCounter += 1;
-					resultCode = result + resultCounter;
-					allCounter += 1;
-					putSequence(allCounter, resultCode, this.vocabs.INVERSED_PROPERTIES.get(prop.toLowerCase()));
-					break;
-				default:
-					propertyCounter += 1;
-					propertyCode =  property + propertyCounter;
-					putSequence(allCounter, propertyCode, this.vocabs.INVERSED_PROPERTIES.get(prop.toLowerCase()));
-					break;
+					classes.add(new Classes(classes.size() + 1, "?date", "date", 999, "?game"));
 
 				}
+
+				// TODO count events, etc
+				break;
+			case "NUMBER":
+				if (preNe.equals("round")) {
+
+					index += 1;
+					addEntityOrClass(word.replaceAll("\\D+", ""), ne, "round", "?game");
+				} else if (nextNe.equals("piece")) {
+					// will be used in case piece
+					break;
+				} else {
+					options.setLimitStr(Integer.valueOf(word));
+					options.setOffsetStr(0);
+
+				}
+				break;
+			case "game":
+				// TODO als Spezialfall, konkurrierend mit anderen res
+				// TODO bei eco, opening, event,... flag für game ressource
+				// resources.add(new Resource((resources.size() + 1), "?game",
+				// "ChessGame", index));
+				break;
+			case "eco":
+				addEntityOrClass(word.substring(0,1).toUpperCase() + word.substring(1), ne, "eco", "?game");
+				break;
+			case "elo":
+				isElo = true;
+				addEntityOrClass(word, ne, "whiteelo|prop:blackelo", "?game");
+				break;
+			case "black":
+				isBlack = true;
+				break;
+			case "white":
+				isWhite = true;
+				break;
+			case "1-0":
+				isDecisive = true;
+				addEntityOrClass(ne, ne, "result", "?game");
+				break;
+			case "0-1":
+				isDecisive = true;
+				addEntityOrClass(ne, ne, "result", "?game");
+				break;
+			case "1/2-1/2":
+				addEntityOrClass(ne, ne, "result", "?game");
+				break;
+			case "event":
+				addEntityOrClass(word, ne, "event", "?game");
+				if(!this.tokens.get(index).getWord().equals("tournament") && !this.tokens.get(index).getWord().equals("event")){
+					filters.addRegex("?" + ne, word, false);
+				}
+				
+				break;
+			case "opening":
+				addEntityOrClass(word, ne, "eco", "?game");
+				break;
+			case "moves":
+				addEntityOrClass(word, ne, "moves", "?game");
+			case "move":
+				addEntityOrClass(word, ne, "move", "?moves");
+			case "piece":
+				isFen = true;
+				isFilter = true;
+				int number = 1;
+
+				if (nextWord.equals("pair")) {
+					number = 2;
+				}
+
+				if (!isBlackPieces) {
+					try {
+						number = Integer.valueOf(preWord);
+					} catch (Exception e) {
+
+					}
+
+					fenReg.addPieceWhite(number, word);
+				} else {
+					try {
+						number = Integer.valueOf(preWord);
+					} catch (Exception e) {
+
+					}
+					fenReg.addPieceBlack(number, word);
+
+				}
+
+				if (fenReg.getPiecesWhite().size() == 1 && fenReg.getPiecesBlack().size() == 0) {
+					classes.add(new Classes(classes.size() + 1, "?moves", "moves", 999, "?game"));
+					classes.add(new Classes(classes.size() + 1, "?fen", "fen", 999, "?moves"));
+				}
+
+				break;
+			case "option":
+				if (word.equals("average")) {
+					options.setOrderStr("AVG", "?" + nextFoundNe);
+				}
+
+				break;
+			case "greater":
+				isFilter = true;
+				filters.addGreaterThan("?" + nextFoundNe, nextFoundWord);
+				index = nextFoundIndex + 1;
+			default:
+				if (word.equals("versus") || word.equals("vs") || word.equals("against")) {
+					if (preNe.equals("piece")) {
+						isBlackPieces = true;
+					}
+				}
+
+				break;
+
 			}
-		} catch (NullPointerException err) {
+
 		}
 	}
 
-	/**
-	 * check if entity is known in the chess vocabulary.
-	 * iff: assign the entity a property
-	 * @param entity
-	 */
-	private void checkEntity(String entity) {
-		String[] entityChecker = entity.split(" ", -1);
-		for (String e : entityChecker) {
+	public void injectColor() {
+		PropertyAllocator ca = new PropertyAllocator(tokens);
+		int[] personHasColor = ca.allocateColor();
+
+		if (isWhite) {
+			for (Entity e : entities) {
+				if (e.getEndPosition() == personHasColor[0]) {
+					e.setPropertyName("prop:white");
+				} else if (e.getEndPosition() != personHasColor[0]
+						&& e.getPropertyName().equals("prop:white|prop:black")) {
+					e.setPropertyName("prop:black");
+				}
+			}
+			for (Classes c : classes) {
+				if (c.getPosition() == personHasColor[0]) {
+					c.setPropertyName("prop:white");
+				} else if (c.getPosition() != personHasColor[0]
+						&& c.getPropertyName().equals("prop:white|prop:black")) {
+					c.setPropertyName("prop:black");
+				}
+			}
+
+		} else if (isBlack) {
+			for (Entity e : entities) {
+				if (e.getEndPosition() == personHasColor[0]) {
+					e.setPropertyName("prop:black");
+				} else if (e.getEndPosition() != personHasColor[0]
+						&& e.getPropertyName().equals("prop:white|prop:black")) {
+					e.setPropertyName("prop:white");
+				}
+			}
+			for (Classes c : classes) {
+				if (c.getPosition() == personHasColor[0]) {
+					c.setPropertyName("prop:black");
+				} else if (c.getPosition() != personHasColor[0]
+						&& c.getPropertyName().equals("prop:white|prop:black")) {
+					c.setPropertyName("prop:white");
+				}
+			}
+		}
+	}
+
+	public void injectElo() {
+		PropertyAllocator pa = new PropertyAllocator(tokens);
+		HashMap<Integer, Integer> propertyToPerson = pa.allocateProperty(pa.getEloPositions());
+		int tempPerson = 9999;
+
+		for (Entry<Integer, Integer> pair : propertyToPerson.entrySet()) {
+			if (pair.getValue() < tempPerson) {
+				tempPerson = pair.getValue();
+			}
+
 			try {
-				if (this.vocabs.INVERSED_PROPERTIES.get(e.toLowerCase()) != null) {
-					propertyCounter += 1;
-					String propertyCode = property + propertyCounter;
-					allCounter += 1;
-					putSequence(allCounter, propertyCode, this.vocabs.INVERSED_PROPERTIES.get(e.toLowerCase()));
+				Entity e = getEntityByEndPosition(pair.getValue());
+
+				if (e.getPropertyName().equals("prop:white")) {
+					try {
+
+						getEntityByEndPosition(pair.getKey()).setPropertyName("prop:whiteelo");
+					} catch (NullPointerException err) {
+						getClassByPosition(pair.getKey()).setPropertyName("prop:whiteelo");
+					}
+				} else if (e.getPropertyName().equals("prop:black")) {
+					try {
+
+						getEntityByEndPosition(pair.getKey()).setPropertyName("prop:blackelo");
+					} catch (NullPointerException err) {
+						getClassByPosition(pair.getKey()).setPropertyName("prop:blackelo");
+					}
+
+				} else {
+					try {
+
+						getEntityByEndPosition(pair.getKey()).setPropertyName("prop:whiteelo");
+						System.out.println("3. " + getEntityByEndPosition(pair.getValue()).getPropertyName());
+						try {
+							getEntityByEndPosition(pair.getValue()).setPropertyName("prop:white");
+						} catch (Exception err) {
+							getClassByPosition(pair.getValue()).setPropertyName("prop:white");
+						}
+
+						isWhite = true;
+
+					} catch (NullPointerException err) {
+						System.out.println(pair.getKey() + "-> " + pair.getValue());
+						getClassByPosition(pair.getKey()).setPropertyName("prop:whiteelo");
+						try {
+							getEntityByEndPosition(pair.getValue()).setPropertyName("prop:white");
+						} catch (Exception error) {
+							getClassByPosition(pair.getValue()).setPropertyName("prop:white");
+						}
+
+						isWhite = true;
+					}
+
+					isUnion = true;
+
 				}
 			} catch (NullPointerException err) {
 
 			}
+			try {
+				Classes c = getClassByPosition(pair.getValue());
+
+				if (c.getPropertyName().equals("prop:white")) {
+					try {
+
+						getEntityByEndPosition(pair.getKey()).setPropertyName("prop:whiteelo");
+					} catch (NullPointerException err) {
+						getClassByPosition(pair.getKey()).setPropertyName("prop:whiteelo");
+					}
+				} else if (c.getPropertyName().equals("prop:black")) {
+					try {
+
+						getEntityByEndPosition(pair.getKey()).setPropertyName("prop:blackelo");
+					} catch (NullPointerException err) {
+						getClassByPosition(pair.getKey()).setPropertyName("prop:blackelo");
+					}
+				} else {
+
+					try {
+
+						getEntityByEndPosition(pair.getKey()).setPropertyName("prop:whiteelo");
+						try {
+							getEntityByEndPosition(pair.getValue()).setPropertyName("prop:white");
+						} catch (Exception err) {
+							getClassByPosition(pair.getValue()).setPropertyName("prop:white");
+
+						}
+
+						isBlack = true;
+
+					} catch (NullPointerException err) {
+						getClassByPosition(pair.getKey()).setPropertyName("prop:whiteelo");
+						try {
+							getClassByPosition(pair.getValue()).setPropertyName("prop:white");
+						} catch (Exception error) {
+							getEntityByEndPosition(pair.getValue()).setPropertyName("prop:white");
+						}
+
+						isWhite = true;
+					}
+					isUnion = true;
+				}
+			} catch (NullPointerException err) {
+
+			}
+
+		}
+		injectColor();
+	}
+
+	// public void injectElo(){
+
+	/*
+	 * 1. entity/class finden mit prop:black prop:white 2. nehme position und
+	 * gehe zu HashMap 3. aus Hashmap ermittle position von elo 4. ändere elo
+	 * property ab
+	 * 
+	 */
+
+	public void resultChecker() {
+		Stack<String> colors = new Stack<String>();
+		String result = "";
+		boolean isFlipped = false;
+
+		if (isDecisive && (isBlack || isWhite)) {
+			for (Entity e : entities) {
+				if (e.getPropertyName().equals("prop:white") || e.getPropertyName().equals("prop:black")) {
+					colors.push(e.getPropertyName());
+				}
+				if (e.getPropertyName().equals("prop:result")) {
+					result = e.getEntityName();
+				}
+			}
+			for (Classes c : classes) {
+				if (c.getPropertyName().equals("prop:white") || c.getPropertyName().equals("prop:black")) {
+					colors.push(c.getPropertyName());
+				}
+			}
+
+			if (colors.size() > 1) {
+				if (colors.peek().equals("prop:white")) {
+					if (result.equals("'0-1'")) {
+						result = "'1-0'";
+						isFlipped = true;
+					} else if (result.equals("'1-0'")) {
+						result = "'0-1'";
+						isFlipped = true;
+					}
+				}
+			} else if (colors.size() == 1) {
+				if (colors.peek().equals("prop:black")) {
+					if (result.equals("'0-1'")) {
+						result = "'1-0'";
+						isFlipped = true;
+					} else if (result.equals("'1-0'")) {
+						result = "'0-1'";
+						isFlipped = true;
+					}
+				}
+			}
+
+			if (isFlipped) {
+				for (Entity e : entities) {
+					if (e.getPropertyName().equals("prop:result")) {
+						e.setEntityName(result);
+					}
+				}
+			}
+		} else if (isDecisive && (!isBlack || !isWhite)) {
+			for (Entity e : entities) {
+				if (e.getPropertyName().equals("prop:result")) {
+					result = e.getEntityName();
+				}
+			}
+			if (result.equals("'1-0'") || result.equals("'0-1'")) {
+				isUnion = true;
+				boolean isFirst = true;
+				for (Entity e : entities) {
+					if (e.getPropertyName().equals("prop:white|prop:black") && isFirst) {
+						e.setPropertyName("prop:white");
+						isFirst = false;
+					} else if (e.getPropertyName().equals("prop:white|prop:black") && !isFirst) {
+						e.setPropertyName("prop:black");
+					}
+				}
+			}
 		}
 	}
-	
-	/**
-	 * put the sequence to the HashMap
-	 * @param index
-	 * @param code
-	 * @param word
-	 */
-	private void putSequence(int index, String code, String word) {
-		String[] seq = new String[] { code, word };
-		this.sequence.put(index, seq);
-	}
-	
-	/**
-	 * set the sequence code 
-	 * with this code a sparql query will be chosen
-	 * @param sequence
-	 */
-	private void setSequenceCode(HashMap<Integer, String[]> sequence) {
-		Iterator<Entry<Integer, String[]>> iter = getSequence().entrySet().iterator();
-		String code = "";
-		while (iter.hasNext()) {
-			Map.Entry<Integer, String[]> pair = (Map.Entry<Integer, String[]>) iter.next();
-			String[] seq = (String[]) pair.getValue();
+
+	public void addEntityOrClass(String word, String ne, String property, String resource) {
+		int startPosition = index;
+
+		if (Character.isUpperCase(ne.charAt(0))) {
+			while ((index + 1) < tokens.size() && tokens.get(index + 1).getNe().equals(ne)) {
+				word += " " + tokens.get(index + 1).getWord();
+				index += 1;
+			}
+		}
+
+		if (ne.equals("MISC")) {
+			String[] words = word.split(" ");
+
+			for (String w : words) {
+				if (vocabulary.INVERSED_PROPERTIES.get(w.toLowerCase()) != null) {
+					property = vocabulary.INVERSED_PROPERTIES.get(w.toLowerCase());
+				}
+			}
+		}
+
+		int endPosition = index;
+
+		String entity = vocabulary.INVERSED_PROPERTIES.get(word);
+
+		if (entity != null && entity != "1-0" && entity != "0-1" && entity != "1/2-1/2") {
+			classes.add(new Classes(classes.size() + 1, "?" + ne, property, endPosition, resource));
+		} else {
+//			System.out.println(property + " " + word);
+//			try {
+//				StringSimilarity sim = new StringSimilarity(property,word);
+//				word = sim.subStringMatch();			
+//			} catch(Exception e){
+//				
+//			}
 			
-			code += seq[0].substring(0, 1);
+			
+			entities.add(
+					new Entity(entities.size() + 1, "'" + word + "'", property, startPosition, endPosition, resource));
 		}
-		
-		//https://stackoverflow.com/a/605901
-		char chars[] = code.toCharArray();
-		Arrays.sort(chars);
-		code = new String(chars);
-
-		this.sequenceCode = code;
-	}
-	
-	/**
-	 * @return sequence code
-	 */
-	public String getSequenceCode() {
-		return this.sequenceCode;
 	}
 
-	/**
-	 * set the list of tokens
-	 * @param tokens
-	 */
-	public void setTokens(List<Token> tokens) {
+	public void makeUnion() {
+		Flipper flipper = new Flipper();
+		String newPropertyName = "";
+		String newEntityName = "";
+
+		List<Entity> tempEntities = new ArrayList<Entity>();
+
+		for (Entity e : entities) {
+
+			newPropertyName = flipper.toFlip(e.getPropertyName());
+			newEntityName = flipper.toFlip(e.getEntityName());
+
+			tempEntities.add(new Entity(tempEntities.size() + 1, newEntityName, newPropertyName.replace("prop:", ""),
+					e.getStartPosition(), e.getEndPosition(), e.getResourceName()));
+		}
+
+		for (Entity t : tempEntities) {
+			entities.add(new Entity(entities.size() + 1, t.getEntityName(), t.getPropertyName().replace("prop:", ""),
+					t.getStartPosition(), t.getEndPosition(), t.getResourceName()));
+		}
+
+		// classes
+		List<Classes> tempClasses = new ArrayList<Classes>();
+
+		for (Classes c : classes) {
+
+			newPropertyName = flipper.toFlip(c.getPropertyName());
+			newEntityName = flipper.toFlip(c.getClassesName());
+
+			tempClasses.add(new Classes(tempClasses.size() + 1, newEntityName, newPropertyName.replace("prop:", ""),
+					c.getPosition(), c.getResourceName()));
+		}
+
+		for (Classes t : tempClasses) {
+			classes.add(new Classes(classes.size() + 1, t.getClassesName(), t.getPropertyName().replace("prop:", ""),
+					t.getPosition(), t.getResourceName()));
+		}
+	}
+
+	List<Token> getTokens() {
+		return tokens;
+	}
+
+	void setTokens(List<Token> tokens) {
 		this.tokens = tokens;
 	}
 
-	/**
-	 * @return list of tokens
-	 */
-	public List<Token> getTokens() {
-		return this.tokens;
+	String getQuery() {
+		return query;
 	}
 
-	/**
-	 * @return HashMap of sequences
-	 */
-	public HashMap<Integer, String[]> getSequence() {
+	void setQuery(String query) {
+		this.query = query;
+	}
+
+	List<Entity> getEntities() {
+		return entities;
+	}
+
+	void setEntities(List<Entity> entities) {
+		this.entities = entities;
+	}
+
+	List<Classes> getClasses() {
+		return classes;
+	}
+
+	void setClasses(List<Classes> classes) {
+		this.classes = classes;
+	}
+
+	List<Resource> getResources() {
+		return resources;
+	}
+
+	void setResources(List<Resource> resources) {
+		this.resources = resources;
+	}
+
+	boolean isUnion() {
+		return isUnion;
+	}
+
+	void setUnion(boolean isUnion) {
+		this.isUnion = isUnion;
+	}
+
+	String getSequence() {
 		return sequence;
 	}
-	
-	/**
-	 * set the HashMap of sequences
-	 * @param sequence
-	 */
-	public void setSequence(HashMap<Integer, String[]> sequence) {
+
+	void setSequence(String sequence) {
 		this.sequence = sequence;
+	}
+
+	Options getOptions() {
+		return options;
+	}
+
+	public Filters getFilters() {
+		return filters;
+	}
+
+	public void setFilters(Filters filters) {
+		this.filters = filters;
+	}
+
+	public Entity getEntityByEndPosition(int position) {
+		for (Entity e : entities) {
+			if (e.getEndPosition() == position) {
+				return e;
+			}
+		}
+		return null;
+	}
+
+	public Entity getEntityByStartPosition(int position) {
+		for (Entity e : entities) {
+			if (e.getStartPosition() == position) {
+				return e;
+			}
+		}
+		return null;
+	}
+
+	public Classes getClassByPosition(int position) {
+		for (Classes c : classes) {
+			if (c.getPosition() == position) {
+				return c;
+			}
+		}
+		return null;
 	}
 
 }

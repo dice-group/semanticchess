@@ -9,23 +9,29 @@ import org.springframework.web.bind.annotation.RestController;
 
 import de.daug.semanticchess.Service.SparqlService;
 
+/**
+ * sets up a REST API
+ * the page /sparql delivers a result json for sparql queries
+ */
 @RestController
 @RequestMapping("/sparql")
 public class SparqlController{
 	
+	/**
+	 * service that connects to the database
+	 */
 	@Autowired
-	private SparqlService queryService;
+	private SparqlService sparqlService;
 	
-//	@RequestMapping(method = RequestMethod.GET)
-//	public String getResults(){	
-//		return queryService.getResults();
-//		
-//	}
-	
+	/**
+	 * connects to SparqlService.java 
+	 * @param strQuery: sparql query
+	 * @return a json with the results from the database
+	 */
 	@RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public String getCustomResult(@RequestBody String strQuery){
 		System.out.println("Controller: " + strQuery);
-		return queryService.getCustomResult(strQuery);
+		return sparqlService.getCustomResult(strQuery);
 	}
 	
 }

@@ -13,67 +13,43 @@ import com.google.gson.GsonBuilder;
 import de.daug.semanticchess.Database.ConnectVirtuoso;
 import virtuoso.jena.driver.VirtModel;
 
+/**
+ * connects to the database and returns a result
+ */
 @Repository
 public class SparqlVirtuoso {
 
-	private String prefix = "PREFIX ex:<http://example.com>" + " PREFIX res:<http://example.com/res/>"
+	private static String PREFIX = "PREFIX ex:<http://example.com>" + " PREFIX res:<http://example.com/res/>"
 			+ " PREFIX prop:<http://example.com/prop/>";
-	private String virtQuery = "select distinct ?player where {?s prop:black ?player.} LIMIT 100";
-
-	public SparqlVirtuoso(String virtQuery) {
-		this.virtQuery = virtQuery;
-	}
-
+	
+	/**
+	 * constructor
+	 */
 	public SparqlVirtuoso() {
 	}
 
-	public String getQuery() {
-		return virtQuery;
-	}
 
-	public void setQuery(String query) {
-		this.virtQuery = query;
-	}
-
-	public String getResults() {
-		String query = this.prefix + " " + this.virtQuery;
-
-		ConnectVirtuoso conn = new ConnectVirtuoso();
-		VirtModel vModel = conn.connect();
-
-		System.out.println("=====================");
-		System.out.println("Exec: " + query);
-
-		String json = "";
-
-		Query jquery = QueryFactory.create(query);
-
-		QueryExecution qexec = QueryExecutionFactory.create(jquery, vModel);
-		ResultSet results = qexec.execSelect();
-		ResultSetFormatter.out(System.out, results, jquery);
-
-		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-
-		// ResultSetFormatter.outputAsJSON(outputStream, results);
-		json = new String(outputStream.toByteArray());
-		System.out.println("============================\n");
-
-		return json;
-
-	}
-
+	/**
+	 * the method connects to the database and returns a json
+	 * with the wanted result
+	 * @param strQuery: sparql Query
+	 * @return json 
+	 */
 	public String getCustomResult(String strQuery) {
-		String query = this.prefix + " " + strQuery;
+		String query = PREFIX + " " + strQuery;
 
+		//database connection
 		ConnectVirtuoso conn = new ConnectVirtuoso();
 		VirtModel vModel = conn.connect();
 
 		System.out.println("=====================");
 		System.out.println("Exec: " + query);
+		//create the sparql query from the String
 		Query jquery = QueryFactory.create(query);
 		Gson gson = new GsonBuilder().create();
 		String json = "";
 
+		//SELECT
 		if (jquery.isSelectType()) {
 			QueryExecution qexec = QueryExecutionFactory.create(jquery, vModel);
 			ResultSet results = qexec.execSelect();
@@ -84,7 +60,8 @@ public class SparqlVirtuoso {
 
 			return json;
 		}
-
+		
+		//ASK
 		if (jquery.isAskType()) {
 			QueryExecution qexec = QueryExecutionFactory.create(jquery, vModel);
 			Boolean results = qexec.execAsk();
@@ -94,12 +71,37 @@ public class SparqlVirtuoso {
 
 			return json;
 		}
-
+		
+		//UNKNWON STATEMENT
 		json = gson.toJson("Unkown statement.");
 
 		return json;
 	}
+	
+	/**
+	 * method mainly to for StringSimilarity.java
+	 * @param strQuery: sparql query
+	 * @return resultSet
+	 */
+	public ResultSet getResultSet(String strQuery){
+		String query = PREFIX + " " + strQuery;
 
+		ConnectVirtuoso conn = new ConnectVirtuoso();
+		VirtModel vModel = conn.connect();
+		Query jquery = QueryFactory.create(query);
+		
+		QueryExecution qexec = QueryExecutionFactory.create(jquery, vModel);
+		ResultSet results = qexec.execSelect();
+		//ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+		//ResultSetFormatter.out(outputStream, results);
+		
+		return results;
+	}
+
+	/**
+	 * main method for testing
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		SparqlVirtuoso virtQuery = new SparqlVirtuoso();
 		String json = virtQuery.getCustomResult(

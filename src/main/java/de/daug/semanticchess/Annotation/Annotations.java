@@ -29,6 +29,7 @@ import org.aksw.hawk.datastructures.HAWKQuestion;
  * @author jorn-henningdaug
  *
  */
+@Deprecated
 public class Annotations {
 
 	// attributes

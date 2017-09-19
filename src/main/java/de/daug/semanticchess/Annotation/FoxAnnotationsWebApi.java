@@ -24,6 +24,7 @@ import com.google.gson.JsonObject;
 
 
 //TODO: 			work in progress
+@Deprecated
 public class FoxAnnotationsWebApi{
 	public static void main(String[] args) throws UnsupportedEncodingException, IOException{
 		
