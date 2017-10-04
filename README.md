@@ -32,7 +32,7 @@ $ mvn spring-boot:run
 
 ## Note
 
-At first the program converts the file 1610-1899.pgn to ttl-files. After that it uploads thes files plus a mapping file and an chess opening file to the database. That will take some time.
+At first the program converts the file 1610-1899.pgn to ttl-files. After that it uploads these files plus a mapping file and an chess opening file to the database. That will take some time.
 
 
 ## Use
