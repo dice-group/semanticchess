@@ -9,8 +9,8 @@ public class Entity {
 	private final static String entityLabel = "E_";
 	private final static String propertyLabel = "P_";
 	private final static String resourceLabel = "R_";
-	private final static String property = "prop:";
-
+	
+	private String propertyPrefix;
 	private String entityId;
 	private String propertyId;
 	private String resourceId;
@@ -31,14 +31,15 @@ public class Entity {
 	 * @param endPosition: end position in the query
 	 * @param resourceName: name of the resource (e.g. game, moves,...)
 	 */
-	public Entity(int counter, String entityName, String propertyName, int startPosition, int endPosition,
+	public Entity(int counter, String entityName, String propertyPrefix, String propertyName, int startPosition, int endPosition,
 			String resourceName) {
 		this.entityId = entityLabel + counter;
 		this.propertyId = propertyLabel + counter;
 		this.resourceId = resourceLabel + counter;
 
 		this.entityName = entityName;
-		this.propertyName = property + propertyName;
+		this.propertyPrefix = propertyPrefix;
+		this.propertyName = propertyPrefix + propertyName;
 		this.resourceName = resourceName;
 
 		this.startPosition = startPosition;
@@ -171,6 +172,16 @@ public class Entity {
 	 */
 	public void setEndPosition(int endPosition) {
 		this.endPosition = endPosition;
+	}
+	
+	
+
+	public String getPropertyPrefix() {
+		return propertyPrefix;
+	}
+
+	public void setPropertyPrefix(String propertyPrefix) {
+		this.propertyPrefix = propertyPrefix;
 	}
 
 	/**

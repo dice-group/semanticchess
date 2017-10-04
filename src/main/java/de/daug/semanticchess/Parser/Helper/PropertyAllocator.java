@@ -21,6 +21,7 @@ public class PropertyAllocator {
 	public PropertyAllocator(List<Token> tokens) {
 		this.tokens = tokens;
 		this.personPositions = getPersonPositions();
+		this.colorPosition = getFirstColorPosition();
 	}
 
 	/**
@@ -68,10 +69,24 @@ public class PropertyAllocator {
 		
 		for(int i = 0; i < tokens.size(); i++){
 			if(tokens.get(i).getNe().equals("elo")){
-				eloPosition.add(i);
-				
+				eloPosition.add(i);				
+			}
+			if(tokens.get(i).getNe().equals("jjs_pos") || tokens.get(i).getNe().equals("jjs_neg") || tokens.get(i).getNe().equals("jjr_pos") || tokens.get(i).getNe().equals("jjr_neg") ){
+				System.out.println(tokens.get(i).getNe() + tokens.get(i).getWord());
+				if(!tokens.get(i).getWord().equals("longest") && !tokens.get(i).getWord().equals("shortest")){
+					eloPosition.add(i);
+				}
+								
 			}
 		}
+		
+//		if(eloPosition.isEmpty()){
+//			for(int i = 0; i < tokens.size(); i++){
+//				
+//				
+//			}
+//		}
+//		
 		return eloPosition;
 	}
 
@@ -88,6 +103,7 @@ public class PropertyAllocator {
 	public int[] allocateColor() {
 		int[] personHasColor = new int[2];
 		int bestPosition = personPositions.get(0);
+		
 		personHasColor[0] = bestPosition;
 		personHasColor[1] = colorPosition;
 

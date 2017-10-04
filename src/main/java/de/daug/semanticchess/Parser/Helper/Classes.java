@@ -11,8 +11,8 @@ public class Classes {
 	private final static String classesLabel = "C_";
 	private final static String propertyLabel = "D_";
 	private final static String resourceLabel = "S_";
-	private final static String property = "prop:";
-
+	
+	private String propertyPrefix;
 	private String classesId;
 	private String propertyId;
 	private String resourceId;
@@ -31,13 +31,14 @@ public class Classes {
 	 * @param position: postion in the query
 	 * @param resourceName: name of the resource (e.g. game, moves,...)
 	 */
-	public Classes(int counter, String classesName, String propertyName, int position, String resourceName) {
+	public Classes(int counter, String classesName, String propertyPrefix, String propertyName, int position, String resourceName) {
 		this.classesId = classesLabel + counter;
 		this.propertyId = propertyLabel + counter;
 		this.resourceId = resourceLabel + counter;
 
+		this.propertyPrefix = propertyPrefix;
 		this.classesName = classesName;
-		this.propertyName = property + propertyName;
+		this.propertyName = propertyPrefix + propertyName;
 		this.resourceName = resourceName;
 
 		this.position = position;
@@ -153,6 +154,14 @@ public class Classes {
 	 */
 	public void setPosition(int position) {
 		this.position = position;
+	}
+
+	public String getPropertyPrefix() {
+		return propertyPrefix;
+	}
+
+	public void setPropertyPrefix(String propertyPrefix) {
+		this.propertyPrefix = propertyPrefix;
 	}
 
 	/**

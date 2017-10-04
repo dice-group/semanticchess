@@ -81,8 +81,44 @@ public class CustomNer {
 						tokens.get(i).setNe("elo");
 					}
 				} catch (Exception e) {}
+			} else if(tokens.get(i).getNe().equals("ORGANIZATION")){
+				if(word.equals("elo")){
+					tokens.get(i).setNe("elo");
+				}
 			}
 		}
+		
+		return tokens;
+	}
+	
+	
+	public List<Token> checkOpening(List<Token> tokens){
+		for(int i = 0; i < tokens.size(); i++){
+			String word = tokens.get(i).getWord().toLowerCase();
+			String value = vocabulary.INVERSED_PROPERTIES.get(word);
+			//System.out.println(value);
+			if(value != null && value.equals("OPENING") && tokens.get(i).getPos().equals("NNP")){
+				value = "OPENING";
+			} else if (value != null && value.equals("piece") && tokens.get(i).getPos().equals("NNP")){
+				value = "OPENING";		
+			}
+			if (value != null && value.equals("OPENING")) {
+				tokens.get(i).setNe(value);
+				int j = i-1;
+				while(tokens.get(j) != null && (!tokens.get(j).getNe().equals("O") || tokens.get(j).getPos().equals("POS") || tokens.get(j).getPos().equals("NNP"))){
+					tokens.get(j).setNe(value);
+					j--;
+				}
+				int k = i+1;
+				while(tokens.get(k) != null && (!tokens.get(k).getNe().equals("O") || tokens.get(k).getPos().equals("POS") || tokens.get(k).getPos().equals("NNP"))){
+					tokens.get(k).setNe(value);
+					k++;
+				}
+				
+			}
+			
+		}
+		
 		
 		return tokens;
 	}

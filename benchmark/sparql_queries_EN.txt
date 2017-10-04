@@ -25,24 +25,27 @@ WHERE {
 }
 
 ========================================================
-3	Which player with an ELO above 2500 has won the most in 1899?
+3	Which player with an ELO above 2500 has won most often in 1899?
 SELECT ?player (count(?game) AS ?nr)
 WHERE {
 	{?game prop:white ?player .
 	 ?game prop:result '1-0' .
 	 ?game prop:date ?date .
+	 ?game prop:whiteelo ?elo .
 	 FILTER regex(?date, '1899')
 	}
 	UNION
 	{?game prop:black ?player .
 	 ?game prop:result '0-1' .
 	 ?game prop:date ?date .
+	 ?game prop:blackelo ?elo .
 	 FILTER regex(?date, '1899')
 	}
 } 
 GROUP BY ?player
+HAVING ?elo > 2500
 ORDER BY DESC(?nr)
-LIMIT 3 OFFSET 0
+LIMIT 1 OFFSET 0
 
 ========================================================
 4	Have Emanuel Lasker played the opening King’s Indian?
@@ -53,12 +56,12 @@ ASK {
 }
 
 ========================================================
-5	Give me 10 blitz games of Wilhelm Steinitz.
-SELECT ?game
+5	Who did play blind games?
+SELECT DISTINCT ?person
 WHERE {
-	?game prop:black|prop:white 'Wilhelm Steinitz' .
+	?game prop:black|prop:white ?person .
 	?game prop:event ?event .
-	FILTER regex(?event, 'blitz', 'i')
+	FILTER regex(?event, 'blind', 'i')
 }
 
 ========================================================
@@ -118,16 +121,16 @@ WHERE {
 
 ========================================================
 11	What is the longest game?
-SELECT DISTINCT ?game
+SELECT DISTINCT ?game (MAX(?nr) AS ?max)
 WHERE {
 	?game prop:moves ?moves .
 	?moves prop:moveNr ?nr .
 }
-ORDER BY DESC(?nr) LIMIT 1 OFFSET 0
+GROUP BY ?game ORDER BY DESC(?max) LIMIT 1 OFFSET 0
 
 ========================================================
 12 Give me games where Adolf Anderssen defeats Howard Staunton with black.
-SELECTT DISTINCT ?game
+SELECT DISTINCT ?game
 WHERE {
 	?game prop:white 'Adolf Anderssen'.
 	?game prop:black 'Howard Staunton'.
@@ -145,13 +148,12 @@ WHERE {
 ORDER BY ASC(?date) LIMIT 1 OFFSET 0
 
 ========================================================
-14	Show me 10 games of white in the Queen’s Indian.
+14	Show me games of white in the Evans Gambit.
 SELECT DISTINCT ?game
 WHERE {
 	?game prop:eco ?eco .
-	FILTER regex(?eco, 'E1[2-9].*')
+	FILTER regex(?eco, 'C5[1-2].*')
 }
-LIMIT 10
 
 ========================================================
 15	Which opening has Wilhelm Steinitz played most frequently?
@@ -165,14 +167,14 @@ ORDER BY DESC(?nr)
 LIMIT 1 OFFSET 0
 
 ========================================================
-16	In which game did Caruana have his highest rating?
+16	In which game did Wilhelm Steinitz have his highest rating?
 SELECT DISTINCT ?game
 WHERE {
-	{?game prop:black 'Fabiano Caruana' .
+	{?game prop:black 'Wilhelm Steinitz' .
 	 ?game prop:blackelo ?elo .
 	}
 	UNION
-	{?game prop:white 'Fabiano Caruana' .
+	{?game prop:white 'Wilhelm Steinitz' .
 	 ?game prop:whiteelo ?elo .
 	}
 }
@@ -184,13 +186,13 @@ LIMIT 1
 SELECT DISTINCT ?game
 WHERE {
 	?game prop:event ?event .
-	{SELECT DISTINCT ?event
+	{SELECT DISTINCT ?event (AVG(?elo) AS ?avg)
 	 WHERE {
 		?game prop:event ?event . 
 		?game prop:whiteelo|prop:blackelo ?elo .
 	 }
 	 GROUP BY ?event
-	 ORDER BY DESC(AVG(?elo))
+         ORDER BY DESC(?avg)
 	 LIMIT 1
 	 }
 }
@@ -201,16 +203,19 @@ SELECT DISTINCT ?game
 WHERE {
 	{?game prop:black 'Wilhelm Steinitz' .
 	 ?game prop:result '1-0' .
-	 ?game prop:whiteelo ?elo .
+	 ?game prop:whiteelo ?whiteelo .
+	 ?game prop:blackelo ?blackelo .
+	 FILTER (?blackelo > ?whiteelo) 
 	}
 	UNION
 	{?game prop:white 'Wilhelm Steinitz' .
 	 ?game prop:result '0-1' .
-	 ?game prop:blackelo ?elo .
+	 ?game prop:whiteelo ?whiteelo .
+	 ?game prop:blackelo ?blackelo .
+	 FILTER (?blackelo < ?whiteelo) 
 	}
 }
-ORDER BY ASC(?elo)
-LIMIT 10 OFFSET 0
+
 
 ========================================================
 19	What openings were played at the World Championship 1894?
@@ -233,7 +238,7 @@ WHERE {
 }
 
 ========================================================
-21	Which game was played exactly 10 years ago?
+21	Which game was played exactly 150 years ago?
 ==> inaccurate, month and day have to be considered
 
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
@@ -244,44 +249,47 @@ WHERE {
 	FILTER (xsd:Integer(?year) + 150 = 2017)
 }
 
-========================================================
-22	What does Emanuel Lasker play against the Sicilian Defense?
-SELECT DISTINCT ?game ?move
+SELECT DISTINCT ?game ?year
 WHERE {
-	?game prop:black|prop:white 'Emanuel Lasker' .
-	?game prop:eco ?eco .
-	?game prop:moves ?moves .
-	?moves prop:move ?move .
-	?moves prop:moveNr ?nr .
-	FILTER regex(?eco, 'B[2-9][0-9].*')
+	?game prop:date '1867.06.08' .
 }
-ORDER BY ?game ASC(?nr)
 
 ========================================================
-23	Who was the 8th world champion?
+22	What does Emanuel Lasker play against the Sicilian Defense?
+SELECT DISTINCT ?game
+WHERE {
+	?game prop:black|prop:white 'Emanuel Lasker' .
+	?game cont:eco ?eco .
+	?eco cont:openingCode ?e
+	FILTER regex(?e, 'B[2-9][0-9].*')
+}
+
+
+========================================================
+23	Who was the 5th world champion?
 SELECT DISTINCT ?player (COUNT(?result) + ((COUNT(?draw))/2) AS ?points)
 WHERE {
 	{?game prop:black ?player .
-	 ?game prop:event '7. World Championship' .
+	 ?game prop:event '5. World Championship' .
 	 ?game prop:result '0-1' .
 	 ?game prop:result ?result .
 	}
 	UNION
 	{?game prop:white ?player .
-	 ?game prop:event '7. World Championship' .
+	 ?game prop:event '5. World Championship' .
 	 ?game prop:result '1-0' .
 	 ?game prop:result ?result .
 	}
 	UNION
 	{?game prop:black|prop:white ?player .
-	 ?game prop:event '7. World Championship' .
+	 ?game prop:event '5. World Championship' .
 	 ?game prop:result '1/2-1/2' .
 	 ?game prop:result ?result .
 	}
 }
 GROUP BY ?player
 ORDER BY DESC(?points)
-LIMIT 5 OFFSET 0
+LIMIT 1 OFFSET 0
 
 ========================================================
 24	What was the last game of Wilhelm Steinitz?
@@ -294,7 +302,7 @@ ORDER BY DESC(?date) LIMIT 1 OFFSET 0
 
 
 ========================================================
-25	How often is King’s Indian played?
+25	How often is Evans Gambit played?
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 SELECT DISTINCT (?played/(xsd:double(COUNT(?ecoAll))*100)  AS ?percentage)
 WHERE {
@@ -303,10 +311,16 @@ WHERE {
 		SELECT DISTINCT (COUNT(?eco) AS ?played)
 		WHERE {
 			?game prop:eco ?eco .
-        FILTER regex(?eco, '^E[6-9]{2}.*')
+        FILTER regex(?eco, '^C5[1-2].*')
 		}
 	}
 } GROUP BY ?played
+
+SELECT DISTINCT (COUNT(?eco) AS ?nr)
+WHERE {
+		?game prop:eco ?eco .
+        FILTER regex(?eco, '^C5[1-2].*')
+}
 
 ========================================================
 26	When did Wilhelm Steinitz played his last World Championship?
@@ -321,7 +335,7 @@ ORDER BY DESC(?date)
 LIMIT 1 OFFSET 0
 ========================================================
 27	Which players with black defeated Howard Staunton?
-SELECT ?player 
+SELECT DISTINCT ?player 
 WHERE {
 	?game prop:black ?player .
 	?game prop:white 'Howard Staunton' .
@@ -329,42 +343,32 @@ WHERE {
 }
 
 ========================================================
-28	All games with a move number exceeding 100.
+28	All games with more than 200 moves. (only half moves)
 SELECT DISTINCT ?game
 WHERE {
 	?game prop:moves ?moves .
 	?moves prop:moveNr ?nr .
-	FILTER ((?nr/2) > 99)
+	FILTER (?nr > 200)
 } GROUP BY ?game
 
 ========================================================
-29	Show me any games with three pawns on the 7th rank?
+29	Show me any games with three pawns on the 2nd rank?
 SELECT DISTINCT ?game
 WHERE {
-	{?game prop:moves ?moves	.
-	 ?moves prop:fen ?fen .
-	 FILTER regex(?fen, '^.*/.*P{1}.*P{1}.*P{1}.*/.*/.*/.*/.*/.*/.* ')
-	}
-	UNION
-	{?game prop:moves ?moves	.
+	?game prop:moves ?moves	.
 	 ?moves prop:fen ?fen .
 	 FILTER regex(?fen, '^.*/.*/.*/.*/.*/.*/.*p{1}.*p{1}.*p{1}.*/.* ')
-	}
+	
 }
 
 ========================================================
-30	Show me positions with knight pair against bishop pair.
+30	Show me positions with rook against bishop pair.
 SELECT DISTINCT ?game
 WHERE {
-	{?game prop:moves ?moves .
+	?game prop:moves ?moves .
 	 ?moves prop:fen ?fen .
-	 FILTER (regex(?fen, '^[^bNRrQq]* w|b  ') && regex(?fen, '^[^B]*B{2}[^B]* ') && regex(?fen, '^[^n]*n{2}[^n]* '))
-	}
-	UNION
-	{?game prop:moves ?moves .
-	 ?moves prop:fen ?fen .
-	 FILTER (regex(?fen, '^[^BnQqp]* w|b  ') && regex(?fen, '^[^b]+b{2}[^b]+ ') && regex(?fen, '^[^N]*N{2}[^N]* '))
-	}	
+	 FILTER (regex(?fen, '^(?=(.*R){1})(?!(.*R){2})(?=(.*[^ ]b){2})(?!(.*[^ ]b){3})((?![QqrBNn]).)*$'))
+		
 }
 
 ========================================================
@@ -381,8 +385,8 @@ WHERE {
 }
 
 ========================================================
-32	Has Carlsen ever played a fianchetto?
-ASK {?game prop:black|prop:white 'Magnus Carlsen'.
+32	Has Wilhelm Steinitz ever played a fianchetto?
+ASK {?game prop:black|prop:white 'Wilhelm Steinitz'.
 	{?game prop:moves ?moves .
 	?moves prop:fen ?fen .
 	FILTER regex(?fen, '^.*/.*/.*/.*/.*/.*P{1}.{1}/.*PBP/.* ')
@@ -405,7 +409,7 @@ ASK {?game prop:black|prop:white 'Magnus Carlsen'.
 }
 
 ========================================================
-33	Are there games with f2-f4 d7-d5 g2-g3?
+33	Are there games with f2-f4 d7-d5 Ng1-f3?
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 SELECT DISTINCT ?game
 WHERE {
@@ -419,16 +423,16 @@ WHERE {
 	
 	?move1 prop:move 'f2-f4'.
 	?move2 prop:move 'd7-d5'.
-	?move3 prop:move 'g2-g3'.
+	?move3 prop:move 'Ng1-f3'.
 }
 
 ========================================================
-34	Wins of white in B33 and an average ELO of over 2400.
+34	Wins of white in C52 and an average ELO of over 2400.
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 SELECT DISTINCT ?game
 WHERE {
 	?game prop:blackelo|prop:whiteelo ?elo .
-	?game prop:eco 'B33' .
+	?game prop:eco 'C52' .
 	?game prop:result '1-0'.
 }
 GROUP BY ?game
@@ -443,9 +447,10 @@ WHERE {
 }
 GROUP BY ?player
 ORDER BY DESC(?nr)
+LIMIT 1 OFFSET 0
 
 ========================================================
-36	What was the first game with a Ruy Lopez?
+36	What was the first game with a Ruy Lopez Opening?
 SELECT DISTINCT ?game
 WHERE {
 	?game prop:eco ?eco .
@@ -469,13 +474,18 @@ LIMIT 1 OFFSET 2
 
 
 ========================================================
-38	All games of GMs against computers.
+38	Show me all won games of Lasker against Steinitz.
 SELECT DISTINCT ?game
 WHERE {
-	?game prop:black|prop:white ?comp .
-	?game prop:black|prop:white ?player .
-	?game prop:blacktitle|prop:whitetitle 'GM' .
-	FILTER regex(?comp, 'Comp', 'i') 
+	{?game prop:black 'Wilhelm Steinitz' .
+	 ?game prop:white 'Emanuel Lasker' .
+	 ?game prop:result '1-0' .
+	}
+	UNION
+	{?game prop:white 'Wilhelm Steinitz' .
+	 ?game prop:black 'Emanuel Lasker' .
+	 ?game prop:result '0-1' .
+	}
 }
 
 ========================================================
@@ -514,29 +524,24 @@ WHERE {
 }
 
 ========================================================
-40	Two games with doubling rooks on the 7th rank from June 1894.
+40	Games with doubling rooks on the 7th rank.
 
 SELECT DISTINCT ?game
 WHERE {
 	?game prop:moves ?moves .
 	?game prop:date ?date .
 	?moves prop:fen ?fen .
-	FILTER (regex(?fen , '^.*/.*R{1}.*R{1}.*/.*/.*/.*/.*/.*/.* ') && regex(?date, '06.18945$'))
+	FILTER (regex(?fen , '^.*/.*R{1}.*R{1}.*/.*/.*/.*/.*/.*/.* '))
 }
 
 ========================================================
 41	Examples of games with bishop against knight and 2 pawns.
 SELECT DISTINCT ?game 
 WHERE {
-	{?game prop:moves ?moves .	
+	?game prop:moves ?moves .	
 	?moves prop:fen ?fen .
-	FILTER (regex(?fen, '^.*B{1}.* ') && regex(?fen, '^.*n{1}.* ') && regex(?fen, '^[^N]* ') && regex(?fen, '^[^b]* ') && regex(?fen, '^[^p]*p{2}[^p]* '))
-	}
-	UNION
-	{?game prop:moves ?moves .	
-	?moves prop:fen ?fen .
-	FILTER (regex(?fen, '^.*b{1}.* ') && regex(?fen, '^.*N{1}.* ') && regex(?fen, '^[^n]* ') && regex(?fen, '^[^B]* ') && regex(?fen, '^[^P]*P{2}[^P]* '))
-	}
+	FILTER (regex(?fen, '(?=(.*B){1})(?!(.*B){2})(?=(.*n){1})(?!(.*n){2})(?=(.*p){2})(?!(.*p){3})((?![QqRrbNP]).)*$'))
+
 }
 
 ========================================================
@@ -576,7 +581,7 @@ ORDER BY ASC(?date)
 45 Show me all games from Amsterdam.
 SELECT ?game
 WHERE {
-	?game prop:site 'Amsterdam'.
+	?game prop:site 'Amsterdam NED'.
 }
 
 ========================================================
@@ -592,23 +597,15 @@ ORDER BY DESC(?nr)
 LIMIT 1 OFFSET 0
 
 ========================================================
-47	All games in which a FM has defeated a GM.
+47	All games by William Steinitz.
 
 SELECT DISTINCT ?game
 WHERE {
-	{?game prop:whiteTitle 'FM' .
-	?game prop:blackTitle 'GM' .
-	?game prop:result '1-0' .
-	}
-	UNION
-	{?game prop:whiteTitle 'GM' .
-	?game prop:blackTitle 'FM' .
-	?game prop:result '0-1' .
-	}
+	?game prop:white|prop:black 'Wilhelm Steinitz' .
 }
 
 ========================================================
-48	What is played against Giuoco Piano?
+48	What is played against the Italian Game?
 SELECT DISTINCT ?game
 WHERE {
 	?game prop:eco ?eco .
@@ -616,22 +613,24 @@ WHERE {
 }
 
 ========================================================	
-49	In which variation in the Sicilian Defense does black win the most?
+49	In which variation in the Sicilian Defense does black win most often?
 SELECT DISTINCT ?eco (count(?eco) AS ?wins)
 WHERE {
-	?game prop:eco ?eco .
+	?game cont:eco ?eco .
+	?eco cont:openingCode ?e .
 	?game prop:result '0-1' .
-	FILTER regex(?eco, 'B[2-9][0-9].*')
+	FILTER regex(?e, 'B[2-9][0-9].*')
 }
 GROUP BY ?eco
 ORDER BY DESC(?wins)
-LIMIT 3 OFFSET 0
+LIMIT 1 OFFSET 0
 
 ========================================================
-50	What is the main variation in the Ruy Lopez?
+50	What is the main variation in the Ruy Lopez Opening?
 SELECT DISTINCT ?eco (count(?eco) AS ?played)
 WHERE {
-	?game prop:eco ?eco .
+	?game cont:eco ?eco .
+	?eco cont:openingCode ?e .
 	FILTER regex(?eco, '^C[6-9][0-9].*')
 }
 GROUP BY ?eco

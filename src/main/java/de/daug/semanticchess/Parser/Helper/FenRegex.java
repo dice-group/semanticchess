@@ -17,6 +17,18 @@ public class FenRegex{
 	private static String MAX = "(?!(.*X){Z})";
 	private static String notOnBoard = "((?![QqRrBbNnPp]).)*$";
 	
+	private int whiteQueenCounter = 0;
+	private int whiteRookCounter = 0;
+	private int whiteBishopCounter = 0;
+	private int whiteKnightCounter = 0;
+	private int whitePawnCounter = 0;
+	
+	private int blackQueenCounter = 0;
+	private int blackRookCounter = 0;
+	private int blackBishopCounter = 0;
+	private int blackKnightCounter = 0;
+	private int blackPawnCounter = 0;
+	
 	/**
 	 * constructor
 	 */
@@ -29,8 +41,29 @@ public class FenRegex{
 	 * @param piece: name of the piece
 	 */
 	public void addPieceWhite(int counter, String piece){
-		Piece p = new Piece(counter, piece);
-		piecesWhite.add(p);
+		switch(piece){
+		case "queen":
+			this.whiteQueenCounter += counter;
+			break;
+		case "rook":
+			this.whiteRookCounter += counter;
+			break;
+		case "bishop":
+			this.whiteBishopCounter += counter;
+			break;	
+		case "knight":
+			this.whiteKnightCounter += counter;
+			break;
+		case "pawn":
+			this.whitePawnCounter += counter;
+			
+			break;
+		default:
+			break;
+	}
+		
+//		Piece p = new Piece(counter, piece);
+//		piecesWhite.add(p);
 	}
 	
 	/**
@@ -39,8 +72,29 @@ public class FenRegex{
 	 * @param piece: name of the piece
 	 */
 	public void addPieceBlack(int counter, String piece){
-		Piece p = new Piece(counter, piece);
-		piecesBlack.add(p);
+		switch(piece){
+		case "queen":
+			this.blackQueenCounter += counter;
+			break;
+		case "rook":
+			this.blackRookCounter += counter;
+			break;
+		case "bishop":
+			this.blackBishopCounter += counter;
+			break;	
+		case "knight":
+			this.blackKnightCounter += counter;
+			break;
+		case "pawn":
+			this.blackPawnCounter += counter;
+			
+			break;
+		default:
+			break;
+	}
+		
+//		Piece p = new Piece(counter, piece);
+//		piecesBlack.add(p);
 	}
 	
 	/**
@@ -49,6 +103,49 @@ public class FenRegex{
 	public void createFen(){
 		boolean whitePawnIsCalled = false;
 		boolean blackPawnIsCalled = false;
+		
+		if(this.whiteQueenCounter > 0){
+			Piece Q = new Piece(this.whiteQueenCounter, "queen");
+			piecesWhite.add(Q);
+		}
+		if(this.whiteRookCounter > 0){
+			Piece R = new Piece(this.whiteRookCounter, "rook");
+			piecesWhite.add(R);
+		}
+		if(this.whiteBishopCounter > 0){
+			Piece B = new Piece(this.whiteBishopCounter, "bishop");
+			piecesWhite.add(B);
+		}
+		if(this.whiteKnightCounter > 0){
+			Piece N = new Piece(this.whiteKnightCounter, "knight");
+			piecesWhite.add(N);
+		}
+		if(this.whitePawnCounter > 0){
+			Piece P = new Piece(this.whitePawnCounter, "pawn");
+			piecesWhite.add(P);
+		}
+		if(this.blackQueenCounter > 0){
+			Piece q = new Piece(this.blackQueenCounter, "queen");
+			piecesBlack.add(q);
+		}
+		if(this.blackRookCounter > 0){
+			Piece r = new Piece(this.blackRookCounter, "rook");
+			piecesBlack.add(r);
+		}
+		if(this.blackBishopCounter > 0){
+			Piece b = new Piece(this.blackBishopCounter, "bishop");
+			piecesBlack.add(b);
+		}
+		if(this.blackKnightCounter > 0){
+			Piece n = new Piece(this.blackKnightCounter, "knight");
+			piecesBlack.add(n);
+		}
+		if(this.blackPawnCounter > 0){
+			Piece p = new Piece(this.blackPawnCounter, "pawn");
+			piecesBlack.add(p);
+		}
+		
+		
 		
 		//white pieces
 		for(Piece piece : piecesWhite){	
@@ -185,9 +282,9 @@ public class FenRegex{
 	public static void main (String[] args){
 		
 		FenRegex reg = new FenRegex();
-		reg.addPieceWhite(1, "queen");
+		
 		reg.addPieceBlack(1, "rook");
-		reg.addPieceBlack(1, "pawn");
+		reg.addPieceWhite(2, "bishop");
 		
 		reg.createFen();
 		

@@ -31,9 +31,18 @@ public class ChessVocabulary {
 		blackProperty.add("black");
 		// ==============================
 		PROPERTIES.put("black", blackProperty);
+		
+		ArrayList<String> countProperty = new ArrayList<String>();
+		countProperty.add("often");
+		countProperty.add("many");
+		countProperty.add("most");
+		countProperty.add("main");
+		// ==============================
+		PROPERTIES.put("count", countProperty);
 				
 		ArrayList<String> dateProperty = new ArrayList<String>();
 		dateProperty.add("when");
+		dateProperty.add("date");
 		// ==============================
 		PROPERTIES.put("DATE", dateProperty);
 				
@@ -51,33 +60,48 @@ public class ChessVocabulary {
 		ArrayList<String> eloProperty = new ArrayList<String>();
 		eloProperty.add("elo");
 		eloProperty.add("rating");
+		eloProperty.add("rate");
 		// ==============================
 		PROPERTIES.put("elo", eloProperty);
 		
 		ArrayList<String> eventProperty = new ArrayList<String>();
-		eventProperty.add("blitz");
-		eventProperty.add("candidate");
-		eventProperty.add("championship");
-		eventProperty.add("chess960");
-		eventProperty.add("classics");
-		eventProperty.add("congress");
+		
 		eventProperty.add("event");
-		eventProperty.add("events");
-		eventProperty.add("festival");
-		eventProperty.add("kongress");
-		eventProperty.add("masters");
-		eventProperty.add("meeting");
-		eventProperty.add("open");
-		eventProperty.add("random chess");
-		eventProperty.add("rapid");
-		eventProperty.add("section");
-		eventProperty.add("simul");
-		eventProperty.add("simultan");
-		eventProperty.add("simultaneous");
-		eventProperty.add("speed");
 		eventProperty.add("tournament");
+		eventProperty.add("tourney");
+		eventProperty.add("championship");
 		// ==============================
 		PROPERTIES.put("event", eventProperty);
+		
+		ArrayList<String> eventEntityProperty = new ArrayList<String>();
+		
+		eventEntityProperty.add("blitz");
+		eventEntityProperty.add("candidate");
+		eventEntityProperty.add("chess960");
+		eventEntityProperty.add("classics");
+		eventEntityProperty.add("congress");
+		eventEntityProperty.add("festival");
+		eventEntityProperty.add("kongress");
+		eventEntityProperty.add("masters");
+		eventEntityProperty.add("meeting");
+		eventEntityProperty.add("open");
+		eventEntityProperty.add("rapid");
+		eventEntityProperty.add("section");
+		eventEntityProperty.add("simul");
+		eventEntityProperty.add("simultan");
+		eventEntityProperty.add("simultaneous");
+		eventEntityProperty.add("speed");
+		eventEntityProperty.add("exhibition");
+		eventEntityProperty.add("consultation");
+		eventEntityProperty.add("correspondence");
+		eventEntityProperty.add("challenge");
+		eventEntityProperty.add("playoff");
+		eventEntityProperty.add("final");
+		eventEntityProperty.add("blind");
+		eventEntityProperty.add("knockout");
+		eventEntityProperty.add("blindfolded");
+		// ==============================
+		PROPERTIES.put("eventEntity", eventEntityProperty);
 		
 		ArrayList<String> fenProperty = new ArrayList<String>();
 		fenProperty.add("fen");
@@ -87,11 +111,27 @@ public class ChessVocabulary {
 		// ==============================
 		PROPERTIES.put("fen", fenProperty);
 		
-		ArrayList<String> greaterThanProperty = new ArrayList<String>();
-		greaterThanProperty.add("above");
-		greaterThanProperty.add("highest");
+		ArrayList<String> comparativePosProperty = new ArrayList<String>();
+		comparativePosProperty.add("above");
+		comparativePosProperty.add("higher");
+		comparativePosProperty.add("more");
+		comparativePosProperty.add("larger");
+		comparativePosProperty.add("over");
+		comparativePosProperty.add("beyond");
+		comparativePosProperty.add("longer");
+		comparativePosProperty.add("stronger");
+		comparativePosProperty.add("greater");
 		//===============================
-		PROPERTIES.put("greater", greaterThanProperty);
+		PROPERTIES.put("jjr_pos", comparativePosProperty);
+		
+		ArrayList<String> superlativePosProperty = new ArrayList<String>();
+		superlativePosProperty.add("longest");
+		superlativePosProperty.add("strongest");
+		superlativePosProperty.add("toughest");
+		superlativePosProperty.add("hardest");
+		superlativePosProperty.add("highest");
+		//===============================
+		PROPERTIES.put("jjs_pos", superlativePosProperty);
 		
 		ArrayList<String> gameProperty = new ArrayList<String>();
 		gameProperty.add("game");
@@ -105,8 +145,26 @@ public class ChessVocabulary {
 		gameProperty.add("pairings");
 		gameProperty.add("encounter");
 		gameProperty.add("encounters");
+		gameProperty.add("endgames");
 		// ==============================
 		PROPERTIES.put("game", gameProperty);
+		
+		ArrayList<String> comparativeNegProperty = new ArrayList<String>();
+		comparativeNegProperty.add("less");
+		comparativeNegProperty.add("lower");
+		comparativeNegProperty.add("smaller");
+		comparativeNegProperty.add("weaker");
+		comparativeNegProperty.add("below");
+		comparativeNegProperty.add("under");		
+		comparativeNegProperty.add("shorter");
+		// ==============================
+		PROPERTIES.put("jjr_neg", comparativeNegProperty);
+		
+		ArrayList<String> superlativeNegProperty = new ArrayList<String>();
+		superlativeNegProperty.add("shortest");
+		superlativeNegProperty.add("weakest");
+		superlativeNegProperty.add("lowest");
+		PROPERTIES.put("jjs_neg", superlativeNegProperty);
 
 		ArrayList<String> loseProperty = new ArrayList<String>();
 		loseProperty.add("lose");
@@ -128,27 +186,31 @@ public class ChessVocabulary {
 		openingProperty.add("wall");
 		openingProperty.add("gambit");
 		openingProperty.add("attack");
+		openingProperty.add("counterattack");
+		openingProperty.add("countergambit");
 		openingProperty.add("opening");
 		openingProperty.add("symmetrical");
 		openingProperty.add("line");
 		openingProperty.add("indian");
 		// ==============================
-		PROPERTIES.put("opening", openingProperty);
+		PROPERTIES.put("OPENING", openingProperty);
 		
 		ArrayList<String> ordinalProperty = new ArrayList<String>();
 		ordinalProperty.add("last");
 		// ==============================
 		PROPERTIES.put("ORDINAL", ordinalProperty);
 		
-		ArrayList<String> optionProperty = new ArrayList<String>();
-		optionProperty.add("average");
+		ArrayList<String> averageProperty = new ArrayList<String>();
+		averageProperty.add("average");
 		//===============================
-		PROPERTIES.put("option", optionProperty);
+		PROPERTIES.put("average", averageProperty);
 		
 		ArrayList<String> personProperty = new ArrayList<String>();
 		personProperty.add("player");
 		personProperty.add("opponent");
 		personProperty.add("who");
+		personProperty.add("whom");
+		personProperty.add("person");
 		// ==============================
 		PROPERTIES.put("PERSON", personProperty);
 
@@ -169,6 +231,10 @@ public class ChessVocabulary {
 
 		ArrayList<String> siteProperty = new ArrayList<String>();
 		siteProperty.add("where");
+		siteProperty.add("city");
+		siteProperty.add("town");
+		siteProperty.add("country");
+		siteProperty.add("place");
 		PROPERTIES.put("site", siteProperty);
 
 		ArrayList<String> whiteProperty = new ArrayList<String>();

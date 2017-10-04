@@ -24,7 +24,7 @@ public class ConnectVirtuoso {
 	 * connect to database
 	 * @return vModel: database
 	 */
-	public VirtModel connect(){
+	public VirtModel connectDefault(){
 		VirtModel vModel = VirtModel.openDatabaseModel(graph, url, user, pwd);
 				
 		return vModel;

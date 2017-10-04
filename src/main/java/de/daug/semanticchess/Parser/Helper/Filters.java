@@ -20,7 +20,8 @@ public class Filters{
 	 */
 	public void addGreaterThan(String classesName, String filterValue){
 		if(isFirstFilter){
-			this.filter = "FILTER "+ classesName +" > " + filterValue;
+			this.filter = "FILTER ("+ classesName +" > " + filterValue;
+			this.isFirstFilter = false;
 		} else {
 			this.filter += " && "+ classesName +" > " + filterValue;
 		}
@@ -31,7 +32,8 @@ public class Filters{
 	 */
 	public void addLowerThan(String classesName, String filterValue){
 		if(isFirstFilter){
-			this.filter = "FILTER "+ classesName +" < " + filterValue;
+			this.filter = "FILTER ("+ classesName +" < " + filterValue;
+			this.isFirstFilter = false;
 		} else {
 			this.filter += " && "+ classesName +" < " + filterValue;
 		}
@@ -46,9 +48,11 @@ public class Filters{
 	public void addRegex(String classesName, String regex, boolean caseSensitiv){
 		if(isFirstFilter){
 			if(!caseSensitiv){
-				this.filter = "FILTER regex( " + classesName + ", '" + regex + "')";
+				this.filter = "FILTER ( regex( " + classesName + ", '" + regex + "')";
+				this.isFirstFilter = false;
 			} else {
-				this.filter = "FILTER regex( " + classesName + ", '" + regex + "' "+ ",'i' " + ")";
+				this.filter = "FILTER ( regex( " + classesName + ", '" + regex + "' "+ ",'i' " + ")";
+				this.isFirstFilter = false;
 			}
 		}else {
 			if(!caseSensitiv){
@@ -65,7 +69,13 @@ public class Filters{
 	 * @return filter
 	 */
 	public String getFilterStr() {
-		return filter;
+		if(filter.equals("")){
+			return "";
+		}
+		else {
+			return filter + ")";
+		}
+		
 	}
 
 	/**
@@ -74,6 +84,14 @@ public class Filters{
 	 */
 	public void setFilterStr(String filter) {
 		this.filter = filter;
+	}
+
+	public boolean isFirstFilter() {
+		return isFirstFilter;
+	}
+
+	public void setFirstFilter(boolean isFirstFilter) {
+		this.isFirstFilter = isFirstFilter;
 	}
 	
 	

@@ -19,9 +19,13 @@ import virtuoso.jena.driver.VirtModel;
 @Repository
 public class SparqlVirtuoso {
 
-	private static String PREFIX = "PREFIX ex:<http://example.com>" + " PREFIX res:<http://example.com/res/>"
-			+ " PREFIX prop:<http://example.com/prop/>";
-	
+	private static String PREFIX = 	"PREFIX ex:<http://example.com> " + 
+									"PREFIX res:<http://example.com/res/> " + 
+									"PREFIX prop:<http://example.com/prop/> " +
+									"PREFIX cres:<http://pcai042.informatik.uni-leipzig.de/~swp13-sc/ChessOntology/Resources/> " + 
+									"PREFIX cont:<http://pcai042.informatik.uni-leipzig.de/~swp13-sc/ChessOntology#> " +
+									"PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>";
+									
 	/**
 	 * constructor
 	 */
@@ -40,7 +44,7 @@ public class SparqlVirtuoso {
 
 		//database connection
 		ConnectVirtuoso conn = new ConnectVirtuoso();
-		VirtModel vModel = conn.connect();
+		VirtModel vModel = conn.connectDefault();
 
 		System.out.println("=====================");
 		System.out.println("Exec: " + query);
@@ -87,7 +91,7 @@ public class SparqlVirtuoso {
 		String query = PREFIX + " " + strQuery;
 
 		ConnectVirtuoso conn = new ConnectVirtuoso();
-		VirtModel vModel = conn.connect();
+		VirtModel vModel = conn.connectDefault();
 		Query jquery = QueryFactory.create(query);
 		
 		QueryExecution qexec = QueryExecutionFactory.create(jquery, vModel);
