@@ -19,7 +19,8 @@ src/main/database/virtuoso/*
 src/test
 resources/ontologyClasses
 resources/ontologyProperties
-src/main/resources/static/games/rdf/16*.ttl
+src/main/resources/static/rdf/16*.ttl
+src/main/resources/static/rdf/chessopenings.txt.ttl
 src/main/resources/static/openings/*.txt
 
 

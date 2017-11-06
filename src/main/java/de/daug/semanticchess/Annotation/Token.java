@@ -1,6 +1,6 @@
 package de.daug.semanticchess.Annotation;	
 	/**
-	 * class for a token (word, POS, NER)
+	 * Class for a token (word, POS, NER)
 	 */
 	public class Token{
 		private String word = "";

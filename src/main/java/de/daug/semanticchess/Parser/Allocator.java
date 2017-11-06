@@ -6,13 +6,13 @@ import java.util.List;
 import org.apache.jena.query.QueryParseException;
 
 import de.daug.semanticchess.Database.StringSimilarity;
-import de.daug.semanticchess.Parser.Helper.Classes;
-import de.daug.semanticchess.Parser.Helper.Entity;
-import de.daug.semanticchess.Parser.Helper.Filters;
-import de.daug.semanticchess.Parser.Helper.Values;
+import de.daug.semanticchess.Parser.Utils.Classes;
+import de.daug.semanticchess.Parser.Utils.Entity;
+import de.daug.semanticchess.Parser.Utils.Filters;
+import de.daug.semanticchess.Parser.Utils.Values;
 
 /**
- * assigns a sequence code to a sparql query
+ * Assigns a sequence code to a SPARQL query.
  */
 public class Allocator {
 
@@ -29,28 +29,20 @@ public class Allocator {
 
 	/**
 	 * constructor allocates the given sequence code to a sparql query
-	 * 
-	 * @param query:
-	 *            user question
+	 * @param query: user question
 	 */
 	public Allocator(String query) {
 		Parser parser = new Parser(query);
-
-		
 		
 		this.sequenceCode = parser.getSequence();
 		this.entities = parser.getEntities();
 		
 		
 		this.classes = parser.getClasses();
+		//System.out.println(classes.toString());
 		
-		
-		//TopicFinder topicFinder = new TopicFinder();
 		this.topics = parser.getTopicStr();
 		
-		//System.out.println(this.topics.toString());
-		
-		//System.out.println(parser.getOptions().getLimitStr());
 		if(parser.getOptions().getLimitStr().isEmpty()){
 			parser.getOptions().setLimitStr(2000);
 			parser.getOptions().setOffsetStr(0);
@@ -58,15 +50,14 @@ public class Allocator {
 		this.options = parser.getOptions().toString();
 		this.filters = parser.getFilters();
 		this.similar = parser.getSimilar();
-		// allocateSequence();
 	}
 
 	/**
-	 * replace all placeholders in the sparql query with found entities and
+	 * replace all placeholders in the SPARQL query with found entities and
 	 * properties
 	 * 
-	 * @param query
-	 * @return
+	 * @param sparql
+	 * @return configured sparql
 	 */
 	public String replaceOnly(String sparql) {
 
@@ -90,7 +81,13 @@ public class Allocator {
 
 		return sparql;
 	}
-
+	
+	/**
+	 * replaces all placeholders in the SPARQL query with regex filerts
+	 * 
+	 * @param sparql
+	 * @return configured sparql
+	 */
 	public String regexEntities(String sparql) {
 		int counter = 1;
 
@@ -107,7 +104,6 @@ public class Allocator {
 			
 			sparql = sparql.replaceAll(e.getPropertyId(), e.getPropertyName());
 			sparql = sparql.replaceAll(e.getResourceId(), e.getResourceName());
-			//System.out.println(sparql);
 		}
 
 		for (Classes c : classes) {
@@ -120,7 +116,13 @@ public class Allocator {
 
 		return sparql;
 	}
-
+	
+	/**
+	 * replaces all placeholders in the SPARQL query with a VALUES clause
+	 * 
+	 * @param sparql
+	 * @return configured sparql
+	 */
 	public String subStringEntities(String sparql) {
 
 		Values values = new Values();
@@ -137,7 +139,7 @@ public class Allocator {
 			if (!e.getEntityName().isEmpty()) {
 
 				try {
-					subStrEntities = similar.subStringMatch(e.getEntityName().replaceAll("'", ""));
+					subStrEntities = similar.subStringMatch(e.getEntityName().substring(1, e.getEntityName().length() -1 ));
 				} catch (QueryParseException err) {
 
 				}
@@ -163,14 +165,10 @@ public class Allocator {
 		String tempStr = "";
 		
 		values.generatePermutations(values.getResults(), values.getPermutation(), 0, tempStr);
-		
-		//System.out.println(values.toString());
 
 		sparql = sparql.replace("VALUE_PLACEHOLDER", values.toString());
 		
-		for (
-
-		Classes c : classes) {
+		for (Classes c : classes) {
 			sparql = sparql.replaceAll(c.getClassesId(), c.getClassesName());
 			sparql = sparql.replaceAll(c.getPropertyId(), c.getPropertyName());
 			sparql = sparql.replaceAll(c.getResourceId(), c.getResourceName());
@@ -180,11 +178,17 @@ public class Allocator {
 
 		return sparql;
 	}
-
+	
+	/**
+	 * replaces all placeholders in the SPARQL query in each case with the best matching
+	 * entity from the database
+	 * 
+	 * @param sparql
+	 * @return configured sparql
+	 */
 	public String distanceEntities(String sparql) {
 
 		for (Entity e : entities) {
-
 			similar.setQuery(e.getPropertyName());
 
 			if (!e.getEntityName().isEmpty()) {
@@ -204,7 +208,6 @@ public class Allocator {
 				sparql = sparql.replaceAll(e.getPropertyId(), e.getPropertyName());
 				sparql = sparql.replaceAll(e.getResourceId(), e.getResourceName());
 			}
-
 		}
 
 		for (Classes c : classes) {
@@ -219,11 +222,78 @@ public class Allocator {
 	}
 	
 	/**
+	 * combination of distanceMatch and substringMatch
+	 * first of all the method looks for substrings in the result from the database
+	 * if it does not find an entity, it restarts with a distance match
+	 * @param sparql
+	 * @return configured sparql
+	 */
+	public String substringWithDistanceFallback(String sparql){
+		Values values = new Values();
+
+		sparql = sparql.replaceFirst("\\{", "\\{VALUE_PLACEHOLDER ");
+		int counter = 1;
+
+		for (Entity e : entities) {
+
+			similar.setQuery(e.getPropertyName());
+
+			ArrayList<String> subStrEntities = new ArrayList<String>();
+
+			if (!e.getEntityName().isEmpty()) {
+
+				try {
+					subStrEntities = similar.subStringMatch(e.getEntityName().substring(1, e.getEntityName().length() -1 ));
+					if(subStrEntities.isEmpty()){
+						subStrEntities.add(similar.distanceMatch(e.getEntityName().substring(1, e.getEntityName().length() -1 )).replaceFirst("\\\\",""));
+					}
+				} catch (QueryParseException err) {
+
+				}
+
+				if (subStrEntities.size() > 0) {
+					values.setValueVars("?value" + counter);
+					sparql = sparql.replaceAll(e.getEntityId(), "?value" + counter);
+					values.addResult(subStrEntities);
+					counter++;
+				}
+
+				else {
+					sparql = sparql.replaceAll(e.getEntityId(), e.getEntityName());
+				}
+			} else {
+				sparql = sparql.replaceAll(e.getEntityId(), "");
+			}
+
+			sparql = sparql.replaceAll(e.getPropertyId(), e.getPropertyName());
+			sparql = sparql.replaceAll(e.getResourceId(), e.getResourceName());
+		}
+
+		String tempStr = "";
+		
+		values.generatePermutations(values.getResults(), values.getPermutation(), 0, tempStr);
+
+		sparql = sparql.replace("VALUE_PLACEHOLDER", values.toString());
+		
+		for (Classes c : classes) {
+			sparql = sparql.replaceAll(c.getClassesId(), c.getClassesName());
+			sparql = sparql.replaceAll(c.getPropertyId(), c.getPropertyName());
+			sparql = sparql.replaceAll(c.getResourceId(), c.getResourceName());
+		}
+
+		sparql = sparql.replace("FILTER", this.filters.getFilterStr());
+
+		return sparql;
+		
+	}
+	
+	
+	/**
 	 * allocate sequence code
 	 */
 	public void allocateSequence() {
 		String sparqlQuery = "";
-		System.out.println(this.sequenceCode);
+		//System.out.println("Current sequence code: " + this.sequenceCode);
 		switch (this.sequenceCode) {
 		case "_010":
 			sparqlQuery = Sequences._010;
@@ -342,6 +412,87 @@ public class Allocator {
 		case "_470":
 			sparqlQuery = Sequences._470;
 			break;
+		case "_500":
+			sparqlQuery = Sequences._500;
+			break;
+		case "_510":
+			sparqlQuery = Sequences._510;
+			break;
+		case "_520":
+			sparqlQuery = Sequences._520;
+			break;
+		case "_530":
+			sparqlQuery = Sequences._530;
+			break;
+		case "_540":
+			sparqlQuery = Sequences._540;
+			break;
+		case "_550":
+			sparqlQuery = Sequences._550;
+			break;
+		case "_560":
+			sparqlQuery = Sequences._560;
+			break;
+		case "_570":
+			sparqlQuery = Sequences._570;
+			break;
+		case "_600":
+			sparqlQuery = Sequences._600;
+			break;
+		case "_610":
+			sparqlQuery = Sequences._610;
+			break;
+		case "_620":
+			sparqlQuery = Sequences._620;
+			break;
+		case "_630":
+			sparqlQuery = Sequences._630;
+			break;
+		case "_640":
+			sparqlQuery = Sequences._640;
+			break;
+		case "_650":
+			sparqlQuery = Sequences._650;
+			break;
+		case "_660":
+			sparqlQuery = Sequences._660;
+			break;
+		case "_670":
+			sparqlQuery = Sequences._670;
+			break;
+		case "_680":
+			sparqlQuery = Sequences._680;
+			break;
+		case "_700":
+			sparqlQuery = Sequences._700;
+			break;
+		case "_710":
+			sparqlQuery = Sequences._710;
+			break;
+		case "_720":
+			sparqlQuery = Sequences._720;
+			break;
+		case "_730":
+			sparqlQuery = Sequences._730;
+			break;
+		case "_740":
+			sparqlQuery = Sequences._740;
+			break;
+		case "_750":
+			sparqlQuery = Sequences._750;
+			break;
+		case "_760":
+			sparqlQuery = Sequences._760;
+			break;
+		case "_770":
+			sparqlQuery = Sequences._770;
+			break;
+		case "_780":
+			sparqlQuery = Sequences._780;
+			break;
+		case "_790":
+			sparqlQuery = Sequences._790;
+			break;
 		case "_021":
 			sparqlQuery = Sequences._021;
 			break;
@@ -356,6 +507,21 @@ public class Allocator {
 			break;
 		case "_0101":
 			sparqlQuery = Sequences._0101;
+			break;
+		case "_121":
+			sparqlQuery = Sequences._121;
+			break;
+		case "_141":
+			sparqlQuery = Sequences._141;
+			break;
+		case "_161":
+			sparqlQuery = Sequences._161;
+			break;
+		case "_181":
+			sparqlQuery = Sequences._181;
+			break;
+		case "_1101":
+			sparqlQuery = Sequences._1101;
 			break;
 		case "_201":
 			sparqlQuery = Sequences._201;
@@ -374,6 +540,21 @@ public class Allocator {
 			break;
 		case "_2101":
 			sparqlQuery = Sequences._2101;
+			break;
+		case "_321":
+			sparqlQuery = Sequences._321;
+			break;
+		case "_341":
+			sparqlQuery = Sequences._341;
+			break;
+		case "_361":
+			sparqlQuery = Sequences._361;
+			break;
+		case "_381":
+			sparqlQuery = Sequences._381;
+			break;
+		case "_3101":
+			sparqlQuery = Sequences._3101;
 			break;
 		case "_401":
 			sparqlQuery = Sequences._401;
@@ -411,6 +592,21 @@ public class Allocator {
 		case "_6101":
 			sparqlQuery = Sequences._6101;
 			break;
+		case "_721":
+			sparqlQuery = Sequences._721;
+			break;
+		case "_741":
+			sparqlQuery = Sequences._741;
+			break;
+		case "_761":
+			sparqlQuery = Sequences._761;
+			break;
+		case "_781":
+			sparqlQuery = Sequences._781;
+			break;
+		case "_7101":
+			sparqlQuery = Sequences._7101;
+			break;
 		default:
 			
 			break;
@@ -426,14 +622,14 @@ public class Allocator {
 	}
 
 	/**
-	 * @return sparql query
+	 * @return SPARQL query
 	 */
 	public String getSparqlQuery() {
 		return sparqlQuery;
 	}
 
 	/**
-	 * set the sparql query
+	 * set the SPARQL query
 	 * 
 	 * @param sparqlQuery
 	 */
@@ -443,16 +639,15 @@ public class Allocator {
 	}
 
 	/**
-	 * for testing
+	 * main method for testing
 	 * 
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		Allocator alloc = new Allocator("Show me games by Wilhelm Steinitz.");
-
+		Allocator alloc = new Allocator("Which player with an ELO above 2500 has won most often in 1899?");
 		alloc.allocateSequence();
 		
-		System.out.println(alloc.regexEntities(alloc.getSparqlQuery()));
+		System.out.println(alloc.distanceEntities(alloc.getSparqlQuery()));
 
 	}
 

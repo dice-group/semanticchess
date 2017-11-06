@@ -4,8 +4,7 @@ import de.daug.semanticchess.Configurations;
 import virtuoso.jena.driver.VirtModel;
 
 /**
- * connect to the Virtuoso database
- *
+ * This class connects to the Virtuoso database.
  */
 public class ConnectVirtuoso {
 	private String url = Configurations.DB;
@@ -14,15 +13,14 @@ public class ConnectVirtuoso {
 	private String graph = Configurations.DB_GRAPH;
 	
 	/**
-	 * constructor
+	 * empty constructor
 	 */
-	public ConnectVirtuoso(){
-		
+	public ConnectVirtuoso(){		
 	}
 	
 	/**
-	 * connect to database
-	 * @return vModel: database
+	 * builds a VirtModel and connects to the database
+	 * @return vModel: database connection
 	 */
 	public VirtModel connectDefault(){
 		VirtModel vModel = VirtModel.openDatabaseModel(graph, url, user, pwd);

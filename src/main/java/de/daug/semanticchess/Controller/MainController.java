@@ -4,7 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 /**
- * main controller that maps the index.html to the homepage 
+ * Main controller that maps pages to the HTML files.
  */
 @Controller
 public class MainController {
@@ -16,6 +16,27 @@ public class MainController {
 	@GetMapping("/")
 	public String home() {
 		return "index";
+
+	}
+	
+	
+	/**
+	 * maps "/game" to game.html
+	 * @return index.html
+	 */
+	@GetMapping("/game")
+	public String game() {
+		return "game";
+
+	}
+	
+	/**
+	 * maps "/search" to search.html
+	 * @return index.html
+	 */
+	@GetMapping("/search")
+	public String search() {
+		return "search";
 
 	}
 }

@@ -1,0 +1,74 @@
+<!-- This view creates the search box and shows the results for a query -->
+<nav class="nav">
+	<a class="nav-link active" href="#!">Search</a> 
+	<a class="nav-link" href="#!">Instructions</a>
+	<a class="nav-link" href="https://github.com/dice-group/semanticchess/">Github</a>
+	<a class="nav-link" href="https://github.com/dice-group/semanticchess/issues">Issues</a>
+</nav>
+
+<div ng-controller="appCtrl" ng-cloak id="searchBox">
+	<!-- Logo -->
+	<div>
+		<img id="scLogo" src="../static/img/logo.png">
+		<div style="display: inline-block;">
+			<h2>Semantic Chess</h2>
+		</div>
+	</div>
+	<!-- Textarea for query -->
+	<div style="margin-top: 30px;">
+		<textarea rows='1' ng-model="query" type="text" autofocus></textarea>
+	</div>
+	<!-- Buttons for query type (user query or sparql) -->
+	<div style="margin-top: 30px;">
+		<button ng-click="getQueryResults()" class="btn btn-outline-success my-2 my-sm-0" type="submit"
+			style="display: inline-block;">Question</button>
+		<button ng-click="getSparqlResults();"
+			class="btn btn-outline-success my-2 my-sm-0" type="submit"
+			style="display: inline-block;">SPARQL</button>
+	</div>
+	<!-- result counter -->
+	<div style="margin: 30px; color: #bdc3c7;" ng-show="resultCounter > 0">
+		The engine found {{resultCounter | number}} <span ng-if="resultCounter === '1'">result</span><span ng-if="resultCounter !== '1'">results</span>.
+	</div>
+	<!-- Loading spinner -->
+	<div class="spinner" ng-show="loading" style="margin-top:50px;"></div>
+	<!-- results -->
+	<div class="tableContainer">
+		<table class="table table-sm table-bordered" style="white-space:nowrap;">
+			<thead class="table-success">
+				<tr>
+					<th ng-repeat="var in result.data.head.vars track by $index" style="text-align:center;">
+						<span ng-if="var !== 'black' && var !== 'white'">{{var}}</span>
+						<span ng-if="var === 'white'">&#x2654;</span>
+						<span ng-if="var === 'black'">&#x265a;</span>
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="row in result.data.results.bindings track by $index">   
+					<td ng-repeat="(key,value) in row" style="text-align:center;">
+						<span ng-if="key === 'game'"><a ng-href="#!/game/{{value.value | escape}}"><i class="fa fa-play-circle-o" aria-hidden="true"></i></a></span>
+						<span ng-if="key !== 'game'">{{value.value}}</span>
+					</td>		
+				</tr>
+			</tbody>
+		</table>
+		
+		<!-- error messages -->
+		<div class="alert alert-danger alert-dismissible fade show" ng-show="error !== 500 && errorFound" role="alert" " role="alert">
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+			<strong>Oh no!</strong> 
+			An unknown error occurred. Please check your query.
+		</div>
+		<div class="alert alert-danger alert-dismissible fade show" role="alert" " role="alert" ng-show="error === 500">
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+			<strong>Oh no!</strong> A server error occured. 
+			Please <a href="https://github.com/dice-group/semanticchess/issues">open an issue</a> on Github 
+			or contact me on <a href="https://www.twitter.com/joerndigital">Twitter</a>.
+		</div>
+	</div>
+</div>

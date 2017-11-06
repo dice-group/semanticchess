@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * simple chess vocabulary assign a term to a topic
+ * Simple chess vocabulary: assign a term to a topic
  */
 public class ChessVocabulary {
 
@@ -24,7 +24,7 @@ public class ChessVocabulary {
 	}
 
 	/**
-	 * a list the terms assigned to a topic
+	 * a list: the terms assigned to a topic
 	 */
 	public void fillProperties() {
 		ArrayList<String> blackProperty = new ArrayList<String>();
@@ -104,10 +104,23 @@ public class ChessVocabulary {
 		PROPERTIES.put("eventEntity", eventEntityProperty);
 		
 		ArrayList<String> fenProperty = new ArrayList<String>();
-		fenProperty.add("fen");
-		fenProperty.add("position");
-		fenProperty.add("rank");
-		fenProperty.add("file");
+		fenProperty.add("capture");
+		//fenProperty.add("check");
+		//fenProperty.add("doubled");
+		//fenProperty.add("enpassant");
+		fenProperty.add("exchange");
+		//fenProperty.add("fianchetto");
+		//fenProperty.add("fen");
+		//fenProperty.add("isolate");
+		//fenProperty.add("position");
+		//fenProperty.add("rank");
+		//fenProperty.add("file");
+		fenProperty.add("castling");
+		fenProperty.add("castle");
+		//fenProperty.add("passant");
+		fenProperty.add("promote");
+		fenProperty.add("promotion");
+		fenProperty.add("underpromotion");
 		// ==============================
 		PROPERTIES.put("fen", fenProperty);
 		
@@ -130,6 +143,7 @@ public class ChessVocabulary {
 		superlativePosProperty.add("toughest");
 		superlativePosProperty.add("hardest");
 		superlativePosProperty.add("highest");
+		superlativePosProperty.add("main");
 		//===============================
 		PROPERTIES.put("jjs_pos", superlativePosProperty);
 		
@@ -145,7 +159,8 @@ public class ChessVocabulary {
 		gameProperty.add("pairings");
 		gameProperty.add("encounter");
 		gameProperty.add("encounters");
-		gameProperty.add("endgames");
+		gameProperty.add("endgame");
+		gameProperty.add("position");
 		// ==============================
 		PROPERTIES.put("game", gameProperty);
 		
@@ -235,7 +250,14 @@ public class ChessVocabulary {
 		siteProperty.add("town");
 		siteProperty.add("country");
 		siteProperty.add("place");
+		// ==============================
 		PROPERTIES.put("site", siteProperty);
+		
+		ArrayList<String> temporalProperty = new ArrayList<String>();
+		temporalProperty.add("earliest");
+		temporalProperty.add("latest");
+		// ==============================
+		PROPERTIES.put("temporal", temporalProperty);
 
 		ArrayList<String> whiteProperty = new ArrayList<String>();
 		whiteProperty.add("white");

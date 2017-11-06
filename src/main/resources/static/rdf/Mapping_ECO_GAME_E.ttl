@@ -1,0 +1,35 @@
+@prefix cres:  <http://pcai042.informatik.uni-leipzig.de/~swp13-sc/ChessOntology/Resources/> .
+@prefix cont:  <http://pcai042.informatik.uni-leipzig.de/~swp13-sc/ChessOntology#> .
+
+<http://example.com/res/Siegbert_Tarrasch_Berthold_Englisch_1885______>
+        cont:eco  cres:E76 .
+
+<http://example.com/res/Mikhail_Chigorin_Amos_Burn_1898______>
+        cont:eco  cres:E76_2 .
+
+<http://example.com/res/Josef_Noa_Joseph_Blackburne_1887_07_19>
+        cont:eco  cres:E12 .
+
+<http://example.com/res/Isidor_Gunsberg_Wilhelm_Steinitz_1891_01_12>
+        cont:eco  cres:E14 .
+
+<http://example.com/res/Joseph_Blackburne_George_H_Mackenzie_1883_______2>
+        cont:eco  cres:E14 .
+
+<http://example.com/res/Wilhelm_Steinitz_Eugene_Delmar_1894______>
+        cont:eco  cres:E65 .
+
+<http://example.com/res/Louis_Paulsen_Adolf_Schwarz_1879______>
+        cont:eco  cres:E76 .
+
+<http://example.com/res/Josef_Noa_George_H_Mackenzie_1883______>
+        cont:eco  cres:E11_2 , cres:E11 .
+
+<http://example.com/res/Szymon_Winawer_Johannes_Minckwitz_1870______>
+        cont:eco  cres:E48 .
+
+<http://example.com/res/Joseph_Blackburne_Berthold_Englisch_1883______>
+        cont:eco  cres:E20_2 , cres:E20 .
+
+<http://example.com/res/Josef_Noa_Johannes_Zukertort_1887______>
+        cont:eco  cres:E00_5 .

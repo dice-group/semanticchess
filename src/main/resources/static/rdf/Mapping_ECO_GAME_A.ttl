@@ -1,0 +1,1211 @@
+@prefix cres:  <http://pcai042.informatik.uni-leipzig.de/~swp13-sc/ChessOntology/Resources/> .
+@prefix cont:  <http://pcai042.informatik.uni-leipzig.de/~swp13-sc/ChessOntology#> .
+
+<http://example.com/res/Adolf_Anderssen_Wilfried_Paulsen_1878______>
+        cont:eco  cres:A00_139 .
+
+<http://example.com/res/Henry_Bird_Robert_B_Brien_1858______>
+        cont:eco  cres:A20_2 .
+
+<http://example.com/res/Joseph_Blackburne_Arthur_Skipworth_1883______>
+        cont:eco  cres:A04_23 , cres:A04_2 .
+
+<http://example.com/res/Joseph_Blackburne_Preston_Ware_1882_05_24>
+        cont:eco  cres:A43_15 .
+
+<http://example.com/res/Wayte_Thorold_1885______>
+        cont:eco  cres:A03_2 .
+
+<http://example.com/res/Oscar_Gelbfuhs_Wilhelm_Steinitz_1873_08_18>
+        cont:eco  cres:A13 .
+
+<http://example.com/res/Ignac_Kolisch_Adolf_Anderssen_1861_______2>
+        cont:eco  cres:A02 .
+
+<http://example.com/res/Ignac_Kolisch_Daniel_Harrwitz_1859______>
+        cont:eco  cres:A85 .
+
+<http://example.com/res/Joseph_Blackburne_Johannes_Zukertort_1881_09_10>
+        cont:eco  cres:A13 .
+
+<http://example.com/res/John_Baird_Harry_Pillsbury_1893______>
+        cont:eco  cres:A83 , cres:A83_3 .
+
+<http://example.com/res/Adolf_Anderssen_Henry_Bird_1873______>
+        cont:eco  cres:A02 .
+
+<http://example.com/res/George_Hatfeild_Gossip_Henry_Bird_1891______>
+        cont:eco  cres:A03_2 .
+
+<http://example.com/res/William_Pollock_Kurt_Von_Bardeleben_1895______>
+        cont:eco  cres:A43_16 , cres:A43_15 .
+
+<http://example.com/res/Frank_Marshall_Herman_Helms_1897______>
+        cont:eco  cres:A80 , cres:A80_5 .
+
+<http://example.com/res/Johannes_Minckwitz_Henry_Bird_1885______>
+        cont:eco  cres:A03_2 .
+
+<http://example.com/res/Howard_Staunton_Elijah_Williams_1851______>
+        cont:eco  cres:A02 .
+
+<http://example.com/res/George_H_Mackenzie_Eugene_Delmar_1880______>
+        cont:eco  cres:A13 .
+
+<http://example.com/res/Emanuel_Lasker_I_Leather_1889_08_28>
+        cont:eco  cres:A00_106 .
+
+<http://example.com/res/Adolf_Anderssen_John_Owen_1862______>
+        cont:eco  cres:A82 , cres:A82_2 .
+
+<http://example.com/res/Mikhail_Chigorin_Preston_Ware_1882_06_14>
+        cont:eco  cres:A40_28 , cres:A40_49 .
+
+<http://example.com/res/Amos_Burn_Henry_Bird_1887______>
+        cont:eco  cres:A03_2 .
+
+<http://example.com/res/Amos_Burn_Arthur_Skipworth_1875______>
+        cont:eco  cres:A01 , cres:A01_7 , cres:A01_6 .
+
+<http://example.com/res/Mikhail_Chigorin_George_H_Mackenzie_1882_06_15>
+        cont:eco  cres:A10_5 , cres:A10 .
+
+<http://example.com/res/Daniel_Harrwitz_Augustus_Mongredien_1860_______3>
+        cont:eco  cres:A84 , cres:A84_3 .
+
+<http://example.com/res/Daniel_Harrwitz_Elijah_Williams_1852_______2>
+        cont:eco  cres:A03_2 .
+
+<http://example.com/res/Emil_Schallopp_James_Mason_1885______>
+        cont:eco  cres:A03_2 .
+
+<http://example.com/res/Rezso_Charousek_Geza_Maroczy_1895_12_11>
+        cont:eco  cres:A03_2 .
+
+<http://example.com/res/Richard_Teichmann_Geza_Maroczy_1899______>
+        cont:eco  cres:A40_49 .
+
+<http://example.com/res/Smith_Simons_1852______>
+        cont:eco  cres:A02_15 , cres:A02 , cres:A02_5 .
+
+<http://example.com/res/Max_Weiss_Joseph_Blackburne_1882_05_31>
+        cont:eco  cres:A06_2 .
+
+<http://example.com/res/Szymon_Winawer_Joseph_Blackburne_1882_05_11>
+        cont:eco  cres:A06_2 .
+
+<http://example.com/res/Siegbert_Tarrasch_James_Mason_1885______>
+        cont:eco  cres:A03_4 , cres:A03_2 .
+
+<http://example.com/res/Henry_Bird_Kurt_Von_Bardeleben_1883______>
+        cont:eco  cres:A81_2 .
+
+<http://example.com/res/George_H_Mackenzie_Frederic_Elder_1871______>
+        cont:eco  cres:A83 , cres:A83_3 .
+
+<http://example.com/res/Wilfried_Paulsen_Siegbert_Tarrasch_1888______>
+        cont:eco  cres:A03_2 .
+
+<http://example.com/res/Pierre_Saint_Amant_Howard_Staunton_1843_______8>
+        cont:eco  cres:A34_2 .
+
+<http://example.com/res/Bonaparte_A_Daniel_Harrwitz_1857______>
+        cont:eco  cres:A43_14 .
+
+<http://example.com/res/Siegbert_Tarrasch_Carl_Schlechter_1896______>
+        cont:eco  cres:A00_75 , cres:A00_74 .
+
+<http://example.com/res/Louis_Paulsen_Wilhelm_Steinitz_1873______>
+        cont:eco  cres:A41_2 , cres:A41_9 , cres:A41_7 .
+
+<http://example.com/res/Mikhail_Chigorin_Isidor_Gunsberg_1890_______8>
+        cont:eco  cres:A83 , cres:A83_3 .
+
+<http://example.com/res/Kurt_Von_Bardeleben_Harry_Pillsbury_1895______>
+        cont:eco  cres:A40_49 .
+
+<http://example.com/res/Samuel_Lipschuetz_Henry_Bird_1889______>
+        cont:eco  cres:A03_2 .
+
+<http://example.com/res/Samuel_Tinsley_Henry_Bird_1891______>
+        cont:eco  cres:A02 .
+
+<http://example.com/res/Gareth_Hughes_Howard_Staunton_1858______>
+        cont:eco  cres:A40_49 .
+
+<http://example.com/res/Joseph_Blackburne_Kasimir_De_Weydlich_1894______>
+        cont:eco  cres:A34 .
+
+<http://example.com/res/Samuel_Rosenthal_Henry_Bird_1873______>
+        cont:eco  cres:A02 .
+
+<http://example.com/res/Geza_Maroczy_Adolf_Albin_1899______>
+        cont:eco  cres:A03_2 .
+
+<http://example.com/res/Henry_Bird_Berthold_Englisch_1883______>
+        cont:eco  cres:A85 .
+
+<http://example.com/res/Philipp_Meitner_Wilhelm_Steinitz_1860______>
+        cont:eco  cres:A48_2 .
+
+<http://example.com/res/Samuel_Lipschuetz_George_H_Mackenzie_1886______>
+        cont:eco  cres:A02 .
+
+<http://example.com/res/Wilhelm_Steinitz_Valentine_Green_1864_______6>
+        cont:eco  cres:A00_139 .
+
+<http://example.com/res/Henry_Bird_Dion_M_Martinez_1889______>
+        cont:eco  cres:A02 .
+
+<http://example.com/res/Adolf_Schwarz_Wilhelm_Steinitz_1873_08_14>
+        cont:eco  cres:A28_7 .
+
+<http://example.com/res/Richard_Teichmann_Beniamino_Vergani_1895______>
+        cont:eco  cres:A80 .
+
+<http://example.com/res/William_Napier_Frank_Marshall_1897______>
+        cont:eco  cres:A80 , cres:A80_5 .
+
+<http://example.com/res/Mikhail_Chigorin_Emanuel_Schiffers_1878______>
+        cont:eco  cres:A80 , cres:A80_5 .
+
+<http://example.com/res/Rezso_Charousek_Konjovic_Nikola_1893______>
+        cont:eco  cres:A03_2 .
+
+<http://example.com/res/Du_Mont_unknown_1802______>
+        cont:eco  cres:A02 , cres:A02_5 .
+
+<http://example.com/res/Bernhard_Horwitz_Daniel_Harrwitz_1849_______7>
+        cont:eco  cres:A40_28 , cres:A40_49 .
+
+<http://example.com/res/Louis_Van_Vliet_Henry_Bird_1893______>
+        cont:eco  cres:A03_2 .
+
+<http://example.com/res/Carl_Schlechter_James_Mason_1895______>
+        cont:eco  cres:A00_139 .
+
+<http://example.com/res/Bernhard_Horwitz_Howard_Staunton_1846______>
+        cont:eco  cres:A85 .
+
+<http://example.com/res/Emanuel_Lasker_Henry_Bird_1890_02____4>
+        cont:eco  cres:A03_2 .
+
+<http://example.com/res/Joseph_Blackburne_Carl_Schlechter_1898______>
+        cont:eco  cres:A46_7 , cres:A46_9 .
+
+<http://example.com/res/George_MacDonnell_Joseph_Blackburne_1867______>
+        cont:eco  cres:A40_28 , cres:A40_49 .
+
+<http://example.com/res/William_Pollock_Samuel_Tinsley_1895______>
+        cont:eco  cres:A90 , cres:A90_2 .
+
+<http://example.com/res/Henry_Bird_Amos_Burn_1895______>
+        cont:eco  cres:A84 , cres:A84_3 .
+
+<http://example.com/res/Elijah_Williams_Howard_Staunton_1851______>
+        cont:eco  cres:A13 .
+
+<http://example.com/res/Elijah_Williams_Howard_Staunton_1851_______5>
+        cont:eco  cres:A03_2 .
+
+<http://example.com/res/Siegbert_Tarrasch_Karl_Kuntze_1882______>
+        cont:eco  cres:A13 .
+
+<http://example.com/res/Joseph_Blackburne_John_Owen_1870______>
+        cont:eco  cres:A01 , cres:A01_7 , cres:A01_6 .
+
+<http://example.com/res/Johannes_Zukertort_John_Wisker_1872______>
+        cont:eco  cres:A02 , cres:A02_5 .
+
+<http://example.com/res/Joseph_Blackburne_Wilfried_Paulsen_1880_07_06>
+        cont:eco  cres:A00_12 .
+
+<http://example.com/res/Adolf_Anderssen_Berthold_Suhle_1859_______3>
+        cont:eco  cres:A01 , cres:A01_8 , cres:A01_7 , cres:A01_6 , cres:A01_9 .
+
+<http://example.com/res/Jean_Taubenhaus_Henry_Bird_1889______>
+        cont:eco  cres:A02 .
+
+<http://example.com/res/Jacques_Mieses_Emanuel_Lasker_1890______>
+        cont:eco  cres:A84 .
+
+<http://example.com/res/Joseph_Blackburne_Wilhelm_Steinitz_1873_08_29>
+        cont:eco  cres:A00_5 .
+
+<http://example.com/res/Pierre_Saint_Amant_Howard_Staunton_1843_______3>
+        cont:eco  cres:A84 .
+
+<http://example.com/res/Rezso_Charousek_Konyovits_1893______>
+        cont:eco  cres:A03_2 .
+
+<http://example.com/res/Wilhelm_Steinitz_Henry_Bird_1866______>
+        cont:eco  cres:A02 , cres:A02_5 .
+
+<http://example.com/res/Theodor_Von_Scheve_Richard_Teichmann_1894______>
+        cont:eco  cres:A40_49 .
+
+<http://example.com/res/Siegbert_Tarrasch_Max_Kuerschner_1887_______3>
+        cont:eco  cres:A83 , cres:A83_3 .
+
+<http://example.com/res/Joseph_Blackburne_Mikhail_Chigorin_1883______>
+        cont:eco  cres:A02 .
+
+<http://example.com/res/Daniel_Harrwitz_Laroche_1860______>
+        cont:eco  cres:A03_2 .
+
+<http://example.com/res/Joseph_Blackburne_Henry_Bird_1878_07_05>
+        cont:eco  cres:A02 .
+
+<http://example.com/res/Wilhelm_Cohn_Dawid_Janowsky_1897______>
+        cont:eco  cres:A84 , cres:A84_3 .
+
+<http://example.com/res/John_Wisker_Henry_Bird_1873_______2>
+        cont:eco  cres:A02 .
+
+<http://example.com/res/Mikhail_Chigorin_James_Mason_1883______>
+        cont:eco  cres:A40_28 , cres:A40_49 .
+
+<http://example.com/res/Daniel_Harrwitz_Elijah_Williams_1852______>
+        cont:eco  cres:A03_2 .
+
+<http://example.com/res/Siegbert_Tarrasch_Henry_Bird_1890______>
+        cont:eco  cres:A03_4 , cres:A03_2 .
+
+<http://example.com/res/Adolf_Albin_Siegbert_Tarrasch_1896______>
+        cont:eco  cres:A84 , cres:A84_3 .
+
+<http://example.com/res/Johannes_Zukertort_Wilhelm_Steinitz_1872_______4>
+        cont:eco  cres:A08_3 , cres:A08_2 .
+
+<http://example.com/res/Szymon_Winawer_James_Mason_1881______>
+        cont:eco  cres:A00_139 .
+
+<http://example.com/res/Pierre_Saint_Amant_Howard_Staunton_1843_11_23>
+        cont:eco  cres:A34_2 .
+
+<http://example.com/res/Wilhelm_Steinitz_Frederic_Deacon_1863_______5>
+        cont:eco  cres:A02 , cres:A02_5 .
+
+<http://example.com/res/Henry_Bird_Constant_Ferdinand_Burille_1889______>
+        cont:eco  cres:A85 .
+
+<http://example.com/res/Henry_Bird_Joseph_Blackburne_1889______>
+        cont:eco  cres:A81 , cres:A81_2 .
+
+<http://example.com/res/James_Mason_Henry_Bird_1882______>
+        cont:eco  cres:A03_4 , cres:A03_2 .
+
+<http://example.com/res/Joseph_Blackburne_Johannes_Zukertort_1887_______6>
+        cont:eco  cres:A20_2 .
+
+<http://example.com/res/Steinkuhler_Amos_Burn_1883______>
+        cont:eco  cres:A00_139 .
+
+<http://example.com/res/Joseph_Blackburne_Henry_Bird_1888______>
+        cont:eco  cres:A02 , cres:A02_5 .
+
+<http://example.com/res/Emanuel_Schiffers_Mikhail_Chigorin_1878_______2>
+        cont:eco  cres:A43_14 .
+
+<http://example.com/res/Emanuel_Lasker_James_Hanham_1892_10_10>
+        cont:eco  cres:A00_5 .
+
+<http://example.com/res/Henry_Bird_George_Hatfeild_Gossip_1889______>
+        cont:eco  cres:A85 .
+
+<http://example.com/res/Adolf_Anderssen_Laroche_1860_______2>
+        cont:eco  cres:A02 .
+
+<http://example.com/res/James_Mason_Mikhail_Chigorin_1889______>
+        cont:eco  cres:A03_2 .
+
+<http://example.com/res/Joseph_Blackburne_Henry_Bird_1892______>
+        cont:eco  cres:A02 , cres:A02_5 .
+
+<http://example.com/res/Adolf_Anderssen_M_Van_t_Kruys_1861_______4>
+        cont:eco  cres:A84 , cres:A84_3 , cres:A84_6 .
+
+<http://example.com/res/Geza_Maroczy_Jackson_Showalter_1899_06_14>
+        cont:eco  cres:A40_28 , cres:A40_49 .
+
+<http://example.com/res/Siegbert_Tarrasch_Mikhail_Chigorin_1898______>
+        cont:eco  cres:A02 , cres:A02_5 , cres:A02_8 .
+
+<http://example.com/res/Pierre_Saint_Amant_Howard_Staunton_1843_______9>
+        cont:eco  cres:A34_2 .
+
+<http://example.com/res/Johann_Loewenthal_Howard_Staunton_1858______>
+        cont:eco  cres:A22_3 .
+
+<http://example.com/res/Wilhelm_Steinitz_Mikhail_Chigorin_1892______>
+        cont:eco  cres:A04_2 , cres:A04_29 .
+
+<http://example.com/res/Karl_Pitschel_Henry_Bird_1878______>
+        cont:eco  cres:A02 .
+
+<http://example.com/res/Amos_Burn_John_Owen_1875_______2>
+        cont:eco  cres:A00_139 .
+
+<http://example.com/res/Henry_Bird_Preston_Ware_1882______>
+        cont:eco  cres:A80 .
+
+<http://example.com/res/Ernst_Falkbeer_Henry_Bird_1856_______2>
+        cont:eco  cres:A03_2 .
+
+<http://example.com/res/James_Mortimer_George_H_Mackenzie_1883______>
+        cont:eco  cres:A10_5 , cres:A10 .
+
+<http://example.com/res/Oscar_Gelbfuhs_Henry_Bird_1873______>
+        cont:eco  cres:A02_20 , cres:A02 .
+
+<http://example.com/res/Henry_Bird_Adolf_Albin_1895______>
+        cont:eco  cres:A04_12 , cres:A04_2 .
+
+<http://example.com/res/Lowe_Deacon_1851______>
+        cont:eco  cres:A03_2 .
+
+<http://example.com/res/Louis_Paulsen_Gustav_Neumann_1870______>
+        cont:eco  cres:A85 .
+
+<http://example.com/res/H_Gifford_Henry_Bird_1878______>
+        cont:eco  cres:A02 .
+
+<http://example.com/res/Joseph_Blackburne_Henry_Bird_1879_07_07>
+        cont:eco  cres:A02 , cres:A02_5 .
+
+<http://example.com/res/Emanuel_Lasker_Henry_Bird_1892_08_29>
+        cont:eco  cres:A02 , cres:A02_5 , cres:A02_8 .
+
+<http://example.com/res/W_Cook_Amos_Burn_1883______>
+        cont:eco  cres:A02 , cres:A02_5 .
+
+<http://example.com/res/Frank_Marshall_Vladimir_Sournin_1896______>
+        cont:eco  cres:A80 , cres:A80_5 .
+
+<http://example.com/res/George_H_Mackenzie_George_MacDonnell_1862_______5>
+        cont:eco  cres:A10_5 , cres:A10 .
+
+<http://example.com/res/Wilhelm_Steinitz_John_Owen_1862_06_30>
+        cont:eco  cres:A10_5 , cres:A10 .
+
+<http://example.com/res/Louis_Paulsen_Preston_Ware_1882______>
+        cont:eco  cres:A45_2 , cres:A45_3 .
+
+<http://example.com/res/Wilhelm_Steinitz_Hieronim_Czarnowski_1867_06_05>
+        cont:eco  cres:A80 .
+
+<http://example.com/res/Emanuel_Lasker_Reif_1889_07___>
+        cont:eco  cres:A02_12 , cres:A02 , cres:A02_5 .
+
+<http://example.com/res/Joseph_Blackburne_Johannes_Zukertort_1881_07_27>
+        cont:eco  cres:A13 , cres:A13_2 .
+
+<http://example.com/res/Amos_Burn_Henry_Bird_1886______>
+        cont:eco  cres:A03_2 .
+
+<http://example.com/res/William_Napier_Frank_Marshall_1896_______6>
+        cont:eco  cres:A84 , cres:A84_3 , cres:A84_6 .
+
+<http://example.com/res/Jackson_Showalter_Henry_Bird_1889______>
+        cont:eco  cres:A03_2 .
+
+<http://example.com/res/Jongman_Poel_1899______>
+        cont:eco  cres:A02 .
+
+<http://example.com/res/Bernhard_Horwitz_Daniel_Harrwitz_1849_______8>
+        cont:eco  cres:A40_28 , cres:A40_49 .
+
+<http://example.com/res/Szymon_Winawer_Arthur_Skipworth_1883______>
+        cont:eco  cres:A20_2 .
+
+<http://example.com/res/Louis_Paulsen_Adolf_Anderssen_1877_______2>
+        cont:eco  cres:A00_5 .
+
+<http://example.com/res/Max_Judd_Henry_Bird_1889______>
+        cont:eco  cres:A02 .
+
+<http://example.com/res/George_H_Mackenzie_Preston_Ware_1880______>
+        cont:eco  cres:A80 .
+
+<http://example.com/res/Fritz_Riemann_Henry_Bird_1885______>
+        cont:eco  cres:A03_2 .
+
+<http://example.com/res/Emil_Schallopp_Joseph_Blackburne_1880_07_09>
+        cont:eco  cres:A00_139 .
+
+<http://example.com/res/Carl_Schlechter_Adolf_Albin_1899______>
+        cont:eco  cres:A03_2 .
+
+<http://example.com/res/Henry_Bird_George_Medley_1849_______4>
+        cont:eco  cres:A85 .
+
+<http://example.com/res/Josef_Noa_George_H_Mackenzie_1883_______2>
+        cont:eco  cres:A30 .
+
+<http://example.com/res/James_Mason_Mikhail_Chigorin_1882_06_06>
+        cont:eco  cres:A00_5 .
+
+<http://example.com/res/Richard_Fenton_Henry_Bird_1891______>
+        cont:eco  cres:A03_2 .
+
+<http://example.com/res/Elijah_Williams_Howard_Staunton_1851_______6>
+        cont:eco  cres:A02 .
+
+<http://example.com/res/Wilhelm_Steinitz_Josef_Heral_1873_08_26>
+        cont:eco  cres:A13 .
+
+<http://example.com/res/Joseph_Blackburne_Karl_Pitschel_1878_06_25>
+        cont:eco  cres:A13 .
+
+<http://example.com/res/Adolf_Albin_Wilhelm_Steinitz_1894______>
+        cont:eco  cres:A81_2 .
+
+<http://example.com/res/Szymon_Winawer_Henry_Bird_1878______>
+        cont:eco  cres:A02 .
+
+<http://example.com/res/Oscar_Gelbfuhs_Joseph_Blackburne_1873_08_01>
+        cont:eco  cres:A81 , cres:A81_2 .
+
+<http://example.com/res/Josef_Noa_Mikhail_Chigorin_1883______>
+        cont:eco  cres:A02 .
+
+<http://example.com/res/Szymon_Winawer_Henry_Bird_1882______>
+        cont:eco  cres:A03_2 .
+
+<http://example.com/res/Pierre_Saint_Amant_Howard_Staunton_1843_______4>
+        cont:eco  cres:A43_17 , cres:A43_16 , cres:A43_15 .
+
+<http://example.com/res/Wilhelm_Steinitz_Arthur_Skipworth_1883______>
+        cont:eco  cres:A20_2 .
+
+<http://example.com/res/Ignac_Kolisch_Louis_Paulsen_1861_______14>
+        cont:eco  cres:A80 , cres:A80_16 .
+
+<http://example.com/res/Jacques_Mieses_Emanuel_Lasker_1889_12_30>
+        cont:eco  cres:A84 .
+
+<http://example.com/res/Wilhelm_Steinitz_Frederic_Deacon_1863______>
+        cont:eco  cres:A02 , cres:A02_5 .
+
+<http://example.com/res/Daniel_Harrwitz_Johann_Loewenthal_1853_______8>
+        cont:eco  cres:A10_5 , cres:A10 .
+
+<http://example.com/res/Johann_Loewenthal_Buckle_1851______>
+        cont:eco  cres:A02 .
+
+<http://example.com/res/Samuel_Rosenthal_George_H_Mackenzie_1883______>
+        cont:eco  cres:A28_8 , cres:A28_7 .
+
+<http://example.com/res/Wilhelm_Steinitz_Joseph_Blackburne_1863______>
+        cont:eco  cres:A82 , cres:A82_2 .
+
+<http://example.com/res/Eugene_Delmar_Joseph_Blackburne_1889______>
+        cont:eco  cres:A81_2 .
+
+<http://example.com/res/E_Jeney_Wilhelm_Steinitz_1860______>
+        cont:eco  cres:A13 .
+
+<http://example.com/res/John_Wisker_Henry_Bird_1873_______3>
+        cont:eco  cres:A03_2 .
+
+<http://example.com/res/Richard_Teichmann_Kasimir_De_Weydlich_1894______>
+        cont:eco  cres:A20_2 .
+
+<http://example.com/res/Daniel_Harrwitz_Bernhard_Horwitz_1849______>
+        cont:eco  cres:A21_4 .
+
+<http://example.com/res/William_Pollock_Amos_Burn_1886_10_23>
+        cont:eco  cres:A04_12 , cres:A04_2 .
+
+<http://example.com/res/Adolf_Anderssen_Stefan_Heer_1861______>
+        cont:eco  cres:A85 .
+
+<http://example.com/res/Joseph_Blackburne_Johannes_Zukertort_1881_07_22>
+        cont:eco  cres:A13 .
+
+<http://example.com/res/Alexander_Sellman_Mikhail_Chigorin_1883______>
+        cont:eco  cres:A03_4 , cres:A03_2 .
+
+<http://example.com/res/Wilhelm_Steinitz_Valentine_Green_1864_______2>
+        cont:eco  cres:A02 .
+
+<http://example.com/res/Ernst_Falkbeer_Henry_Bird_1856______>
+        cont:eco  cres:A02 .
+
+<http://example.com/res/Seidl_Stor_1897______>
+        cont:eco  cres:A00_74 .
+
+<http://example.com/res/Riviere_Laroche_1856______>
+        cont:eco  cres:A03_2 .
+
+<http://example.com/res/Bernhard_Horwitz_Howard_Staunton_1846_______5>
+        cont:eco  cres:A83 , cres:A83_3 .
+
+<http://example.com/res/Wilhelm_Steinitz_William_Potter_1872______>
+        cont:eco  cres:A83 , cres:A83_3 .
+
+<http://example.com/res/Josef_Noa_Joseph_Blackburne_1883______>
+        cont:eco  cres:A00_106 .
+
+<http://example.com/res/Kolisch_Meitner_Steinitz_Potter_1872______>
+        cont:eco  cres:A21_3 , cres:A21_4 .
+
+<http://example.com/res/Johannes_Metger_Joseph_Blackburne_1889_07_15>
+        cont:eco  cres:A37_2 .
+
+<http://example.com/res/George_H_Mackenzie_John_S_Ryan_1880______>
+        cont:eco  cres:A84 , cres:A84_3 .
+
+<http://example.com/res/Henry_Bird_Arthur_Skipworth_1883______>
+        cont:eco  cres:A04_12 , cres:A04_2 .
+
+<http://example.com/res/James_Mason_Henry_Bird_1889______>
+        cont:eco  cres:A03_2 .
+
+<http://example.com/res/Joseph_Blackburne_Johannes_Zukertort_1887_______7>
+        cont:eco  cres:A20_2 .
+
+<http://example.com/res/Johann_H_Bauer_Emanuel_Lasker_1889_08_26>
+        cont:eco  cres:A03_2 .
+
+<http://example.com/res/Paul_Morphy_Adolf_Anderssen_1858_______9>
+        cont:eco  cres:A00_5 .
+
+<http://example.com/res/Joseph_Blackburne_Henry_Bird_1883_______2>
+        cont:eco  cres:A02 .
+
+<http://example.com/res/Carl_Schlechter_Fried_1897______>
+        cont:eco  cres:A02_15 , cres:A02 , cres:A02_5 .
+
+<http://example.com/res/Adolf_Anderssen_Augustus_Mongredien_1862_______3>
+        cont:eco  cres:A02 .
+
+<http://example.com/res/Amos_Burn_John_Owen_1875_______3>
+        cont:eco  cres:A28_7 .
+
+<http://example.com/res/George_H_Mackenzie_Henry_Bird_1878_______2>
+        cont:eco  cres:A03_2 .
+
+<http://example.com/res/Pierre_Saint_Amant_Howard_Staunton_1843_12_07>
+        cont:eco  cres:A35_2 .
+
+<http://example.com/res/Siegbert_Tarrasch_Wilfried_Paulsen_1892______>
+        cont:eco  cres:A01 , cres:A01_2 .
+
+<http://example.com/res/Charles_Moehle_George_H_Mackenzie_1880______>
+        cont:eco  cres:A85 .
+
+<http://example.com/res/Emanuel_Lasker_Henry_Bird_1895_08_10>
+        cont:eco  cres:A02 , cres:A02_5 .
+
+<http://example.com/res/Szymon_Winawer_Joseph_Blackburne_1870______>
+        cont:eco  cres:A40_49 .
+
+<http://example.com/res/Carl_Walbrodt_Henry_Bird_1895______>
+        cont:eco  cres:A03_2 .
+
+<http://example.com/res/Geza_Maroczy_Jackson_Showalter_1899______>
+        cont:eco  cres:A03_2 .
+
+<http://example.com/res/Adolf_Anderssen_Johannes_Zukertort_1868_______4>
+        cont:eco  cres:A00_139 .
+
+<http://example.com/res/Wilhelm_Steinitz_NV_Bugaev_1896______>
+        cont:eco  cres:A00_77 , cres:A00_74 .
+
+<http://example.com/res/Joseph_Blackburne_Henry_Bird_1895______>
+        cont:eco  cres:A02 , cres:A02_5 .
+
+<http://example.com/res/George_Hatfeild_Gossip_Henry_Bird_1889______>
+        cont:eco  cres:A03_2 .
+
+<http://example.com/res/Berthold_Englisch_Mikhail_Chigorin_1883______>
+        cont:eco  cres:A03_4 , cres:A03_2 .
+
+<http://example.com/res/Richard_Teichmann_Henry_Bird_1895______>
+        cont:eco  cres:A03_2 .
+
+<http://example.com/res/Max_Weiss_Henry_Bird_1889______>
+        cont:eco  cres:A03_2 .
+
+<http://example.com/res/Adolf_Anderssen_Johannes_Zukertort_1865_______6>
+        cont:eco  cres:A00_139 .
+
+<http://example.com/res/Wilhelm_Steinitz_Mikhail_Chigorin_1895______>
+        cont:eco  cres:A13_3 .
+
+<http://example.com/res/John_Owen_Amos_Burn_1874_______3>
+        cont:eco  cres:A00_41 .
+
+<http://example.com/res/Emanuel_Lasker_Henry_Bird_1890_02____6>
+        cont:eco  cres:A03_2 .
+
+<http://example.com/res/James_Hanham_Henry_Bird_1889______>
+        cont:eco  cres:A03_2 .
+
+<http://example.com/res/Johannes_Zukertort_Preston_Ware_1882______>
+        cont:eco  cres:A40_28 , cres:A40_49 .
+
+<http://example.com/res/Kurt_Von_Bardeleben_Joseph_Blackburne_1895_______5>
+        cont:eco  cres:A00_70 .
+
+<http://example.com/res/Carl_Schlechter_Joseph_Blackburne_1895______>
+        cont:eco  cres:A00_70 .
+
+<http://example.com/res/Cecil_De_Vere_Henry_Bird_1866______>
+        cont:eco  cres:A40_49 .
+
+<http://example.com/res/Louis_Paulsen_Thomas_Barnes_1862______>
+        cont:eco  cres:A03_2 .
+
+<http://example.com/res/Max_Weiss_Henry_Bird_1885______>
+        cont:eco  cres:A03_2 .
+
+<http://example.com/res/George_H_Mackenzie_H_Harding_1871______>
+        cont:eco  cres:A00_5 .
+
+<http://example.com/res/Harry_Davidson_Henry_Bird_1876______>
+        cont:eco  cres:A03_2 .
+
+<http://example.com/res/Pierre_Saint_Amant_Howard_Staunton_1843_______5>
+        cont:eco  cres:A43_17 , cres:A43_16 , cres:A43_15 .
+
+<http://example.com/res/Nijmegen_The_Hague_1851______>
+        cont:eco  cres:A03_2 .
+
+<http://example.com/res/Jacob_Elson_Henry_Bird_1876______>
+        cont:eco  cres:A03_2 .
+
+<http://example.com/res/Ignac_Kolisch_Adolf_Anderssen_1861_______5>
+        cont:eco  cres:A02 .
+
+<http://example.com/res/Pierre_Saint_Amant_Howard_Staunton_1843_______12>
+        cont:eco  cres:A43_17 , cres:A43_16 , cres:A43_15 .
+
+<http://example.com/res/Louis_Paulsen_Henry_Bird_1873______>
+        cont:eco  cres:A03_2 .
+
+<http://example.com/res/Amos_Burn_John_Owen_1874______>
+        cont:eco  cres:A00_70 .
+
+<http://example.com/res/Joseph_Blackburne_Henry_Bird_1883______>
+        cont:eco  cres:A02 .
+
+<http://example.com/res/Adolf_Anderssen_Laroche_1851______>
+        cont:eco  cres:A03_2 .
+
+<http://example.com/res/Adolf_Anderssen_Marmaduke_Wyvill_1851_______3>
+        cont:eco  cres:A10_5 , cres:A10 .
+
+<http://example.com/res/Adolf_Anderssen_De_Groot_1875______>
+        cont:eco  cres:A02_20 , cres:A02 .
+
+<http://example.com/res/Ignac_Kolisch_Adolf_Anderssen_1861______>
+        cont:eco  cres:A03_2 .
+
+<http://example.com/res/Adolf_Anderssen_Ignac_Kolisch_1861_______7>
+        cont:eco  cres:A02 .
+
+<http://example.com/res/Josef_Noa_Harry_Pillsbury_1896______>
+        cont:eco  cres:A84 , cres:A84_3 .
+
+<http://example.com/res/James_Mason_Henry_Bird_1876_______2>
+        cont:eco  cres:A02 .
+
+<http://example.com/res/Henry_Bird_Samuel_Tinsley_1899_06_12>
+        cont:eco  cres:A81_2 .
+
+<http://example.com/res/Howard_Staunton_Alfred_Brodie_1851______>
+        cont:eco  cres:A30 .
+
+<http://example.com/res/Adolf_Anderssen_Wilhelm_Steinitz_1873______>
+        cont:eco  cres:A13 .
+
+<http://example.com/res/Louis_Paulsen_Ignac_Kolisch_1861_______9>
+        cont:eco  cres:A03_2 .
+
+<http://example.com/res/Jean_Dufresne_Adolf_Anderssen_1851_______3>
+        cont:eco  cres:A83 .
+
+<http://example.com/res/Bernhard_Horwitz_Howard_Staunton_1846_______6>
+        cont:eco  cres:A85 .
+
+<http://example.com/res/Henry_Bird_Emanuel_Lasker_1890_02____5>
+        cont:eco  cres:A93 .
+
+<http://example.com/res/Paul_Morphy_Charles_Dillingham_Mead_1857______>
+        cont:eco  cres:A00_12 .
+
+<http://example.com/res/Louis_Paulsen_Wilhelm_Steinitz_1873_08_08>
+        cont:eco  cres:A41_2 , cres:A41_7 .
+
+<http://example.com/res/Howard_Staunton_Stella_1855______>
+        cont:eco  cres:A03_2 .
+
+<http://example.com/res/Albert_Clerc_George_H_Mackenzie_1878______>
+        cont:eco  cres:A40_49 .
+
+<http://example.com/res/George_H_Mackenzie_Preston_Ware_1871______>
+        cont:eco  cres:A80 .
+
+<http://example.com/res/Adolf_Anderssen_Marmaduke_Wyvill_1851______>
+        cont:eco  cres:A10_5 , cres:A10 .
+
+<http://example.com/res/Henry_Bird_Emanuel_Lasker_1899_06_27>
+        cont:eco  cres:A82 , cres:A82_2 .
+
+<http://example.com/res/Adolf_Anderssen_James_Mason_1878______>
+        cont:eco  cres:A43_14 .
+
+<http://example.com/res/Max_Weiss_James_Mason_1883______>
+        cont:eco  cres:A02 .
+
+<http://example.com/res/Herbert_William_Trenchard_Carl_Schlechter_1898______>
+        cont:eco  cres:A85 .
+
+<http://example.com/res/Matthai_Junge_1870______>
+        cont:eco  cres:A00_79 , cres:A00_74 .
+
+<http://example.com/res/George_H_Mackenzie_A_Johnston_1871______>
+        cont:eco  cres:A10_5 , cres:A10 .
+
+<http://example.com/res/Carl_Schlechter_Geza_Maroczy_1898______>
+        cont:eco  cres:A03_2 .
+
+<http://example.com/res/Henry_Bird_Mikhail_Chigorin_1883______>
+        cont:eco  cres:A80 , cres:A80_5 .
+
+<http://example.com/res/Johannes_Zukertort_William_Potter_1875______>
+        cont:eco  cres:A03_2 .
+
+<http://example.com/res/Henry_Bird_James_Mason_1882______>
+        cont:eco  cres:A85 .
+
+<http://example.com/res/Paul_Morphy_Augustus_Mongredien_1859_______3>
+        cont:eco  cres:A84_3 .
+
+<http://example.com/res/Samuel_Rosenthal_Wilhelm_Steinitz_1873_08_05>
+        cont:eco  cres:A20_2 .
+
+<http://example.com/res/Johannes_Zukertort_Emil_Schallopp_1868______>
+        cont:eco  cres:A40_49 .
+
+<http://example.com/res/Ernst_Falkbeer_Henry_Bird_1856_______4>
+        cont:eco  cres:A03_2 .
+
+<http://example.com/res/Alexander_Sellman_George_H_Mackenzie_1883______>
+        cont:eco  cres:A13 .
+
+<http://example.com/res/Adolf_Schwarz_George_H_Mackenzie_1882______>
+        cont:eco  cres:A13 .
+
+<http://example.com/res/Carl_Schlechter_Theodor_Von_Scheve_1894______>
+        cont:eco  cres:A40_49 .
+
+<http://example.com/res/Bernhard_Horwitz_Howard_Staunton_1851______>
+        cont:eco  cres:A10_5 , cres:A10 .
+
+<http://example.com/res/Paul_Morphy_Adolf_Anderssen_1858_______10>
+        cont:eco  cres:A00_5 .
+
+<http://example.com/res/Howard_Staunton_Bernhard_Horwitz_1851_______8>
+        cont:eco  cres:A02 .
+
+<http://example.com/res/Emanuel_Lasker_William_Rutherford_1895_02___>
+        cont:eco  cres:A56 .
+
+<http://example.com/res/George_H_Mackenzie_H_Harding_1871_______2>
+        cont:eco  cres:A00_5 .
+
+<http://example.com/res/Bernhard_Horwitz_Howard_Staunton_1846_______10>
+        cont:eco  cres:A85 .
+
+<http://example.com/res/Berthold_Englisch_Henry_Bird_1882______>
+        cont:eco  cres:A03_2 .
+
+<http://example.com/res/Siegbert_Tarrasch_Jean_Taubenhaus_1885______>
+        cont:eco  cres:A13 .
+
+<http://example.com/res/Wilhelm_Steinitz_Henry_Bird_1899_06_21>
+        cont:eco  cres:A03_2 .
+
+<http://example.com/res/Berthold_Englisch_George_H_Mackenzie_1885______>
+        cont:eco  cres:A03_2 .
+
+<http://example.com/res/Berthold_Englisch_Louis_Paulsen_1877______>
+        cont:eco  cres:A28_7 .
+
+<http://example.com/res/Joseph_Blackburne_Alexander_Halprin_1898______>
+        cont:eco  cres:A43_16 , cres:A43_15 .
+
+<http://example.com/res/Emanuel_Lasker_Henry_Bird_1890_02____7>
+        cont:eco  cres:A13 .
+
+<http://example.com/res/Isidor_Gunsberg_Wilhelm_Steinitz_1891_01_07>
+        cont:eco  cres:A46_9 , cres:A46_14 .
+
+<http://example.com/res/Wilhelm_Steinitz_Celso_Golmayo_Zupide_1867_06_11>
+        cont:eco  cres:A82 , cres:A82_2 .
+
+<http://example.com/res/Emanuel_Lasker_Henry_Bird_1892_03_08>
+        cont:eco  cres:A03_2 .
+
+<http://example.com/res/Johann_Loewenthal_Williams_1851______>
+        cont:eco  cres:A03_2 .
+
+<http://example.com/res/Adolf_Albin_Emanuel_Lasker_1896_08_01>
+        cont:eco  cres:A84 , cres:A84_3 , cres:A84_6 .
+
+<http://example.com/res/Jackson_Showalter_Joseph_Blackburne_1898______>
+        cont:eco  cres:A13 .
+
+<http://example.com/res/Amos_Burn_Joseph_Blackburne_1898______>
+        cont:eco  cres:A13 .
+
+<http://example.com/res/Emanuel_Lasker_Henry_Bird_1890_02___>
+        cont:eco  cres:A03_2 .
+
+<http://example.com/res/Riviere_Daniel_Harrwitz_1856______>
+        cont:eco  cres:A85 .
+
+<http://example.com/res/Henry_Bird_Joseph_Blackburne_1885_07_13>
+        cont:eco  cres:A81 , cres:A81_2 .
+
+<http://example.com/res/Ignac_Kolisch_Adolf_Anderssen_1861_______6>
+        cont:eco  cres:A02 .
+
+<http://example.com/res/Adolf_Anderssen_Frederic_Deacon_1851______>
+        cont:eco  cres:A02 .
+
+<http://example.com/res/J_Switzar_Adolf_Anderssen_1875______>
+        cont:eco  cres:A02 .
+
+<http://example.com/res/Carl_Schlechter_Wilhelm_Steinitz_1898______>
+        cont:eco  cres:A25_6 .
+
+<http://example.com/res/Malyszko_Piecha_H_Kretschmar_1887______>
+        cont:eco  cres:A00_74 .
+
+<http://example.com/res/Bernhard_Horwitz_Howard_Staunton_1851_______3>
+        cont:eco  cres:A10_5 , cres:A10 .
+
+<http://example.com/res/Harry_Pillsbury_Berthold_Englisch_1896_______3>
+        cont:eco  cres:A00_77 , cres:A00_74 .
+
+<http://example.com/res/Adolf_Anderssen_Marmaduke_Wyvill_1851_______4>
+        cont:eco  cres:A10_5 , cres:A10 .
+
+<http://example.com/res/Howard_Staunton_Elijah_Williams_1851_______10>
+        cont:eco  cres:A03_2 .
+
+<http://example.com/res/Josef_Heral_Henry_Bird_1873______>
+        cont:eco  cres:A03_2 .
+
+<http://example.com/res/Emanuel_Schiffers_Wilhelm_Steinitz_1896_______2>
+        cont:eco  cres:A13 .
+
+<http://example.com/res/W_Fraser_Saint_amant_1836______>
+        cont:eco  cres:A02 .
+
+<http://example.com/res/Samuel_Rosenthal_Szymon_Winawer_1870______>
+        cont:eco  cres:A40_49 .
+
+<http://example.com/res/Louis_Paulsen_Johannes_Minckwitz_1870______>
+        cont:eco  cres:A40_49 .
+
+<http://example.com/res/Muller__O_G__Loman__R_Lasker__Em__Ward_Higgins__W_1892_06_20>
+        cont:eco  cres:A00_70 , cres:A00_72 .
+
+<http://example.com/res/Joseph_Blackburne_Amos_Burn_1898______>
+        cont:eco  cres:A56_2 , cres:A56 .
+
+<http://example.com/res/Emanuel_Lasker_Wilhelm_Steinitz_1894_______2>
+        cont:eco  cres:A25_6 , cres:A25_4 , cres:A25_7 .
+
+<http://example.com/res/Jackson_Showalter_Samuel_Tinsley_1899_07_08>
+        cont:eco  cres:A00_106 .
+
+<http://example.com/res/Siegbert_Tarrasch_B_Richter_1892______>
+        cont:eco  cres:A84 , cres:A84_3 .
+
+<http://example.com/res/A_Simons_Lowe_1849______>
+        cont:eco  cres:A03_2 .
+
+<http://example.com/res/Jozsef_Mendelsohn_Siegbert_Tarrasch_1879_______3>
+        cont:eco  cres:A00_5 .
+
+<http://example.com/res/Harry_Pillsbury_Edward_Olly_1893______>
+        cont:eco  cres:A01 , cres:A01_2 .
+
+<http://example.com/res/Bristol_cc_Howard_Staunton_1844______>
+        cont:eco  cres:A03_2 .
+
+<http://example.com/res/Henry_Bird_Emanuel_Lasker_1890_02____6>
+        cont:eco  cres:A81_2 .
+
+<http://example.com/res/Louis_Paulsen_Ignac_Kolisch_1861_______17>
+        cont:eco  cres:A02 .
+
+<http://example.com/res/Riviere_Daniel_Harrwitz_1856_______2>
+        cont:eco  cres:A85 .
+
+<http://example.com/res/Eugene_Delmar_Henry_Bird_1889______>
+        cont:eco  cres:A02 .
+
+<http://example.com/res/Emanuel_Lasker_Henry_Bird_1890_02____2>
+        cont:eco  cres:A03_2 .
+
+<http://example.com/res/Carl_Walbrodt_Dawid_Janowsky_1898______>
+        cont:eco  cres:A40_49 .
+
+<http://example.com/res/Henry_Bird_Preston_Ware_1876______>
+        cont:eco  cres:A80 .
+
+<http://example.com/res/Emanuel_Lasker_Jackson_Showalter_1892_______2>
+        cont:eco  cres:A40_49 .
+
+<http://example.com/res/Carl_Schlechter_James_Mason_1899_06_12>
+        cont:eco  cres:A00_139 .
+
+<http://example.com/res/Emanuel_Schiffers_Mikhail_Chigorin_1880_______3>
+        cont:eco  cres:A02 .
+
+<http://example.com/res/W_Muster_E_Schuehler_1863______>
+        cont:eco  cres:A00_90 , cres:A00_74 .
+
+<http://example.com/res/Elijah_Williams_Howard_Staunton_1851_______3>
+        cont:eco  cres:A20_2 .
+
+<http://example.com/res/Paul_Morphy_Augustus_Mongredien_1859______>
+        cont:eco  cres:A84_3 .
+
+<http://example.com/res/Amos_Burn_Edmund_Thorold_1876______>
+        cont:eco  cres:A03_2 .
+
+<http://example.com/res/Joseph_Blackburne_Fritz_Riemann_1881_09_02>
+        cont:eco  cres:A04_23 , cres:A04_2 .
+
+<http://example.com/res/George_H_Mackenzie_Preston_Ware_1882______>
+        cont:eco  cres:A40_28 , cres:A40_49 .
+
+<http://example.com/res/Vinzenz_Hruby_Henry_Bird_1883______>
+        cont:eco  cres:A03_2 .
+
+<http://example.com/res/Adolf_Anderssen_Gustav_Neumann_1866_______2>
+        cont:eco  cres:A83 , cres:A83_3 .
+
+<http://example.com/res/Emanuel_Schiffers_Mikhail_Chigorin_1878_______5>
+        cont:eco  cres:A43_14 .
+
+<http://example.com/res/James_Mason_Adolf_Anderssen_1878______>
+        cont:eco  cres:A00_5 .
+
+<http://example.com/res/Max_Bier_Berthold_Englisch_1879______>
+        cont:eco  cres:A03_2 .
+
+<http://example.com/res/Samuel_Rosenthal_Henry_Bird_1883______>
+        cont:eco  cres:A03_2 .
+
+<http://example.com/res/Adolf_Anderssen_Adolf_Stern_1878______>
+        cont:eco  cres:A00_139 .
+
+<http://example.com/res/Ernst_Falkbeer_Henry_Bird_1856_______5>
+        cont:eco  cres:A02 .
+
+<http://example.com/res/Daniel_Harrwitz_Bernhard_Horwitz_1849_______2>
+        cont:eco  cres:A21_4 .
+
+<http://example.com/res/Wilhelm_Steinitz_Celso_Golmayo_1867______>
+        cont:eco  cres:A82 , cres:A82_2 .
+
+<http://example.com/res/Louis_Paulsen_Johann_H_Bauer_1889______>
+        cont:eco  cres:A45_3 .
+
+<http://example.com/res/Paul_Morphy_Adolf_Anderssen_1858_______11>
+        cont:eco  cres:A00_5 .
+
+<http://example.com/res/Francis_J_Lee_Wilhelm_Cohn_1899_07_08>
+        cont:eco  cres:A03_2 .
+
+<http://example.com/res/I_Loc_Gunsberg_Bird__H_Dobell__H_1892______>
+        cont:eco  cres:A02 , cres:A02_5 , cres:A02_8 .
+
+<http://example.com/res/Winkel_Alkmaar_1856______>
+        cont:eco  cres:A02 .
+
+<http://example.com/res/Fritz_Riemann_Henry_Bird_1883______>
+        cont:eco  cres:A03_2 .
+
+<http://example.com/res/Georg_Marco_Joseph_Blackburne_1898______>
+        cont:eco  cres:A13 .
+
+<http://example.com/res/Carl_Walbrodt_Beniamino_Vergani_1895______>
+        cont:eco  cres:A40_34 , cres:A40_49 .
+
+<http://example.com/res/BRODY_Rezso_Charousek_1897______>
+        cont:eco  cres:A00_94 , cres:A00_74 .
+
+<http://example.com/res/Adolf_Anderssen_Karl_Pitschel_1878______>
+        cont:eco  cres:A13 .
+
+<http://example.com/res/Wilhelm_Steinitz_Adolf_Schwarz_1873______>
+        cont:eco  cres:A22_4 , cres:A22_3 , cres:A22 .
+
+<http://example.com/res/Wilhelm_Steinitz_B_Van_der_Haak_1873______>
+        cont:eco  cres:A00_41 .
+
+<http://example.com/res/William_Pollock_Amos_Burn_1895______>
+        cont:eco  cres:A43_16 , cres:A43_15 .
+
+<http://example.com/res/Albert_Clerc_Henry_Bird_1878______>
+        cont:eco  cres:A00_139 .
+
+<http://example.com/res/Mikhail_Chigorin_Emanuel_Schiffers_1898_______2>
+        cont:eco  cres:A47_3 .
+
+<http://example.com/res/George_H_Mackenzie_Adolf_Anderssen_1878______>
+        cont:eco  cres:A00_5 .
+
+<http://example.com/res/S_Goliak_V_Vorobiev_1792______>
+        cont:eco  cres:A02 , cres:A02_5 , cres:A02_8 .
+
+<http://example.com/res/Kieseritsky_Laigle_1843______>
+        cont:eco  cres:A03_2 .
+
+<http://example.com/res/Constant_Ferdinand_Burille_Henry_Bird_1889______>
+        cont:eco  cres:A03_2 .
+
+<http://example.com/res/Joseph_Blackburne_Henry_Bird_1873_08_04>
+        cont:eco  cres:A02 .
+
+<http://example.com/res/Adolf_Schwarz_Louis_Paulsen_1873_______2>
+        cont:eco  cres:A28_7 .
+
+<http://example.com/res/Preston_Ware_Henry_Bird_1882______>
+        cont:eco  cres:A03_2 .
+
+<http://example.com/res/Joseph_Blackburne_John_Owen_1868______>
+        cont:eco  cres:A00_139 .
+
+<http://example.com/res/Joseph_Blackburne_Henry_Bird_1882_06_10>
+        cont:eco  cres:A03_2 .
+
+<http://example.com/res/James_Mason_Harry_Pillsbury_1899_06_07>
+        cont:eco  cres:A85 .
+
+<http://example.com/res/Elijah_Williams_Howard_Staunton_1851_______9>
+        cont:eco  cres:A13 .
+
+<http://example.com/res/Paul_Morphy_Adolf_Anderssen_1858_______6>
+        cont:eco  cres:A00_5 .
+
+<http://example.com/res/Dion_M_Martinez_Henry_Bird_1889______>
+        cont:eco  cres:A25_6 .
+
+<http://example.com/res/Berthold_Englisch_James_Mason_1883______>
+        cont:eco  cres:A03_4 , cres:A03_2 .
+
+<http://example.com/res/George_H_Mackenzie_Wilhelm_Steinitz_1882_06_03>
+        cont:eco  cres:A13 .
+
+<http://example.com/res/Emanuel_Schiffers_Mikhail_Chigorin_1878_05_13>
+        cont:eco  cres:A00_139 .
+
+<http://example.com/res/Adolf_Anderssen_Johannes_Zukertort_1868______>
+        cont:eco  cres:A00_139 .
+
+<http://example.com/res/Johannes_Zukertort_Adolf_Anderssen_1868_______7>
+        cont:eco  cres:A40_49 .
+
+<http://example.com/res/Adolf_Anderssen_M_Van_t_Kruys_1861_______2>
+        cont:eco  cres:A00_5 .
+
+<http://example.com/res/Adolf_Anderssen_Gustav_Neumann_1866_______8>
+        cont:eco  cres:A83 , cres:A83_3 .
+
+<http://example.com/res/Harry_Pillsbury_Mikhail_Chigorin_1895_______2>
+        cont:eco  cres:A02 , cres:A02_5 .
+
+<http://example.com/res/John_Wisker_Henry_Bird_1873______>
+        cont:eco  cres:A03_2 .
+
+<http://example.com/res/E_Flower_Elijah_Williams_1849______>
+        cont:eco  cres:A03_2 .
+
+<http://example.com/res/Wilhelm_Steinitz_Adolf_Anderssen_1866_______4>
+        cont:eco  cres:A13_10 .
+
+<http://example.com/res/Marmaduke_Wyvill_Hugh_A_Kennedy_1851______>
+        cont:eco  cres:A03_2 .
+
+<http://example.com/res/Isidor_Gunsberg_Henry_Bird_1889______>
+        cont:eco  cres:A02 .
+
+<http://example.com/res/Berthold_Englisch_Henry_Bird_1878______>
+        cont:eco  cres:A03_2 .
+
+<http://example.com/res/Wilhelm_Steinitz_Henry_Bird_1866_______2>
+        cont:eco  cres:A02 , cres:A02_5 .
+
+<http://example.com/res/Bernhard_Horwitz_Howard_Staunton_1851_______4>
+        cont:eco  cres:A13 .
+
+<http://example.com/res/Howard_Staunton_Elijah_Williams_1851_______11>
+        cont:eco  cres:A43_14 .
+
+<http://example.com/res/Daniel_Harrwitz_Riviere_1856______>
+        cont:eco  cres:A03_2 .
+
+<http://example.com/res/i_bauer_em_lasker_1889______>
+        cont:eco  cres:A03_2 .
+
+<http://example.com/res/Joseph_Blackburne_George_H_Mackenzie_1883______>
+        cont:eco  cres:A13 .
+
+<http://example.com/res/Gunsberg_Locock_Bird_Dobell_1897______>
+        cont:eco  cres:A02 , cres:A02_5 , cres:A02_8 .
+
+<http://example.com/res/Emanuel_Lasker_Wilhelm_Steinitz_1894_______3>
+        cont:eco  cres:A28_2 .
+
+<http://example.com/res/Mikhail_Chigorin_James_Mason_1881_09_02>
+        cont:eco  cres:A00_139 .
+
+<http://example.com/res/Joseph_Blackburne_Johannes_Zukertort_1883______>
+        cont:eco  cres:A13 .
+
+<http://example.com/res/Wilhelm_Steinitz_Preston_Ware_1882_05_16>
+        cont:eco  cres:A40_28 , cres:A40_49 .
+
+<http://example.com/res/Henry_Bird_Bernhard_Horwitz_1851______>
+        cont:eco  cres:A10_14 , cres:A10 .
+
+<http://example.com/res/Wilhelm_Steinitz_Gustav_Neumann_1870_07_27>
+        cont:eco  cres:A83 , cres:A83_3 .
+
+<http://example.com/res/Jean_Taubenhaus_Henry_Bird_1885______>
+        cont:eco  cres:A02 .
+
+<http://example.com/res/Emanuel_Lasker_Henry_Bird_1890_02____3>
+        cont:eco  cres:A03_2 .
+
+<http://example.com/res/Henry_Bird_George_Medley_1849_______2>
+        cont:eco  cres:A13 .
+
+<http://example.com/res/Dawid_Janowsky_Henry_Bird_1895______>
+        cont:eco  cres:A03_4 , cres:A03_2 .
+
+<http://example.com/res/Elijah_Williams_Howard_Staunton_1851_______4>
+        cont:eco  cres:A02 .
+
+<http://example.com/res/Karl_Pitschel_Louis_Paulsen_1879______>
+        cont:eco  cres:A10_5 , cres:A10 .
+
+<http://example.com/res/Miniatti_Henry_Bird_1889______>
+        cont:eco  cres:A03_2 .
+
+<http://example.com/res/Emanuel_Schiffers_Mikhail_Chigorin_1897_______9>
+        cont:eco  cres:A02 .
+
+<http://example.com/res/Howard_Staunton_Elijah_Williams_1851_______7>
+        cont:eco  cres:A85 .

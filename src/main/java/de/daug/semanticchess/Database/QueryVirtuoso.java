@@ -10,34 +10,31 @@ import org.apache.jena.query.ResultSetFormatter;
 import org.springframework.stereotype.Repository;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
+import de.daug.semanticchess.Configurations;
 import de.daug.semanticchess.Database.ConnectVirtuoso;
 import virtuoso.jena.driver.VirtModel;
 
 /**
- * the previously allocated sparql query from the user query (by Allocator.java) is now 
- * used to get an result by the database
+ * The previously allocated SPARQL query from the user query (by Allocator.java) is now 
+ * used to get an result by the database.
  */
 @Repository
 public class QueryVirtuoso {
 
-	private static String PREFIX = 	"PREFIX ex:<http://example.com> " + 
-									"PREFIX res:<http://example.com/res/> " + 
-									"PREFIX prop:<http://example.com/prop/> " +
-									"PREFIX cres:<http://pcai042.informatik.uni-leipzig.de/~swp13-sc/ChessOntology/Resources/> " + 
-									"PREFIX cont:<http://pcai042.informatik.uni-leipzig.de/~swp13-sc/ChessOntology#> " +
-									"PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>";
+	private static String PREFIX = 	Configurations.SPARQL_PREFIXES;
 	
 	/**
-	 * constructor
+	 * empty constructor
 	 */
 	public QueryVirtuoso() {
 	}
 
 	/**
-	 * the method connects to the database and returns a json
+	 * the method connects to the database and returns a JSON
 	 * with the wanted result
-	 * @param strQuery: sparql Query
-	 * @return json 
+	 * @param strQuery: SPARQL Query
+	 * @return JSON
 	 */
 	public String getCustomResult(String strQuery) {
 		String query = PREFIX + " " + strQuery;
@@ -46,7 +43,7 @@ public class QueryVirtuoso {
 		ConnectVirtuoso conn = new ConnectVirtuoso();
 		VirtModel vModel = conn.connectDefault();
 
-		System.out.println("=====================");
+		System.out.println("============================");
 		System.out.println("Exec: " + query);
 		//create the sparql query from the String
 		Query jquery = QueryFactory.create(query);

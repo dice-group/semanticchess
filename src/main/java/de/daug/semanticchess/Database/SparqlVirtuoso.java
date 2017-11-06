@@ -10,34 +10,30 @@ import org.apache.jena.query.ResultSetFormatter;
 import org.springframework.stereotype.Repository;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
+import de.daug.semanticchess.Configurations;
 import de.daug.semanticchess.Database.ConnectVirtuoso;
 import virtuoso.jena.driver.VirtModel;
 
 /**
- * connects to the database and returns a result
+ * This class connects to the database and returns a JSON.
  */
 @Repository
 public class SparqlVirtuoso {
 
-	private static String PREFIX = 	"PREFIX ex:<http://example.com> " + 
-									"PREFIX res:<http://example.com/res/> " + 
-									"PREFIX prop:<http://example.com/prop/> " +
-									"PREFIX cres:<http://pcai042.informatik.uni-leipzig.de/~swp13-sc/ChessOntology/Resources/> " + 
-									"PREFIX cont:<http://pcai042.informatik.uni-leipzig.de/~swp13-sc/ChessOntology#> " +
-									"PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>";
+	private static String PREFIX = 	Configurations.SPARQL_PREFIXES;
 									
 	/**
-	 * constructor
+	 * empty constructor
 	 */
 	public SparqlVirtuoso() {
 	}
 
-
 	/**
-	 * the method connects to the database and returns a json
+	 * the method connects to the database and returns a JSON
 	 * with the wanted result
-	 * @param strQuery: sparql Query
-	 * @return json 
+	 * @param strQuery: SPARQL Query
+	 * @return JSON
 	 */
 	public String getCustomResult(String strQuery) {
 		String query = PREFIX + " " + strQuery;
@@ -46,7 +42,7 @@ public class SparqlVirtuoso {
 		ConnectVirtuoso conn = new ConnectVirtuoso();
 		VirtModel vModel = conn.connectDefault();
 
-		System.out.println("=====================");
+		System.out.println("============================");
 		System.out.println("Exec: " + query);
 		//create the sparql query from the String
 		Query jquery = QueryFactory.create(query);
@@ -83,7 +79,7 @@ public class SparqlVirtuoso {
 	}
 	
 	/**
-	 * method mainly to for StringSimilarity.java
+	 * method mainly for StringSimilarity.java
 	 * @param strQuery: sparql query
 	 * @return resultSet
 	 */

@@ -7,7 +7,11 @@ import org.apache.commons.io.FilenameUtils;
 
 import de.daug.semanticchess.Configurations;
 
-//https://www.openlinksw.com/vos/main/Main/VirtTipsAndTricksLoadDataInTransactionMode
+//
+/**
+ * This class is based on https://www.openlinksw.com/vos/main/Main/VirtTipsAndTricksLoadDataInTransactionMode
+ * It manages the upload to Virtuoso.
+ */
 public class LoadData {
 
 	public static void main(String[] args) {
@@ -24,12 +28,14 @@ public class LoadData {
 			Statement st;
 
 			st = conn.createStatement();
-			//st.execute("sparql clear graph <http://www.example.com/>");
-
+//			st.execute("sparql clear graph <http://www.example.com/>");
+//			st.execute("sparql clear graph <http://pcai042.informatik.uni-leipzig.de/~swp13-sc/ChessOntology#ChessOpening");
+//			st.execute("http://pcai042.informatik.uni-leipzig.de/~swp13-sc/ChessOntology#ChessMove");
+			
 			conn.setAutoCommit(false);
 			
 
-			File folder = new File("src/main/resources/static/games/rdf/");
+			File folder = new File(Configurations.RDF);
 			File[] listOfFiles = folder.listFiles();
 			
 //			String fileName = "chessopenings.txt.ttl";
@@ -88,9 +94,8 @@ public class LoadData {
 			while ((s = r.readLine()) != null) {
 				sb.append(s);
 				sb.append(" ");
-
 			}
-
+			r.close();
 			return sb.toString();
 		} catch (Exception e) {
 		}
@@ -151,8 +156,11 @@ public class LoadData {
 			while ((s = r.readLine()) != null)
 				sb.append(s);
 
-			if (sb.length() > 0)
-				return "sparql insert into graph <testyear> { " + sb.toString() + " } ";
+			if (sb.length() > 0){
+				r.close();
+				return "sparql insert into graph <test> { " + sb.toString() + " } ";
+			}
+				
 		} catch (Exception e) {
 		}
 		return null;

@@ -5,7 +5,8 @@ import org.springframework.stereotype.Service;
 import de.daug.semanticchess.Database.SparqlVirtuoso;
 
 /**
- * connects to the database
+ * This class connects to the database
+ * and returns the result for the SPARQL query.
  */
 @Service
 public class SparqlService{
@@ -13,6 +14,12 @@ public class SparqlService{
 	@Autowired
 	private SparqlVirtuoso virtuosoQuery;
 	
+	/**
+	 * Takes the SPARQL query and returns
+	 * a JSON with the result data.
+	 * @param strQuery: SPARQL query
+	 * @return JSON: with result data
+	 */
 	public String getCustomResult(String strQuery){
 		return virtuosoQuery.getCustomResult(strQuery);
 	}

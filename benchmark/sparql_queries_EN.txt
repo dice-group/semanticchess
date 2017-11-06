@@ -42,17 +42,17 @@ WHERE {
 	 FILTER regex(?date, '1899')
 	}
 } 
-GROUP BY ?player
-HAVING ?elo > 2500
+GROUP BY ?player ?elo
+HAVING (?elo > 2500)
 ORDER BY DESC(?nr)
 LIMIT 1 OFFSET 0
 
 ========================================================
-4	Have Emanuel Lasker played the opening King’s Indian?
+4	Have Emanuel Lasker played the opening King’s Gambit?
 ASK {
-	?game prop:black|prop:white 'Emanuel Lasker' .
+?game prop:black|prop:white 'Emanuel Lasker' .
 	?game prop:eco ?eco .
-	FILTER regex(?eco, '^E[6-9]{2}.*')
+	FILTER regex(?eco, '^C3[0-9]{1}.*')
 }
 
 ========================================================
@@ -106,7 +106,7 @@ SELECT DISTINCT ?game
 WHERE {
 	?game prop:moves ?moves .
 	?moves prop:move ?move .
-	FILTER regex(?move, '[a-h]8[BNRbnr]')
+	FILTER regex(?move, '[BNRbnr]$')
 }
 LIMIT 5 OFFSET 0
 
@@ -151,8 +151,9 @@ ORDER BY ASC(?date) LIMIT 1 OFFSET 0
 14	Show me games of white in the Evans Gambit.
 SELECT DISTINCT ?game
 WHERE {
-	?game prop:eco ?eco .
-	FILTER regex(?eco, 'C5[1-2].*')
+	?game cont:eco ?eco .
+	?eco cont:openingCode ?e .
+	FILTER regex(?e, 'C5[1-2].*')
 }
 
 ========================================================
@@ -186,7 +187,7 @@ LIMIT 1
 SELECT DISTINCT ?game
 WHERE {
 	?game prop:event ?event .
-	{SELECT DISTINCT ?event (AVG(?elo) AS ?avg)
+	{SELECT DISTINCT ?event (AVG(xsd:integer(?elo)) AS ?avg)
 	 WHERE {
 		?game prop:event ?event . 
 		?game prop:whiteelo|prop:blackelo ?elo .
@@ -205,25 +206,26 @@ WHERE {
 	 ?game prop:result '1-0' .
 	 ?game prop:whiteelo ?whiteelo .
 	 ?game prop:blackelo ?blackelo .
-	 FILTER (?blackelo > ?whiteelo) 
+	 FILTER (xsd:integer(?blackelo) > xsd:integer(?whiteelo)) 
 	}
 	UNION
 	{?game prop:white 'Wilhelm Steinitz' .
 	 ?game prop:result '0-1' .
 	 ?game prop:whiteelo ?whiteelo .
 	 ?game prop:blackelo ?blackelo .
-	 FILTER (?blackelo < ?whiteelo) 
+	 FILTER (xsd:integer(?blackelo) < xsd:integer(?whiteelo)) 
 	}
 }
 
 
 ========================================================
 19	What openings were played at the World Championship 1894?
-SELECT DISTINCT ?eco
+SELECT DISTINCT ?opening
 WHERE {
 	?game prop:event ?event .
 	?game prop:date ?date .
-	?game prop:eco ?eco .
+	?game cont:eco ?eco .
+        ?eco cont:openingName ?opening .
 	FILTER regex(?event, 'World Championship' ,'i')
 	FILTER regex(?date, '1894', 'i')
 }
@@ -318,8 +320,9 @@ WHERE {
 
 SELECT DISTINCT (COUNT(?eco) AS ?nr)
 WHERE {
-		?game prop:eco ?eco .
-        FILTER regex(?eco, '^C5[1-2].*')
+		?game cont:eco ?eco .
+		?eco cont:openingCode ?e.
+        FILTER regex(?e, '^C5[1-2].*')
 }
 
 ========================================================
@@ -343,7 +346,7 @@ WHERE {
 }
 
 ========================================================
-28	All games with more than 200 moves. (only half moves)
+28	All games with more than 100 moves.
 SELECT DISTINCT ?game
 WHERE {
 	?game prop:moves ?moves .
@@ -375,12 +378,14 @@ WHERE {
 31	Show me wins in C33.
 SELECT ?game
 WHERE {
-	{?game prop:eco 'C33'.
+	{?game cont:eco ?eco.
 	?game prop:result '1-0'.
+	?eco cont:openingCode 'C33'.
 	}
 	UNION
-	{?game prop:eco 'C33'.
+	{?game cont:eco ?eco.
 	?game prop:result '0-1'.
+	?eco cont:openingCode 'C33'.
 	}
 }
 
@@ -409,10 +414,11 @@ ASK {?game prop:black|prop:white 'Wilhelm Steinitz'.
 }
 
 ========================================================
-33	Are there games with f2-f4 d7-d5 Ng1-f3?
-PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+33	Are there games with f4 d5 Nf3?
 SELECT DISTINCT ?game
 WHERE {
+    ?game a prop:ChessGame .
+
 	?game prop:moves ?move1 .
 	?game prop:moves ?move2 .
 	?game prop:moves ?move3 .
@@ -421,9 +427,9 @@ WHERE {
 	?move2 prop:moveNr '2'^^xsd:nonNegativeInteger .
 	?move3 prop:moveNr '3'^^xsd:nonNegativeInteger .
 	
-	?move1 prop:move 'f2-f4'.
-	?move2 prop:move 'd7-d5'.
-	?move3 prop:move 'Ng1-f3'.
+	?move1 prop:move 'f4'.
+	?move2 prop:move 'd5'.
+	?move3 prop:move 'Nf3'.
 }
 
 ========================================================
@@ -432,11 +438,12 @@ PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 SELECT DISTINCT ?game
 WHERE {
 	?game prop:blackelo|prop:whiteelo ?elo .
-	?game prop:eco 'C52' .
+	?game cont:eco ?eco .
+	?eco cont:openingCode 'C52' .
 	?game prop:result '1-0'.
 }
 GROUP BY ?game
-HAVING (AVG(?elo)>'2400'^^xsd:int)
+HAVING (AVG(xsd:integer(?elo))>'2400'^^xsd:int)
 
 ========================================================
 35	 Which player loses the most with white.
@@ -608,32 +615,33 @@ WHERE {
 48	What is played against the Italian Game?
 SELECT DISTINCT ?game
 WHERE {
-	?game prop:eco ?eco .
+	?game cont:eco ?eco .
 	FILTER regex(?eco, 'C5[034].*')
 }
 
 ========================================================	
 49	In which variation in the Sicilian Defense does black win most often?
-SELECT DISTINCT ?eco (count(?eco) AS ?wins)
+SELECT DISTINCT ?e (count(?eco) AS ?wins)
 WHERE {
 	?game cont:eco ?eco .
 	?eco cont:openingCode ?e .
 	?game prop:result '0-1' .
 	FILTER regex(?e, 'B[2-9][0-9].*')
 }
-GROUP BY ?eco
+GROUP BY ?e
 ORDER BY DESC(?wins)
 LIMIT 1 OFFSET 0
 
+
 ========================================================
 50	What is the main variation in the Ruy Lopez Opening?
-SELECT DISTINCT ?eco (count(?eco) AS ?played)
+SELECT DISTINCT ?e (count(?e) AS ?played)
 WHERE {
 	?game cont:eco ?eco .
 	?eco cont:openingCode ?e .
-	FILTER regex(?eco, '^C[6-9][0-9].*')
+	FILTER regex(?e, '^C[6-9][0-9].*')
 }
-GROUP BY ?eco
+GROUP BY ?e
 ORDER BY DESC(?played)
 LIMIT 1 OFFSET 0
 

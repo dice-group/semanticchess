@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 import de.daug.semanticchess.Service.SparqlService;
 
 /**
- * sets up a REST API
- * the page /sparql delivers a result json for sparql queries
+ * Sets up a REST API
+ * The page /sparql delivers a result JSON for SPARQL queries.
  */
 @RestController
 @RequestMapping("/sparql")
@@ -25,12 +25,12 @@ public class SparqlController{
 	
 	/**
 	 * connects to SparqlService.java 
-	 * @param strQuery: sparql query
-	 * @return a json with the results from the database
+	 * @param strQuery: SPARQL query
+	 * @return a JSON with the results from the database
 	 */
 	@RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public String getCustomResult(@RequestBody String strQuery){
-		System.out.println("Controller: " + strQuery);
+		System.out.printf("%-16s %s\n", "Controller: ",  strQuery);
 		return sparqlService.getCustomResult(strQuery);
 	}
 	

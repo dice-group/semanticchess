@@ -22,9 +22,8 @@ import edu.stanford.nlp.util.CoreMap;
 import org.apache.log4j.BasicConfigurator;
 
 /**
- * @desc User queries will tagged by this class with the help of the Stanford
- *       POS tagger (coreNLP)
- * @author Joern-Henning Daug
+ * User queries will tagged by this class 
+ * with the help of the Stanford POS tagger (coreNLP)
  */
 public class PosTagger {
 
@@ -61,7 +60,7 @@ public class PosTagger {
 		// NER, parsing, and coreference resolution"
 		Properties props = new Properties();
 		// props.setProperty("ner.applyNumericClassifiers", "true");
-		props.setProperty("annotators", "tokenize, ssplit, pos, lemma, ner, parse, dcoref");
+		props.setProperty("annotators", "tokenize, ssplit, pos, lemma, ner, parse");
 		StanfordCoreNLP pipeline = new StanfordCoreNLP(props);
 		// ===================================
 
