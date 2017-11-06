@@ -1,8 +1,10 @@
 <h1>Semantic Chess</h1>
 
-<p>A question answering system for chess games.</p>
+<p>A question answering system for chess games. The engine will try to answer all chess questions, if the information can be found in a PGN file. Therefore, the questions must include players, events, locations, (annual) dates, ECO, openings, ELO ratings, results and/or moves. In the <a href="https://github.com/semanticchess/semanticchess/blob/master/benchmark/auswertung-20171105.pdf">benchmark</a> you  find some sample questions.</p>
 <div>
-  <img src="https://github.com/semanticchess/semanticchess/blob/master/img/example.gif" alt="alt text" width="450px">
+  <p align="center">
+  <img src="https://github.com/semanticchess/semanticchess/blob/master/img/example.gif" alt="Example gif" width="450px" >
+  </p>
 </div>
 
 <h2>Prerequisite</h2>
@@ -24,28 +26,44 @@
 $ cd src/main/database
 $ docker-compose up
 ```
-<ul>
-  <li>start the engine</li>
-</ul>
+<p>The next commands must be executed in the folder with the pom.xml. If you already loaded data to the database just start the engine with the 4th command. At the first launch perform the following steps. </p>
 
+<h4>1. Convert the PGN file to RDF data (in this project you can find 1610-1899.pgn as an example):</h4>
+
+```sh
+$ mvn spring-boot:run -Drun.arguments="pgn"
+```
+<h4>2. Map the chess openings to the games (optional! the mapping files already exist for 1610-1899.pgn):</h4>
+
+```sh
+$ mvn spring-boot:run -Drun.arguments="eco"
+```
+<h4>3. Load the RDF files to the Virtuoso database:</h4>
+  
+```sh
+$ mvn spring-boot:run -Drun.arguments="load"
+```
+
+<h4>4. Start the engine:</h4>
+  
 ```sh
 $ mvn spring-boot:run
 ```
 
 <h2>Note</h2>
 
-At first the program converts the file 1610-1899.pgn to .ttl-files. After that it uploads these files plus a mapping file and a chess opening file to the database. That will take some time.
+<p>The conversion from PGN to RDF and the mapping of the chess openings to the chess games take some time.</p>
 
 
-## Use
+<h2>Use</h2>
 
-> http://localhost/8080 - Homepage
-> http://localhost/8890 - Databse (Virtusos)
-> http://localhost/8890/sparql (SPARQL editor)
+- http://localhost/8080 - Homepage
+- http://localhost/8890 - Databse (Virtusos)
+- http://localhost/8890/sparql (SPARQL editor)
 
 
-## Prefixes
-If you want to use the sparql editor on http://localhost/8080: The following prefixes are already in use:
+<h2>Prefixes</h2>
+If you want to use the SPARQL editor on http://localhost/8080, note that the following prefixes are already in use:
 
 ```sh
 PREFIX ex:    <http://example.com> 
@@ -56,7 +74,8 @@ PREFIX cont:  <http://pcai042.informatik.uni-leipzig.de/~swp13-sc/ChessOntology#
 PREFIX xsd:   <http://www.w3.org/2001/XMLSchema#>
 ```
 
-## PGN Viewer
+<h2>PGN Viewer</h2>
+
 PgnViewerJS by [mliebelt](https://github.com/mliebelt/PgnViewerJS)
 
 The PGN viewer is embedded by links from cdn.rawgit.com:
@@ -65,23 +84,28 @@ The PGN viewer is embedded by links from cdn.rawgit.com:
 
 If you want to include the files directly into the Semantic Chess project, go to [http://mliebelt.github.io/PgnViewerJS/docu/index.html](mliebelt.github.io)
 and download the current version. After that insert the unzipped directory to 
+
 ```
 /semanticchess/src/main/webapp/static
 ```
 and uncomment line 13 and 35 in
+
 ```
 /semanticchess/src/main/webapp/public/index.html
 ```
 
-## Credits
-### Frontend:
+<h2>Credits</h2>
+
+<h3>Frontend:</h3>
+
 - PgnViewerJS by [mliebelt](https://github.com/mliebelt/PgnViewerJS)
 - Font Awesome by Dave Gandy - http://fontawesome.io
 - [Bootstrap](http://getbootstrap.com/)
 - [AngularJS](https://angularjs.org/) 
 - [jQuery](https://jquery.com/)
 
-### Backend:
+<h3>Backend:</h3>
+
 - [Stanford coreNLP](https://stanfordnlp.github.io/CoreNLP/)
 - [spring.io](https://spring.io/)
 - [Chess Opening JSON by hayatbiralem](https://github.com/hayatbiralem/eco.json/blob/master/eco.json)
