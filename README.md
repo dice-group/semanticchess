@@ -58,7 +58,7 @@ $ mvn spring-boot:run
 <h2>Use</h2>
 
 - http://localhost/8080 - Homepage
-- http://localhost/8890 - Databse (Virtusos)
+- http://localhost/8890 - Databse (Virtuoso)
 - http://localhost/8890/sparql (SPARQL editor)
 
 
