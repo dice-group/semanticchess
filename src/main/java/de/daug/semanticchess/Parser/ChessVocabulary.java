@@ -100,6 +100,7 @@ public class ChessVocabulary {
 		eventEntityProperty.add("blind");
 		eventEntityProperty.add("knockout");
 		eventEntityProperty.add("blindfolded");
+		eventEntityProperty.add("olympiad");
 		// ==============================
 		PROPERTIES.put("eventEntity", eventEntityProperty);
 		
