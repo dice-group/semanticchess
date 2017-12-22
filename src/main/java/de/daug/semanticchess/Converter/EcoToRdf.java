@@ -43,21 +43,28 @@ public class EcoToRdf {
 		inputLinker[1] = Configurations.DB_SHORT;
 		inputLinker[2] = Configurations.DB_USER;
 		inputLinker[3] = Configurations.DB_PASSWORD;
-				
-		inputLinker[4] = "A";
-		ECOLinker.main(inputLinker);
 		
-		inputLinker[4] = "B";
-		ECOLinker.main(inputLinker);
 		
-		inputLinker[4] = "C";
-		ECOLinker.main(inputLinker);
-		
-		inputLinker[4] = "D";
-		ECOLinker.main(inputLinker);
-		
-		inputLinker[4] = "E";
-		ECOLinker.main(inputLinker);
+		if(args == null){
+			inputLinker[4] = "A";
+			ECOLinker.main(inputLinker);
+			
+			inputLinker[4] = "B";
+			ECOLinker.main(inputLinker);
+			
+			inputLinker[4] = "C";
+			ECOLinker.main(inputLinker);
+			
+			inputLinker[4] = "D";
+			ECOLinker.main(inputLinker);
+			
+			inputLinker[4] = "E";
+			ECOLinker.main(inputLinker);
+		} else if (args.length == 2){
+			inputLinker[4] = args[1];
+			ECOLinker.main(inputLinker);
+		}
+
 		
 	}
 	

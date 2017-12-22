@@ -24,11 +24,19 @@ public class Main
     	if(args.length == 1){
         	if(args[0].equals("pgn")){
         		PgnToRdf.main(null);
+        		LoadData.main(null);
         	} else if(args[0].equals("eco")){
         		EcoToRdf.main(null);
+        		LoadData.main(null);
         	} else if(args[0].equals("load")){
         		LoadData.main(null);
-        	}
+        	}  
+    	} else if(args.length == 2){
+    		if(args[0].equals("eco")){
+    			if(args[1].equals("A") || args[1].equals("B") || args[1].equals("C") || args[1].equals("D") || args[1].equals("E")){
+            		EcoToRdf.main(args);
+    			}
+    		}
     	} else {
         	//Application starts
     		SpringApplication.run(Main.class, args);
