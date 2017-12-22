@@ -22,6 +22,7 @@ resources/ontologyProperties
 src/main/resources/static/rdf/16*.ttl
 src/main/resources/static/rdf/chessopenings.txt.ttl
 !src/main/resources/static/openings/*.txt
+!src/main/resources/static/openings/*.gz
 
 
 # External tool builders
