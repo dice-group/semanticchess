@@ -38,7 +38,7 @@ $ mvn spring-boot:run -Drun.arguments="pgn"
 ```sh
 $ mvn spring-boot:run -Drun.arguments="eco"
 ```
-<b>Virtuoso is not stable when running tha mapping process.</b> 
+<b>Virtuoso is not stable when running the mapping process.</b> 
 It crashes randomly. Therefore, you can manually split the mapping process.
 If Virtuoso crashes, first load the mapping you already have with step 3. Then start again at the point where the program stopped.
 
