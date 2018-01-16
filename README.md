@@ -119,4 +119,4 @@ and uncomment line 13 and 35 in
 - [Stanford coreNLP](https://stanfordnlp.github.io/CoreNLP/)
 - [spring.io](https://spring.io/)
 - [Chess Opening JSON by hayatbiralem](https://github.com/hayatbiralem/eco.json/blob/master/eco.json)
-- PGN to RDF and chess RDF ontology by [TortugaAttack](https://github.com/TortugaAttack/CACADUS) and [swp-sc13](http://pcai042.informatik.uni-leipzig.de/swp/SWP-13/swp13-sc/) 
+- PGN to RDF and chess RDF ontology by [TortugaAttack](https://github.com/TortugaAttack/CACADUS) and [swp-sc13](http://pcai042.informatik.uni-leipzig.de/swp/SWP-13/swp13-sc/)
