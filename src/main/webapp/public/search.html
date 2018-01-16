@@ -1,7 +1,7 @@
 <!-- This view creates the search box and shows the results for a query -->
 <nav class="nav">
 	<a class="nav-link active" href="#!">Search</a> 
-	<a class="nav-link" href="#!">Instructions</a>
+	<a class="nav-link" href="https://github.com/dice-group/semanticchess/blob/master/README.md">Instructions</a>
 	<a class="nav-link" href="https://github.com/dice-group/semanticchess/">Github</a>
 	<a class="nav-link" href="https://github.com/dice-group/semanticchess/issues">Issues</a>
 </nav>
@@ -21,10 +21,14 @@
 	<!-- Buttons for query type (user query or sparql) -->
 	<div style="margin-top: 30px;">
 		<button ng-click="getQueryResults()" class="btn btn-outline-success my-2 my-sm-0" type="submit"
-			style="display: inline-block;">Question</button>
+			style="display: inline-block;">Question (HTML)</button>
 		<button ng-click="getSparqlResults();"
 			class="btn btn-outline-success my-2 my-sm-0" type="submit"
-			style="display: inline-block;">SPARQL</button>
+			style="display: inline-block;">SPARQL (HTML)</button>
+		<button ng-click="getQueryXMLResults()" class="btn btn-outline-success my-2 my-sm-0" type="submit"
+			style="display: inline-block;">Question (XML)</button>
+		<button ng-click="getSparqlXMLResults()" class="btn btn-outline-success my-2 my-sm-0" type="submit"
+			style="display: inline-block;">SPARQL (XML)</button>
 	</div>
 	<!-- result counter -->
 	<div style="margin: 30px; color: #bdc3c7;" ng-show="resultCounter > 0">
@@ -70,5 +74,6 @@
 			Please <a href="https://github.com/dice-group/semanticchess/issues">open an issue</a> on Github 
 			or contact me on <a href="https://www.twitter.com/joerndigital">Twitter</a>.
 		</div>
+		<div style="width:80%; margin: 0 auto;"><pre style="text-align:left; margin:20px; padding:20px;">{{xml.data.XML}}</pre></div>
 	</div>
 </div>

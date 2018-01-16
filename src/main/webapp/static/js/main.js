@@ -24,9 +24,12 @@ appChess.controller('appCtrl', function($scope, $location, $http){
 	$scope.errorFound = false;
 	$scope.error = '';
 	$scope.loading = false;
+	$scope.xml = "";
 	
 	//sparql queries
 	$scope.getSparqlResults = function(){
+		$scope.result = "";
+		$scope.xml = "";
 		$scope.loading = true;
 		
 	    $http({
@@ -54,6 +57,8 @@ appChess.controller('appCtrl', function($scope, $location, $http){
 	
 	//user queries
 	$scope.getQueryResults = function(){
+		$scope.result = "";
+		$scope.xml = "";
 		$scope.loading = true;
 	    $http({
 	        'url' : '/query/',
@@ -80,8 +85,70 @@ appChess.controller('appCtrl', function($scope, $location, $http){
 	    });     
 	};
 	
+	//user queries xml
+	$scope.getQueryXMLResults = function(){
+		$scope.result = "";
+		$scope.xml = "";
+		$scope.loading = true;
+	    $http({
+	        'url' : '/queryxml/',
+	        'method' : 'POST',
+	        'headers': {'Content-Type' : 'application/json'},
+	        'data' : $scope.query
+	    }).then(function(data){	    	
+	    	if(!(typeof data == undefined)){
+		    	$scope.errorFound = false;
+		        $scope.xml = data;
+		        $scope.error = '';
+		        console.log( $scope.xml);
+	    	}else {
+	    		$scope.error = data; 
+	    	}  
+	    	$scope.loading = false;
+	    }).catch(function (err) {
+		    	$scope.resultCounter = 0;
+		    	$scope.xml = "";
+		    	$scope.error = err.status;
+		    	console.log($scope.error);
+		    	$scope.errorFound = true;   
+		    	$scope.loading = false;
+	    });     
+	};
+	
+	//user queries xml
+	$scope.getSparqlXMLResults = function(){
+		$scope.result = "";
+		$scope.xml = "";
+		$scope.loading = true;
+	    $http({
+	        'url' : '/sparqlxml/',
+	        'method' : 'POST',
+	        'headers': {'Content-Type' : 'application/json'},
+	        'data' : $scope.query
+	    }).then(function(data){	    	
+	    	if(!(typeof data == undefined)){
+		    	$scope.errorFound = false;
+		        $scope.xml = data;
+		        $scope.error = '';
+		        console.log( $scope.xml);
+	    	}else {
+	    		$scope.error = data; 
+	    	}  
+	    	$scope.loading = false;
+	    }).catch(function (err) {
+		    	$scope.resultCounter = 0;
+		    	$scope.xml = "";
+		    	$scope.error = err.status;
+		    	console.log($scope.error);
+		    	$scope.errorFound = true;   
+		    	$scope.loading = false;
+	    });     
+	};
+	
 	//game uri queries
 	$scope.getGame = function(uri){
+		$scope.result = "";
+		$scope.xml = "";
 		$scope.loading = true;
 	    $http({
 	        'url' : '/uri/',
