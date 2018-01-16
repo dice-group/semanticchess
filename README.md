@@ -38,6 +38,16 @@ $ mvn spring-boot:run -Drun.arguments="pgn"
 ```sh
 $ mvn spring-boot:run -Drun.arguments="eco"
 ```
+<b>Virtuoso is not stable when running the mapping process.</b> 
+It crashes randomly. Therefore, you can manually split the mapping process.
+If Virtuoso crashes, first load the mapping you already have with step 3. Then start again at the point where the program stopped.
+
+For example, if it stopped in the ECO group starting with the letter 'A', start again with:
+```sh
+$ mvn spring-boot:run -Drun.arguments="eco,A"
+```
+You can choose a letter from A to E. You have to start the process for every letter after the crash. So, if it crashes at 'C', you have to manually start 'C', 'D' and 'E'. Don't forget to load (Step 3) at first after the crash.
+
 <h4>3. Load the RDF files to the Virtuoso database:</h4>
   
 ```sh
