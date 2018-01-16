@@ -1,0 +1,204 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf830
+{\fonttbl\f0\fnil\fcharset0 Calibri;\f1\fswiss\fcharset0 Helvetica;\f2\fnil\fcharset0 Monaco;
+}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs32 \cf0 Has the French Defense ever been played in a World Championship match?
+\f1\fs24 \
+\
+ASK\
+WHERE \{\
+ ?game cont:eco ?contEco .\
+ ?contEco cont:openingName ?opening .\
+ ?game prop:event ?event .\
+ FILTER (regex(?opening, 'French Defense', 'i') && regex(?event, 'World Championship', 'i'))\
+\}\
+\
+\pard\pardeftab720\sl380\partightenfactor0
+
+\f0\fs32 \cf2 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 What was the lifetime score between Steinitz and Lasker?\
+
+\f2\fs22 \cf0 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 SELECT DISTINCT (count(?win) as ?wins) (count(?lose) as ?\ul losts\ulnone ) (count(?draw) as ?draws)\
+\pard\pardeftab720\partightenfactor0
+\cf0 WHERE \{\
+	\{?game prop:black '\ul Wilhelm\ulnone  \ul Steinitz\ulnone ' .\
+	 ?game prop:white '\ul Emanuel\ulnone  \ul Lasker\ulnone ' .\
+	 ?game prop:result '0-1' .\
+	 ?game prop:result ?win .\
+	\}\
+	UNION\
+	\{?game prop:white '\ul Wilhelm\ulnone  \ul Steinitz\ulnone ' .\
+	 ?game prop:black '\ul Emanuel\ulnone  \ul Lasker\ulnone ' .\
+	 ?game prop:result '1-0' .\
+	 ?game prop:result ?win .\
+	\}\
+	UNION\
+	\{?game prop:black '\ul Wilhelm\ulnone  \ul Steinitz\ulnone ' .\
+	 ?game prop:white '\ul Emanuel\ulnone  \ul Lasker\ulnone ' .\
+	 ?game prop:result '1-0' .\
+	 ?game prop:result ?lose .\
+	\}\
+	UNION\
+	\{?game prop:white '\ul Wilhelm\ulnone  \ul Steinitz\ulnone ' .\
+	 ?game prop:black '\ul Emanuel\ulnone  \ul Lasker\ulnone ' .\
+	 ?game prop:result '0-1' .\
+	 ?game prop:result ?lose .\
+	\}\
+	UNION\
+	\{?game prop:white|prop:black '\ul Wilhelm\ulnone  \ul Steinitz\ulnone ' .\
+	 ?game prop:white|prop:black '\ul Emanuel\ulnone  \ul Lasker\ulnone ' .\
+	 ?game prop:result '1/2-1/2' .\
+	 ?game prop:result ?draw .\
+	\}\
+\}\
+\
+\pard\pardeftab720\sl380\partightenfactor0
+
+\f0\fs32 \cf2 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 How many games did Wilhelm Steinitz win when employing the Steinitz Gambit?
+\f2\fs22 \cf0 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 \
+\pard\pardeftab720\partightenfactor0
+\cf0 SELECT (COUNT(DISTINCT ?game) AS ?nr)\
+WHERE\
+\{\
+ \{\
+ ?game prop:white 'Wilhelm Steinitz' .\
+ ?game prop:result '1-0' .\
+ ?game cont:eco ?contEco .\
+ ?contEco cont:openingName ?opening .\
+ FILTER regex(?opening, 'Steinitz Gambit', 'i')\
+ \}\
+ UNION \
+ \{\
+ ?game prop:black 'Wilhelm Steinitz' .\
+ ?game prop:result '0-1' .\
+ ?game cont:eco ?contEco .\
+ ?contEco cont:openingName ?opening .\
+ FILTER regex(?opening, 'Steinitz Gambit', 'i')\
+ \}\
+\}\
+\
+\
+\pard\pardeftab720\sl380\partightenfactor0
+
+\f0\fs32 \cf2 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 Who has won the DSB Kongress most often?
+\f2\fs22 \cf0 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 \
+\pard\pardeftab720\partightenfactor0
+\cf0 SELECT DISTINCT ?player ?event ((count(?win) as ?wins) + ((xsd:double(COUNT(?draw))/2)) AS ?points) \
+WHERE \{\
+	\{?game prop:black ?player .\
+	 ?game prop:result '0-1' .\
+	 ?game prop:result ?win .\
+	\}\
+	UNION\
+	\{?game prop:white ?player .\
+	 ?game prop:result '1-0' .\
+	 ?game prop:result ?win .\
+	\}\
+	UNION\
+	\{?game prop:white|prop:black ?player .\
+	 ?game prop:result '1/2-1/2' .\
+	 ?game prop:result ?draw .\
+	\}\
+        ?game prop:event ?event .\
+        FILTER regex(?event, 'DSB Kongress', 'i')\
+\
+\} ORDER BY ASC(?event) DESC(?points)\
+\
+\pard\pardeftab720\sl380\partightenfactor0
+
+\f0\fs32 \cf2 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 Did Emanuel Lasker ever play Bertholt Lasker?
+\f2\fs22 \cf0 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 \
+\pard\pardeftab720\partightenfactor0
+\cf0 ASK \
+WHERE\
+\{\
+?game prop:white|prop:black 'Emanuel Lasker' .\
+?game prop:white|prop:black 'Bertholt Lasker' .\
+\}\
+\
+\pard\pardeftab720\sl380\partightenfactor0
+
+\f0\fs32 \cf2 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 How often won Adolf Anderssen in the English Opening?\
+\pard\pardeftab720\partightenfactor0
+
+\f2\fs22 \cf2 SELECT (COUNT(DISTINCT ?game) AS ?nr)\
+WHERE\
+\{\
+ \{\
+ ?game prop:white 'Adolf Anderssen' .\
+ ?game prop:result '1-0' .\
+ ?game cont:eco ?contEco .\
+ ?contEco cont:openingName ?opening .\
+ FILTER regex(?opening, 'English Opening', 'i')\
+ \}\
+ UNION \
+ \{\
+ ?game prop:black 'Adolf Anderssen' .\
+ ?game prop:result '0-1' .\
+ ?game cont:eco ?contEco .\
+ ?contEco cont:openingName ?opening .\
+ FILTER regex(?opening, 'English Opening', 'i')\
+ \}\
+\}\cf0 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 \
+\
+\pard\pardeftab720\sl380\partightenfactor0
+
+\f0\fs32 \cf2 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 Games in the Lowenthal Variation with an ELO over 2300.
+\f2\fs22 \cf0 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 \
+\pard\pardeftab720\partightenfactor0
+\cf0 \
+SELECT DISTINCT ?game ?elo\
+WHERE\
+\{\
+ ?game cont:eco ?contEco .\
+ ?contEco cont:openingName ?opening .\
+ ?game prop:whiteelo|prop:blackelo ?elo\
+ FILTER (regex(?opening, 'Loewenthal Variation', 'i')  && (xsd:integer(?elo) > 2300))\
+\}\
+\
+\pard\pardeftab720\sl380\partightenfactor0
+
+\f0\fs32 \cf2 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 What is the most played opening in the World Chess Championship overall beginning after year 1886?
+\f2\fs22 \cf0 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 \
+\pard\pardeftab720\partightenfactor0
+\cf0 \
+\
+\pard\pardeftab720\sl380\partightenfactor0
+
+\f0\fs32 \cf2 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 What ist the most played opening by Adolf Anderssen?
+\f2\fs22 \cf0 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 \
+\pard\pardeftab720\partightenfactor0
+\cf0 SELECT DISTINCT ?opening (COUNT(?opening) AS ?nr)\
+WHERE\
+\{\
+ ?game prop:white|prop:black 'Adolf Anderssen' .\
+ ?game cont:eco ?contEco .\
+ ?contEco cont:openingName ?opening .\
+\} GROUP BY ?opening ORDER BY DESC(?nr) LIMIT 1\
+\
+\
+\pard\pardeftab720\sl380\partightenfactor0
+
+\f0\fs32 \cf2 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 Which World Chess Championship had the most games ever played?
+\f2\fs22 \cf0 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 \
+\pard\pardeftab720\partightenfactor0
+\cf0 SELECT DISTINCT ?event (COUNT(?round) AS ?nr)\
+WHERE\
+\{\
+ ?game prop:event ?event .\
+ ?game prop:round ?round . \
+ FILTER regex(?event, 'World Championship', 'i')\
+\} GROUP BY ?event ORDER BY DESC(?nr) LIMIT 1\
+}

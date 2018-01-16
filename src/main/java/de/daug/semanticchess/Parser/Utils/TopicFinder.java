@@ -22,7 +22,8 @@ public class TopicFinder {
 	private Set<String> blacklist = new HashSet<String>();
 	
 	//algebraic function that could appear in the SELECT clause
-	boolean isAlgebra = false;
+	private boolean isAlgebra;
+	private boolean isCount;
 	private String max = "";
 	private String min = "";
 	private String avg = "";
@@ -72,7 +73,8 @@ public class TopicFinder {
 		boolean entityIsEmpty = false;
 		try {
 			try {
-				if (entities.get(0).getEntityName().isEmpty()) {
+				if (entities.get(0).getEntityName().isEmpty() && !this.isCount) {
+
 					topics.add(entities.get(0).getResourceName());
 					entityIsEmpty = true;
 				}
@@ -100,7 +102,7 @@ public class TopicFinder {
 //				}
 			}
 
-			if (topics.isEmpty()) {
+			if (topics.isEmpty() && !this.isCount) {
 				for (Entity e : entities) {
 					if (e.getStartPosition() < firstClassesPosition && e.getEntityName().isEmpty()) {
 						topics.add(e.getResourceName());
@@ -110,7 +112,7 @@ public class TopicFinder {
 			}
 
 			
-			if (this.isAlgebra && topics.isEmpty()) {
+			if (this.isAlgebra && topics.isEmpty() && !this.isCount) {
 				try {
 					topics.add(entities.get(0).getResourceName());
 				}catch (Exception err){
@@ -131,7 +133,7 @@ public class TopicFinder {
 	 * @param countThis: entities to count
 	 */
 	public void addCount(String countThis) {
-		this.isAlgebra = true;
+		setAlgebra(true);
 		this.count = countThis;
 	}
 
@@ -140,7 +142,7 @@ public class TopicFinder {
 	 * @param maxThis: gets maximum of something
 	 */
 	public void addMax(String maxThis) {
-		this.isAlgebra = true;
+		setAlgebra(true);
 		this.max = maxThis;
 	}
 
@@ -149,7 +151,7 @@ public class TopicFinder {
 	 * @param minThis: gets minimum of something
 	 */
 	public void addMin(String minThis) {
-		this.isAlgebra = true;
+		setAlgebra(true);
 		this.min = minThis;
 	}
 	
@@ -158,7 +160,7 @@ public class TopicFinder {
 	 * @param avgThis: gets the average of something
 	 */
 	public void addAvg(String avgThis) {
-		this.isAlgebra = true;
+		setAlgebra(true);
 		this.avg = avgThis;
 	}
 
@@ -192,6 +194,23 @@ public class TopicFinder {
 	 */
 	public void setAlgebra(boolean isAlgebra) {
 		this.isAlgebra = isAlgebra;
+	}
+	
+	
+	/**
+	 * checks if count is used
+	 * @return boolean
+	 */
+	public boolean isCount() {
+		return isCount;
+	}
+	
+	/**
+	 * sets isCount to true or false
+	 * @param isCount
+	 */
+	public void setCount(boolean isCount) {
+		this.isCount = isCount;
 	}
 	
 	/**

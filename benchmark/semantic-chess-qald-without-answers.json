@@ -10,56 +10,56 @@
 			"hybrid": false,
 			"question": [{
 				"language": "en",
-				"string": "Show me all won games of Carlsen against Anand.",
-				"keywords": "games, Carlsen, Anand"
+				"string": "Show me games by Wilhelm Steinitz.",
+				"keywords": "games, Wilhelm Steinitz"
 			}]
 		},
 		{
 			"id": "2",
 			"answertype": "resource",
-			"aggregation": true,
-			"onlydbo": false,
-			"hybrid": false,
-			"question": [{
-				"language": "en",
-				"string": "Which player with an ELO above 2700 has won the most in 2016?",
-				"keywords": "player, ELO above 2700, 2016, won the most"
-			}]
-		},
-		{
-			"id": "3",
-			"answertype": "boolean",
 			"aggregation": false,
 			"onlydbo": false,
 			"hybrid": false,
 			"question": [{
 				"language": "en",
-				"string": "Have Kramnik played the opening King's Indian?",
-				"keywords": "Kramnik, King's Indian"
+				"string": "Show me all won games of Emanuel Lasker against Wilhelm Steinitz",
+				"keywords": "Emanuel Lasker, Wilhelm Steinitz, won, games"
+			}]
+		},
+		{
+			"id": "3",
+			"answertype": "resource",
+			"aggregation": true,
+			"onlydbo": false,
+			"hybrid": false,
+			"question": [{
+				"language": "en",
+				"string": "Which player with an ELO above 2500 has won most often in 1899?",
+				"keywords": "player, ELO, 2500, won, most often, 1899"
 			}]
 		},
 		{
 			"id": "4",
-			"answertype": "resource",
+			"answertype": "boolean",
 			"aggregation": true,
 			"onlydbo": false,
 			"hybrid": false,
 			"question": [{
 				"language": "en",
-				"string": "Give me 10 blitz games of Nakamura.",
-				"keywords": "Nakamura, 10, blitz games"
+				"string": "Did Emanuel Lasker play the opening King’s Gambit?",
+				"keywords": "Emanuel Lasker, opening, King’s Gambit"
 			}]
 		},
 		{
 			"id": "5",
-			"answertype": "resource",
-			"aggregation": true,
+			"answertype": "string",
+			"aggregation": false,
 			"onlydbo": false,
 			"hybrid": false,
 			"question": [{
 				"language": "en",
-				"string": "Show me positions that are similar to FEN'8 / 4 bk2 / 8 / 2 R5 / 1 K6 / 8 / 8 / 8 w - -'?",
-				"keywords": "positions, similiar, FEN, '8/4bk2/8/2R5/1K6/8/8/8 w - -'"
+				"string": "Who did play blind games?",
+				"keywords": "who, blind, games"
 			}]
 		},
 		{
@@ -76,14 +76,14 @@
 		},
 		{
 			"id": "7",
-			"answertype": "resource",
+			"answertype": "string",
 			"aggregation": false,
 			"onlydbo": false,
 			"hybrid": false,
 			"question": [{
 				"language": "en",
-				"string": "In which tournaments did Naiditsch and Carlsen play against each other?",
-				"keywords": "tournaments, Carlsen, Naiditsch"
+				"string": "In which tournaments did Adolf Anderssen and Wilhelm Steinitz play against each other?",
+				"keywords": "tournaments, Adolf Anderssen, Wilhelm Steinitz"
 			}]
 		},
 		{
@@ -94,8 +94,8 @@
 			"hybrid": false,
 			"question": [{
 				"language": "en",
-				"string": "All losing games of Giri from Wijk aan Zee.",
-				"keywords": "Giri, Wijk aan Zee, losing games"
+				"string": "All losing games of Wilhelm Steinitz from London.",
+				"keywords": "Wilhelm Steinitz, London, losing games"
 			}]
 		},
 		{
@@ -137,13 +137,13 @@
 		{
 			"id": "12",
 			"answertype": "resource",
-			"aggregation": true,
+			"aggregation": false,
 			"onlydbo": false,
 			"hybrid": false,
 			"question": [{
 				"language": "en",
-				"string": "10 games with a fivefold exchange?",
-				"keywords": "fivefold exchange, 10 games"
+				"string": "Give me games where Adolf Anderssen defeats Howard Staunton with black.",
+				"keywords": "Adolf Anderssen, black, defeats, Howard Staunton"
 			}]
 		},
 		{
@@ -154,32 +154,32 @@
 			"hybrid": false,
 			"question": [{
 				"language": "en",
-				"string": "What is the first game of Kasparov?",
-				"keywords": "Kasparov, first game"
+				"string": "What is the first game of Adolf Anderssen?",
+				"keywords": "Adolf Anderssen, first game"
 			}]
 		},
 		{
 			"id": "14",
 			"answertype": "resource",
-			"aggregation": true,
+			"aggregation": false,
 			"onlydbo": false,
 			"hybrid": false,
 			"question": [{
 				"language": "en",
-				"string": "Show me 10 games of white in the Queen’s Indian.",
-				"keywords": "Queen's Indian, 10 games"
+				"string": "Show me games of white in the Evans Gambit",
+				"keywords": "Evans Gambit, games"
 			}]
 		},
 		{
 			"id": "15",
-			"answertype": "resource",
+			"answertype": "string",
 			"aggregation": true,
 			"onlydbo": false,
 			"hybrid": false,
 			"question": [{
 				"language": "en",
-				"string": "Which opening has Fischer played most frequently?",
-				"keywords": "Fischer, opening, most frequently"
+				"string": "Which opening has Wilhelm Steinitz played most frequently?",
+				"keywords": "Wilhelm Steinitz, opening, most frequently"
 			}]
 		},
 		{
@@ -190,8 +190,8 @@
 			"hybrid": false,
 			"question": [{
 				"language": "en",
-				"string": "In which game did Caruana have his highest rating?",
-				"keywords": "Caruana, game, highest rating"
+				"string": "In which game did Wilhelm Steinitz have his highest rating?",
+				"keywords": "Wilhelm Steinitz, game, highest rating"
 			}]
 		},
 		{
@@ -214,32 +214,32 @@
 			"hybrid": false,
 			"question": [{
 				"language": "en",
-				"string": "Give me the games in which Topalov lost against a much weaker player.",
-				"keywords": "Topalov, lost, weaker player"
+				"string": "Give me the games in which Wilhelm Steinitz lost against a much weaker player.",
+				"keywords": "Wilhelm Steinitz, lost, weaker player"
 			}]
 		},
 		{
 			"id": "19",
-			"answertype": "resource",
+			"answertype": "string",
 			"aggregation": false,
 			"onlydbo": false,
 			"hybrid": false,
 			"question": [{
 				"language": "en",
-				"string": "What openings were played at the Grenke Chess Classic 2017?",
-				"keywords": "openings, Grenke Chess Classic 2017"
+				"string": "What openings were played at the World Championship 1894?",
+				"keywords": "openings, World Championship, 1894"
 			}]
 		},
 		{
 			"id": "20",
 			"answertype": "number",
-			"aggregation": false,
+			"aggregation": true,
 			"onlydbo": false,
 			"hybrid": false,
 			"question": [{
 				"language": "en",
-				"string": "How many times has Giri played draw?",
-				"keywords": "Giri, draw"
+				"string": "How many times has Adolf Anderssen played draw?",
+				"keywords": "how many times, Adolf Anderessen, draw"
 			}]
 		},
 		{
@@ -250,32 +250,32 @@
 			"hybrid": false,
 			"question": [{
 				"language": "en",
-				"string": "Which game was played exactly 10 years ago?",
-				"keywords": "game, 10 years ago"
+				"string": "Which game was played exactly 150 years ago?",
+				"keywords": "game, 150 years ago"
 			}]
 		},
 		{
 			"id": "22",
-			"answertype": "string",
+			"answertype": "resource",
 			"aggregation": false,
 			"onlydbo": false,
 			"hybrid": false,
 			"question": [{
 				"language": "en",
-				"string": "What does Anand play against the Sicilian Defense?",
-				"keywords": "Anand, against, Sicilian Defense"
+				"string": "What does Emanuel Lasker play against the Sicilian Defense?",
+				"keywords": "Emanuel Lasker, against, Sicilian Defense"
 			}]
 		},
 		{
 			"id": "23",
 			"answertype": "string",
-			"aggregation": false,
+			"aggregation": true,
 			"onlydbo": false,
 			"hybrid": false,
 			"question": [{
 				"language": "en",
-				"string": "Who was the 8th world champion?",
-				"keywords": "8th world champion"
+				"string": "Who was the 5th world champion?",
+				"keywords": "5th world champion"
 			}]
 		},
 		{
@@ -286,80 +286,80 @@
 			"hybrid": false,
 			"question": [{
 				"language": "en",
-				"string": "What was the last game of Euwe?",
-				"keywords": "Euwe, last game"
+				"string": "What was the last game of Wilhelm Steinitz?",
+				"keywords": "Wilhelm Steinitz, last game"
 			}]
 		},
 		{
 			"id": "25",
-			"answertype": "resource",
-			"aggregation": true,
-			"onlydbo": false,
-			"hybrid": false,
-			"question": [{
-				"language": "en",
-				"string": "Show me any games with 2 or more En Passants?",
-				"keywords": "games, 2 or more, En Passants"
-			}]
-		},
-		{
-			"id": "26",
 			"answertype": "number",
 			"aggregation": true,
 			"onlydbo": false,
 			"hybrid": false,
 			"question": [{
 				"language": "en",
-				"string": "How often is King’s Indian played?",
-				"keywords": "King's Indian, how often"
+				"string": "How often is Evans Gambit played?",
+				"keywords": "Evans Gambit, how often"
 			}]
 		},
 		{
-			"id": "27",
-			"answertype": "resource",
-			"aggregation": false,
-			"onlydbo": false,
-			"hybrid": false,
-			"question": [{
-				"language": "en",
-				"string": "Which games have a similar pawn structure as Ivanchuk against Shirov on move 13 in 1996 in Hoogovens?",
-				"keywords": "Ivanchuk, Shirov, move 13, 1996, Hoogovens, similar pawn structure"
-			}]
-		},
-		{
-			"id": "28",
-			"answertype": "resource",
-			"aggregation": false,
-			"onlydbo": false,
-			"hybrid": false,
-			"question": [{
-				"language": "en",
-				"string": "Show me all games with a stalemate.",
-				"keywords": "games, stalemate"
-			}]
-		},
-		{
-			"id": "29",
+			"id": "26",
 			"answertype": "date",
 			"aggregation": true,
 			"onlydbo": false,
 			"hybrid": false,
 			"question": [{
 				"language": "en",
-				"string": "All games with a move number exceeding 100.",
-				"keywords": "games, mover number exceeding 100"
+				"string": "When did Wilhelm Steinitz played his last World Championship?",
+				"keywords": "when, Wilhelm Steinitz, World Championship, last"
 			}]
 		},
 		{
-			"id": "30",
+			"id": "27",
+			"answertype": "string",
+			"aggregation": false,
+			"onlydbo": false,
+			"hybrid": false,
+			"question": [{
+				"language": "en",
+				"string": "Which players with black defeated Howard Staunton?",
+				"keywords": "players, black, defeated, Howard Staunton"
+			}]
+		},
+		{
+			"id": "28",
 			"answertype": "resource",
 			"aggregation": true,
 			"onlydbo": false,
 			"hybrid": false,
 			"question": [{
 				"language": "en",
-				"string": "Show me any games with three pawn on the 7th rank?",
-				"keywords": "games, three pawns, 7th rank"
+				"string": "All games with more than 100 moves.",
+				"keywords": "games, more than, 100, moves"
+			}]
+		},
+		{
+			"id": "29",
+			"answertype": "resource",
+			"aggregation": false,
+			"onlydbo": false,
+			"hybrid": false,
+			"question": [{
+				"language": "en",
+				"string": "Show me any games with three pawns on the 2nd rank?",
+				"keywords": "games, three pawns, 2nd rank"
+			}]
+		},
+		{
+			"id": "30",
+			"answertype": "resource",
+			"aggregation": false,
+			"onlydbo": false,
+			"hybrid": false,
+			"question": [{
+				"language": "en",
+				"string": "Show me positions with rook against bishop pair.",
+				"keywords": "positions, rook, bishop pair"
 			}]
 		},
 		{
@@ -370,36 +370,24 @@
 			"hybrid": false,
 			"question": [{
 				"language": "en",
-				"string": "Show me mate positions with knight and bishop.",
-				"keywords": "mate positions, knight and bishop"
+				"string": "Show me wins in C33.",
+				"keywords": "wins, C33"
 			}]
 		},
 		{
 			"id": "32",
-			"answertype": "resource",
-			"aggregation": false,
-			"onlydbo": false,
-			"hybrid": false,
-			"question": [{
-				"language": "en",
-				"string": "Show me all games with the Epaulette Mate.",
-				"keywords": "games, Epaulette Mate"
-			}]
-		},
-		{
-			"id": "33",
 			"answertype": "boolean",
 			"aggregation": false,
 			"onlydbo": false,
 			"hybrid": false,
 			"question": [{
 				"language": "en",
-				"string": "Has Carlsen ever played a fianchetto?",
-				"keywords": "Carlsen, fianchetto"
+				"string": "Has Wilhelm Steinitz ever played a fianchetto?",
+				"keywords": "Wilhelm Steinitz, fianchetto"
 			}]
 		},
 		{
-			"id": "34",
+			"id": "33",
 			"answertype": "resource",
 			"aggregation": false,
 			"onlydbo": false,
@@ -411,15 +399,27 @@
 			}]
 		},
 		{
-			"id": "35",
+			"id": "34",
 			"answertype": "resource",
+			"aggregation": false,
+			"onlydbo": false,
+			"hybrid": false,
+			"question": [{
+				"language": "en",
+				"string": "Wins of white in C52 and an average ELO of over 2400.",
+				"keywords": "wins, white, C52, ELO, over 2400"
+			}]
+		},
+		{
+			"id": "35",
+			"answertype": "string",
 			"aggregation": true,
 			"onlydbo": false,
 			"hybrid": false,
 			"question": [{
 				"language": "en",
-				"string": "In which game was Karjakin’s position the worst?",
-				"keywords": "Karjakin, game, position, the worst"
+				"string": "Which player loses the most with white",
+				"keywords": "player, lose, white, the most"
 			}]
 		},
 		{
@@ -430,20 +430,20 @@
 			"hybrid": false,
 			"question": [{
 				"language": "en",
-				"string": "10 examples of half open games.",
-				"keywords": "10 examples, half open games"
+				"string": "What was the first game with a Ruy Lopez Opening?",
+				"keywords": "first, game, Ruy Lopez Opening"
 			}]
 		},
 		{
 			"id": "37",
-			"answertype": "boolean",
+			"answertype": "resource",
 			"aggregation": true,
 			"onlydbo": false,
 			"hybrid": false,
 			"question": [{
 				"language": "en",
-				"string": "What was the first game with a Ruy Lopez?",
-				"keywords": "first game, Ruy Lopez"
+				"string": "Show me the 3rd game between Wilhelm Steinitz and Emanuel Lasker.",
+				"keywords": "3rd, game, Wilhelm Steinitz, Emanuel Lasker"
 			}]
 		},
 		{
@@ -454,8 +454,8 @@
 			"hybrid": false,
 			"question": [{
 				"language": "en",
-				"string": "What is the Lucena position?",
-				"keywords": "Lucena Position"
+				"string": "Show me all won games of Lasker against Steinitz.",
+				"keywords": "won, games, Lasker, Steinitz"
 			}]
 		},
 		{
@@ -466,48 +466,36 @@
 			"hybrid": false,
 			"question": [{
 				"language": "en",
-				"string": "All games of GMs against computers.",
-				"keywords": "games, GMs, computers"
+				"string": "What is the lifetime record between Wilhelm Steinitz and Emanuel Lasker.",
+				"keywords": "lifetime record, Wilhelm Steinitz, Emanuel Lasker"
 			}]
 		},
 		{
 			"id": "40",
-			"answertype": "resource",
-			"aggregation": true,
-			"onlydbo": false,
-			"hybrid": false,
-			"question": [{
-				"language": "en",
-				"string": "What was Fischer’s longest winning streak?",
-				"keywords": "Fischer, longest winning streak"
-			}]
-		},
-		{
-			"id": "41",
-			"answertype": "resource",
-			"aggregation": true,
-			"onlydbo": false,
-			"hybrid": false,
-			"question": [{
-				"language": "en",
-				"string": "Two games with doubling rooks on the 7th rank from June 2015.",
-				"keywords": "doubling rooks, 7th rank, June 2015"
-			}]
-		},
-		{
-			"id": "42",
 			"answertype": "resource",
 			"aggregation": false,
 			"onlydbo": false,
 			"hybrid": false,
 			"question": [{
 				"language": "en",
-				"string": "Examples of games with bishop against knight.",
-				"keywords": "games, bishop against knight"
+				"string": "Games with doubling rooks on the 7th rank.",
+				"keywords": "games, doubling rooks, 7th rank"
 			}]
 		},
 		{
-			"id": "43",
+			"id": "41",
+			"answertype": "resource",
+			"aggregation": false,
+			"onlydbo": false,
+			"hybrid": false,
+			"question": [{
+				"language": "en",
+				"string": "Examples of games with bishop against knight and 2 pawns.",
+				"keywords": "games, bishop, knight, 2 pawns"
+			}]
+		},
+		{
+			"id": "42",
 			"answertype": "resource",
 			"aggregation": true,
 			"onlydbo": false,
@@ -519,7 +507,7 @@
 			}]
 		},
 		{
-			"id": "44",
+			"id": "43",
 			"answertype": "resource",
 			"aggregation": true,
 			"onlydbo": false,
@@ -531,31 +519,31 @@
 			}]
 		},
 		{
-			"id": "45",
+			"id": "44",
 			"answertype": "resource",
 			"aggregation": true,
 			"onlydbo": false,
 			"hybrid": false,
 			"question": [{
 				"language": "en",
-				"string": "All games of Carlsen between 2014 and 2016.",
-				"keywords": "Carlsen, games, between 2014 and 2016"
+				"string": "All games of Wilhelm Steinitz between 1855 and 1870.",
+				"keywords": "Wilhelm Steinitz, games, between 1855 and 1870"
 			}]
 		},
 		{
-			"id": "46",
-			"answertype": "string",
+			"id": "45",
+			"answertype": "resource",
 			"aggregation": false,
 			"onlydbo": false,
 			"hybrid": false,
 			"question": [{
 				"language": "en",
-				"string": "What is the Immortal game?",
-				"keywords": "Immortal game"
+				"string": "Show me all games from Amsterdam.",
+				"keywords": "games, Amsterdam"
 			}]
 		},
 		{
-			"id": "47",
+			"id": "46",
 			"answertype": "resource",
 			"aggregation": true,
 			"onlydbo": false,
@@ -567,6 +555,18 @@
 			}]
 		},
 		{
+			"id": "47",
+			"answertype": "resource",
+			"aggregation": false,
+			"onlydbo": false,
+			"hybrid": false,
+			"question": [{
+				"language": "en",
+				"string": "All games by William Steinitz.",
+				"keywords": "games, William Steinitz"
+			}]
+		},
+		{
 			"id": "48",
 			"answertype": "resource",
 			"aggregation": false,
@@ -574,24 +574,12 @@
 			"hybrid": false,
 			"question": [{
 				"language": "en",
-				"string": "All games in which a FM has defeated a GM.",
-				"keywords": "games, FM, defeated, GM"
+				"string": "What is played against the Italian Game?",
+				"keywords": "played against, Italian Game?"
 			}]
 		},
 		{
 			"id": "49",
-			"answertype": "string",
-			"aggregation": false,
-			"onlydbo": false,
-			"hybrid": false,
-			"question": [{
-				"language": "en",
-				"string": "What is played against Giuoco Piano?",
-				"keywords": "played against, Giuoco Piano"
-			}]
-		},
-		{
-			"id": "50",
 			"answertype": "string",
 			"aggregation": true,
 			"onlydbo": false,
@@ -603,7 +591,7 @@
 			}]
 		},
 		{
-			"id": "51",
+			"id": "50",
 			"answertype": "string",
 			"aggregation": false,
 			"onlydbo": false,
@@ -612,18 +600,6 @@
 				"language": "en",
 				"string": "What is the main variation in the Ruy Lopez?",
 				"keywords": "main variation, Ruy Lopez"
-			}]
-		},
-		{
-			"id": "52",
-			"answertype": "resource",
-			"aggregation": true,
-			"onlydbo": false,
-			"hybrid": false,
-			"question": [{
-				"language": "en",
-				"string": "Wins of white in B33 and an average ELO of over 2700.",
-				"keywords": "wins of white, B33, average ELO of over 2700"
 			}]
 		}
 	]

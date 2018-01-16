@@ -1,6 +1,8 @@
 package de.daug.semanticchess.Parser;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 
 import java.util.List;
@@ -167,7 +169,7 @@ public class Parser {
 				System.out.printf("%-16s %s\n", "Parser: ","FEN regex is added.");
 			}
 		}
-
+		
 		//collect topics for the SELECT clause
 		topics.collectTopics(this.entities, this.classes);
 
@@ -178,7 +180,7 @@ public class Parser {
 		 * add an aggregate to the SELECT clause
 		 */ 
 		if (isCount) {
-
+			
 			int firstEntityPosition = 999;
 			int firstClassesPosition = 999;
 			try {
@@ -191,9 +193,9 @@ public class Parser {
 			} catch (Exception err) {
 
 			}
-
+			
 			if (firstEntityPosition < firstClassesPosition) {
-				topics.addCount(entities.get(0).getResourceName());
+				topics.addCount("DISTINCT " + entities.get(0).getResourceName());
 				this.options.setOrderStr("DESC", "?nr");
 
 			} else {
@@ -239,7 +241,10 @@ public class Parser {
 		} else {
 			this.sequence = "_" + classes.size() + "" + entities.size() + "1";
 		}
-		System.out.printf("%-16s %s\n", "SEQUENCE CODE: ", this.sequence);		
+		System.out.printf("%-16s %s\n", "SEQUENCE CODE: ", this.sequence);	
+		SimpleDateFormat sdf = new SimpleDateFormat("DD.MM.yy HH:mm:ss:SS");
+		String uhrzeit = sdf.format(new Date());
+		System.out.println(uhrzeit + " Sequence Code is found.");
 	}
 	
 	/**
@@ -357,17 +362,21 @@ public class Parser {
 						options.setLimitStr(1);
 						options.setOffsetStr(0);
 						options.setOrderStr("DESC", "?date");
+						if (getClassByName("?date") == null) {
+							classes.add(new Classes(classes.size() + 1, "?date", "prop:", "date", 999, "?game"));
+						}
 					} else {
 						options.setLimitStr(1);
 						options.setOffsetStr((Integer.valueOf(word.replaceAll("\\D+", ""))) - 1);
-						if (!nextFoundNe.equals("jjs_pos") && !nextFoundNe.equals("jjs_neg")) {
+						if (!nextFoundNe.equals("jjs_pos") && !nextFoundNe.equals("jjs_neg") && !nextFoundNe.equals("count")) {
 							options.setOrderStr("ASC", "?date");
+							if (getClassByName("?date") == null) {
+								classes.add(new Classes(classes.size() + 1, "?date", "prop:", "date", 999, "?game"));
+							}
 						}
 
 					}
-					if (getClassByName("?date") == null) {
-						classes.add(new Classes(classes.size() + 1, "?date", "prop:", "date", 999, "?game"));
-					}
+
 
 				}
 
@@ -733,6 +742,11 @@ public class Parser {
 				break;
 			case "count":
 				isCount = true;
+				this.topics.setCount(true);
+				if(this.options.getLimitStr().isEmpty()){
+					this.options.setLimitStr(1);
+					this.options.setOffsetStr(0);
+				}
 				break;
 
 			default:

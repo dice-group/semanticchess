@@ -84,7 +84,7 @@ public class ECOLinker
     /**
      * maximum depth to create subqueries
      */
-    public final static int MAX_SUBQUERY_DEPTH = 22;
+    public final static int MAX_SUBQUERY_DEPTH = 18;
     /**
      * Name of file with error openings.
      */

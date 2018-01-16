@@ -10,6 +10,8 @@ import org.apache.jena.query.ResultSetFormatter;
 import org.springframework.stereotype.Repository;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import de.daug.semanticchess.Configurations;
 import de.daug.semanticchess.Database.ConnectVirtuoso;
@@ -58,6 +60,9 @@ public class QueryVirtuoso {
 			ResultSetFormatter.outputAsJSON(outputStream, results);
 			json = new String(outputStream.toByteArray());
 			System.out.println("============================\n");
+			SimpleDateFormat sdf = new SimpleDateFormat("DD.MM.yy HH:mm:ss:SS");
+			String uhrzeit = sdf.format(new Date());
+			System.out.println(uhrzeit + " Finished");
 
 			return json;
 		}
@@ -84,7 +89,7 @@ public class QueryVirtuoso {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		SparqlVirtuoso virtQuery = new SparqlVirtuoso();
+		QueryVirtuoso virtQuery = new QueryVirtuoso();
 		String json = virtQuery.getCustomResult(
 				"select ?game ?black WHERE {?game prop:white 'Wilhelm Steinitz'. ?game prop:black ?black}");
 

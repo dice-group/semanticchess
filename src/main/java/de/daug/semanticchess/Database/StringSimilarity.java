@@ -210,6 +210,6 @@ public class StringSimilarity {
 		StringSimilarity similar = new StringSimilarity();
 		similar.setQuery("cont:openingName");
 		//similar.setOffset(3);
-		System.out.println(similar.subStringMatch("Queen's Gambit"));
+		System.out.println(similar.subStringMatch("Caro-Kann"));
 	}
 }
