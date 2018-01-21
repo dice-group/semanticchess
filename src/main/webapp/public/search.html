@@ -29,6 +29,10 @@
 			style="display: inline-block;">Question (XML)</button>
 		<button ng-click="getSparqlXMLResults()" class="btn btn-outline-success my-2 my-sm-0" type="submit"
 			style="display: inline-block;">SPARQL (XML)</button>
+		<button ng-click="getQueryJSONResults()" class="btn btn-outline-success my-2 my-sm-0" type="submit"
+			style="display: inline-block;">Question (JSON)</button>
+		<button ng-click="getSparqlJSONResults()" class="btn btn-outline-success my-2 my-sm-0" type="submit"
+			style="display: inline-block;">SPARQL (JSON)</button>
 	</div>
 	<!-- result counter -->
 	<div style="margin: 30px; color: #bdc3c7;" ng-show="resultCounter > 0">
@@ -75,5 +79,6 @@
 			or contact me on <a href="https://www.twitter.com/joerndigital">Twitter</a>.
 		</div>
 		<div style="width:80%; margin: 0 auto;"><pre style="text-align:left; margin:20px; padding:20px;">{{xml.data.XML}}</pre></div>
+		<div style="width:80%; margin: 0 auto;"><pre style="text-align:left; margin:20px; padding:20px;">{{json}}</pre></div>
 	</div>
 </div>

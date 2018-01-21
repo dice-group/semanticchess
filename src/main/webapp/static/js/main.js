@@ -29,6 +29,7 @@ appChess.controller('appCtrl', function($scope, $location, $http){
 	//sparql queries
 	$scope.getSparqlResults = function(){
 		$scope.result = "";
+		$scope.json = "";
 		$scope.xml = "";
 		$scope.loading = true;
 		
@@ -58,6 +59,7 @@ appChess.controller('appCtrl', function($scope, $location, $http){
 	//user queries
 	$scope.getQueryResults = function(){
 		$scope.result = "";
+		$scope.json = "";
 		$scope.xml = "";
 		$scope.loading = true;
 	    $http({
@@ -88,6 +90,7 @@ appChess.controller('appCtrl', function($scope, $location, $http){
 	//user queries xml
 	$scope.getQueryXMLResults = function(){
 		$scope.result = "";
+		$scope.json = "";
 		$scope.xml = "";
 		$scope.loading = true;
 	    $http({
@@ -115,9 +118,10 @@ appChess.controller('appCtrl', function($scope, $location, $http){
 	    });     
 	};
 	
-	//user queries xml
+	//sparql queries xml
 	$scope.getSparqlXMLResults = function(){
 		$scope.result = "";
+		$scope.json = "";
 		$scope.xml = "";
 		$scope.loading = true;
 	    $http({
@@ -138,6 +142,68 @@ appChess.controller('appCtrl', function($scope, $location, $http){
 	    }).catch(function (err) {
 		    	$scope.resultCounter = 0;
 		    	$scope.xml = "";
+		    	$scope.error = err.status;
+		    	console.log($scope.error);
+		    	$scope.errorFound = true;   
+		    	$scope.loading = false;
+	    });     
+	};
+	
+	//user queries json
+	$scope.getQueryJSONResults = function(){
+		$scope.result = "";
+		$scope.json = "";
+		$scope.xml = "";
+		$scope.loading = true;
+	    $http({
+	        'url' : '/query/',
+	        'method' : 'POST',
+	        'headers': {'Content-Type' : 'application/json'},
+	        'data' : $scope.query
+	    }).then(function(data){	    	
+	    	if(!(typeof data == undefined)){
+		    	$scope.errorFound = false;
+		        $scope.json = JSON.stringify(data.data, null, 2);
+		        $scope.error = '';
+		        //console.log($scope.json);
+	    	}else {
+	    		$scope.error = data; 
+	    	}  
+	    	$scope.loading = false;
+	    }).catch(function (err) {
+		    	$scope.resultCounter = 0;
+		    	$scope.json = "";
+		    	$scope.error = err.status;
+		    	console.log($scope.error);
+		    	$scope.errorFound = true;   
+		    	$scope.loading = false;
+	    });     
+	};
+	
+	//sparql queries json
+	$scope.getSparqlJSONResults = function(){
+		$scope.result = "";
+		$scope.json = "";
+		$scope.xml = "";
+		$scope.loading = true;
+	    $http({
+	        'url' : '/sparql/',
+	        'method' : 'POST',
+	        'headers': {'Content-Type' : 'application/json'},
+	        'data' : $scope.query
+	    }).then(function(data){	    	
+	    	if(!(typeof data == undefined)){
+		    	$scope.errorFound = false;
+		    	$scope.json = JSON.stringify(data.data, null, 2);
+		        $scope.error = '';
+		        //console.log( $scope.xml);
+	    	}else {
+	    		$scope.error = data; 
+	    	}  
+	    	$scope.loading = false;
+	    }).catch(function (err) {
+		    	$scope.resultCounter = 0;
+		    	$scope.json = "";
 		    	$scope.error = err.status;
 		    	console.log($scope.error);
 		    	$scope.errorFound = true;   

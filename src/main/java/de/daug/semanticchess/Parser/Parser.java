@@ -1317,7 +1317,7 @@ public class Parser {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		String query = "Show me games with less than 34 moves.";
+		String query = "Which player with black defeated Howard Staunton in December 1843?";
 
 		Parser p = new Parser(query);
 
