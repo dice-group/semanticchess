@@ -19,10 +19,11 @@ public class LoadData {
 		System.out.println("==================================");
 		try {
 			Class.forName("virtuoso.jdbc4.Driver");
-
-			String urlDB = Configurations.DB;
-			String userDB = Configurations.DB_USER;
-			String userPW = Configurations.DB_PASSWORD;
+			
+			Configurations config = new Configurations();
+			String urlDB = config.getDB();
+			String userDB = config.getDBUser();
+			String userPW = config.getDBPassword();
 
 			Connection conn = DriverManager.getConnection(urlDB, userDB, userPW);
 			Statement st;

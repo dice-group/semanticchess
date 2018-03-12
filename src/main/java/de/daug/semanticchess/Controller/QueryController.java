@@ -1,5 +1,6 @@
 package de.daug.semanticchess.Controller;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import de.daug.semanticchess.Configurations;
 import de.daug.semanticchess.Service.QueryService;
 
 /**
@@ -33,8 +35,8 @@ public class QueryController{
 	 */
 	@RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public String getCustomResult(@RequestBody String strQuery){
-
-		SimpleDateFormat sdf = new SimpleDateFormat("DD.MM.yy HH:mm:ss:SS");
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yy HH:mm:ss:SS");
 		String uhrzeit = sdf.format(new Date());
 		System.out.println(uhrzeit + " Started backend process");
 		System.out.printf("%-16s %s\n", "Controller: ",  strQuery);

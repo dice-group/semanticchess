@@ -24,7 +24,7 @@ public class MainController {
 	 * maps "/game" to game.html
 	 * @return index.html
 	 */
-	@GetMapping("/game")
+	@GetMapping("/gameView")
 	public String game() {
 		return "game";
 
@@ -34,7 +34,7 @@ public class MainController {
 	 * maps "/search" to search.html
 	 * @return index.html
 	 */
-	@GetMapping("/search")
+	@GetMapping("/searchView")
 	public String search() {
 		return "search";
 

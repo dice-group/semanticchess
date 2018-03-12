@@ -60,7 +60,7 @@ public class QueryVirtuoso {
 			ResultSetFormatter.outputAsJSON(outputStream, results);
 			json = new String(outputStream.toByteArray());
 			System.out.println("============================\n");
-			SimpleDateFormat sdf = new SimpleDateFormat("DD.MM.yy HH:mm:ss:SS");
+			SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yy HH:mm:ss:SS");
 			String uhrzeit = sdf.format(new Date());
 			System.out.println(uhrzeit + " Finished");
 

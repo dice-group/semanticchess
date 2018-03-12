@@ -38,11 +38,12 @@ public class EcoToRdf {
 	        ex.printStackTrace();
 	    }
 		
+	    Configurations config = new Configurations();
 		String[] inputLinker = new String[5];
-		inputLinker[0] = Configurations.DB_GRAPH;
-		inputLinker[1] = Configurations.DB_SHORT;
-		inputLinker[2] = Configurations.DB_USER;
-		inputLinker[3] = Configurations.DB_PASSWORD;
+		inputLinker[0] = config.getDBGraph();
+		inputLinker[1] = config.getDBShort();
+		inputLinker[2] = config.getDBUser();
+		inputLinker[3] = config.getDBPassword();
 		
 		
 		if(args == null){

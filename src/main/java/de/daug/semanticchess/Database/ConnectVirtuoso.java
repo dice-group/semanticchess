@@ -7,15 +7,21 @@ import virtuoso.jena.driver.VirtModel;
  * This class connects to the Virtuoso database.
  */
 public class ConnectVirtuoso {
-	private String url = Configurations.DB;
-	private String user = Configurations.DB_USER;
-	private String pwd = Configurations.DB_PASSWORD;
-	private String graph = Configurations.DB_GRAPH;
+	
+	private String url;
+	private String user;
+	private String pwd;
+	private String graph;
 	
 	/**
 	 * empty constructor
 	 */
-	public ConnectVirtuoso(){		
+	public ConnectVirtuoso(){	
+		Configurations config = new Configurations();
+		this.url = config.getDB();
+		this.user = config.getDBUser();
+		this.pwd = config.getDBPassword();
+		this.graph = config.getDBGraph();
 	}
 	
 	/**

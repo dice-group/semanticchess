@@ -242,7 +242,7 @@ public class Parser {
 			this.sequence = "_" + classes.size() + "" + entities.size() + "1";
 		}
 		System.out.printf("%-16s %s\n", "SEQUENCE CODE: ", this.sequence);	
-		SimpleDateFormat sdf = new SimpleDateFormat("DD.MM.yy HH:mm:ss:SS");
+		SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yy HH:mm:ss:SS");
 		String uhrzeit = sdf.format(new Date());
 		System.out.println(uhrzeit + " Sequence Code is found.");
 	}

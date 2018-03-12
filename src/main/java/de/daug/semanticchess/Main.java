@@ -19,8 +19,9 @@ public class Main
      * eco -> start mapping openings to games and eco to rdf converter
      * load -> load .ttl files to database
 	 */
-    public static void main( String[] args )
+    public static void main( String[] args )  
     {
+    	
     	if(args.length == 1){
         	if(args[0].equals("pgn")){
         		PgnToRdf.main(null);

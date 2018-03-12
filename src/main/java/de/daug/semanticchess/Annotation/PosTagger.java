@@ -19,7 +19,7 @@ import edu.stanford.nlp.trees.Tree;
 import edu.stanford.nlp.trees.TreeCoreAnnotations.TreeAnnotation;
 import edu.stanford.nlp.util.CoreMap;
 
-import org.apache.log4j.BasicConfigurator;
+
 
 /**
  * User queries will tagged by this class 
@@ -50,7 +50,7 @@ public class PosTagger {
 	 */
 	private static StanfordCoreNLP setStanfordTagger() {
 		// configure output for the Staford POS tagger
-		BasicConfigurator.configure();
+		
 
 		// ===================================
 		// This code is part of the introduction of

@@ -3,7 +3,7 @@ var appChess = angular.module('appChess',['ngRoute']);
 appChess.config(function($routeProvider){
 	$routeProvider
 	.when("/game/:uri*",{
-		templateUrl : "/game.html",
+		templateUrl : "/templates/game.html",
 		controller : "appCtrl"
 	})
 	.when("/",{

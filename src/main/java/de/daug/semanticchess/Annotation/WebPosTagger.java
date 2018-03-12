@@ -19,7 +19,6 @@ import edu.stanford.nlp.trees.Tree;
 import edu.stanford.nlp.trees.TreeCoreAnnotations.TreeAnnotation;
 import edu.stanford.nlp.util.CoreMap;
 
-import org.apache.log4j.BasicConfigurator;
 
 import de.daug.semanticchess.Configurations;
 
@@ -51,8 +50,6 @@ public class WebPosTagger {
 	 * @return pipeline: object to set up the annotation
 	 */
 	private static StanfordCoreNLPClient setStanfordTagger() {
-		// configure output for the Staford POS tagger
-		BasicConfigurator.configure();
 
 		// ===================================
 		// This code is part of the introduction of
@@ -63,7 +60,9 @@ public class WebPosTagger {
 		Properties props = new Properties();
 		// props.setProperty("ner.applyNumericClassifiers", "true");
 		props.setProperty("annotators", "tokenize, ssplit, pos, lemma, ner, parse");
-		StanfordCoreNLPClient pipeline = new StanfordCoreNLPClient(props, Configurations.WEB_SERVER, 9000, 1);
+		
+		Configurations config = new Configurations();
+		StanfordCoreNLPClient pipeline = new StanfordCoreNLPClient(props, config.getWebserver(), 9000, 1);
 		// ===================================
 
 		return pipeline;
